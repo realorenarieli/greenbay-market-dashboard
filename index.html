@@ -37,40 +37,22 @@
 <body>
   <div id="loading">
     <div class="spinner"></div>
-    <span id="load-status">Loading v3...</span>
+    <span id="load-status">Loading dashboard…</span>
     <span id="error-msg"></span>
   </div>
   <div id="root"></div>
 
   <script>
-    // Debug: Check dependencies before dashboard loads
-    console.log('Checking dependencies...');
-    console.log('React:', !!window.React);
-    console.log('ReactDOM:', !!window.ReactDOM);
-    console.log('Recharts:', !!window.Recharts);
-
     var missing = [];
     if (!window.React)    missing.push('React');
     if (!window.ReactDOM) missing.push('ReactDOM');
     if (!window.Recharts) missing.push('Recharts');
-
     if (missing.length) {
-      document.getElementById('load-status').textContent = 'Dependency error';
+      document.getElementById('load-status').textContent = 'Failed to load: ' + missing.join(', ');
       document.getElementById('error-msg').style.display = 'block';
-      document.getElementById('error-msg').textContent = 'Failed to load: ' + missing.join(', ');
-    } else {
-      document.getElementById('load-status').textContent = 'Dependencies OK, loading app...';
+      document.getElementById('error-msg').textContent = 'Please refresh the page or check your internet connection.';
     }
   </script>
-  <script>
-    window.onerror = function(msg, url, line, col, error) {
-      document.getElementById('load-status').textContent = 'JS Error: ' + msg;
-      document.getElementById('error-msg').style.display = 'block';
-      document.getElementById('error-msg').textContent = 'Line ' + line + ': ' + msg;
-      return true;
-    };
-  </script>
-  <script src="dashboard.js?v=99"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
-<!-- Thu Feb 26 16:51:17 IST 2026 -->
