@@ -1,0 +1,575 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Greenbay Fleet Intelligence API",
+    "description": "Static JSON API providing electric and autonomous fleet market intelligence data. TAM/SAM/SOM, ARR scenarios, EV fleet time series, Gartner SPA data, and source registry. No authentication required. CORS open. Hosted on GitHub Pages CDN.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Greenbay Solutions",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/"
+    },
+    "license": {
+      "name": "Proprietary \u2014 Greenbay Solutions 2026"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1",
+      "description": "Production (GitHub Pages CDN)"
+    }
+  ],
+  "paths": {
+    "/index.json": {
+      "get": {
+        "operationId": "getApiIndex",
+        "summary": "API manifest \u2014 all endpoints, schemas, usage notes",
+        "description": "Returns a manifest listing all available endpoints with descriptions, schemas, and usage guidance. Start here to discover the API structure.",
+        "responses": {
+          "200": {
+            "description": "API manifest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndexResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Discovery"
+        ]
+      }
+    },
+    "/fleet.json": {
+      "get": {
+        "operationId": "getFleetData",
+        "summary": "EV bus/truck/AHV/H2/LCV time series 2021\u20132030",
+        "description": "Global and regional EV fleet stock and sales data by segment (bus, heavy-duty truck, light commercial vehicle, autonomous heavy vehicle, hydrogen fuel cell). Includes diesel decline projections, total fleet denominators (all powertrains), and ACEA 2026 actuals for fleet age.",
+        "responses": {
+          "200": {
+            "description": "Fleet time series",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FleetResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fleet Data"
+        ]
+      }
+    },
+    "/tam.json": {
+      "get": {
+        "operationId": "getTamData",
+        "summary": "TAM/SAM/SOM 2030 and 2035 with segment breakdown",
+        "description": "Total Addressable Market, Serviceable Addressable Market, and Serviceable Obtainable Market for Greenbay's fleet orchestration platform. Segmented by: transit fleet orchestration, freight fleet orchestration, legacy bus/truck mixed depots, autonomous heavy vehicles, and light commercial vehicles. Includes ARPU per vehicle and geographic breakdown (EU, NA, China, RoW).",
+        "responses": {
+          "200": {
+            "description": "TAM/SAM/SOM data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TamResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Market Sizing"
+        ]
+      }
+    },
+    "/arr.json": {
+      "get": {
+        "operationId": "getArrScenarios",
+        "summary": "ARR trajectory 2025\u20132030, five scenarios",
+        "description": "Annual Recurring Revenue scenarios for Greenbay 2025\u20132030. Five scenarios: bear (~50% CAGR), bottoms-up deal model (~97% CAGR), TAM conservative (3% SAM penetration = $136M), TAM base (5% SAM = $226M), TAM upside (7% SAM = $317M). All scenarios anchored at 2026=$0.8M and 2027=$3.0M.",
+        "responses": {
+          "200": {
+            "description": "ARR scenario data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Financial Projections"
+        ]
+      }
+    },
+    "/gartner.json": {
+      "get": {
+        "operationId": "getGartnerData",
+        "summary": "Gartner Strategic Planning Assumptions with AHV fleet baseline",
+        "description": "Four Gartner SPAs from G00841141 (Predicts 2026: Transportation) with time series data for each prediction. Includes AHV (Autonomous Heavy Vehicle) fleet baseline by operator type (freight, transit, port/yard) and L4 deployment actuals vs forecasts.",
+        "responses": {
+          "200": {
+            "description": "Gartner SPA data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GartnerResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Market Intelligence"
+        ]
+      }
+    },
+    "/sources.json": {
+      "get": {
+        "operationId": "getSourceRegistry",
+        "summary": "All 32 sources \u2014 URLs, HTTP status, methodology notes",
+        "description": "Complete registry of all data sources used in the dashboard. Each source includes name, organization, URL, last-verified HTTP status, and detailed methodology note explaining how the data was used. Organized by category. Last URL verification: 2026-02-26.",
+        "responses": {
+          "200": {
+            "description": "Source registry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourcesResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data Provenance"
+        ]
+      }
+    },
+    "/meta.json": {
+      "get": {
+        "operationId": "getDashboardMeta",
+        "summary": "Dashboard version, changelog, data provenance",
+        "description": "Dashboard metadata including current version, last update date, data as-of period, company description, changelog history, and API base URL.",
+        "responses": {
+          "200": {
+            "description": "Dashboard metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetaResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Discovery"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IndexResponse": {
+        "type": "object",
+        "properties": {
+          "api": {
+            "type": "string",
+            "example": "Greenbay Fleet Intelligence API"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          },
+          "base_url": {
+            "type": "string",
+            "example": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1"
+          },
+          "description": {
+            "type": "string"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date"
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EndpointManifestItem"
+            }
+          }
+        }
+      },
+      "EndpointManifestItem": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "size_kb": {
+            "type": "number"
+          },
+          "key_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "FleetSeriesItem": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "example": 2024
+          },
+          "ev_bus_stock_k": {
+            "type": "number",
+            "description": "Global EV bus stock (thousands)"
+          },
+          "ev_bus_sales_k": {
+            "type": "number",
+            "description": "Global EV bus sales (thousands)"
+          },
+          "ev_hdtruck_stock_k": {
+            "type": "number",
+            "description": "Global EV heavy-duty truck stock (thousands)"
+          },
+          "ev_hdtruck_sales_k": {
+            "type": "number",
+            "description": "Global EV heavy-duty truck sales (thousands)"
+          },
+          "ahv_deployed_k": {
+            "type": "number",
+            "description": "Autonomous heavy vehicle (L4+ commercial) deployed (thousands)"
+          },
+          "h2_bus_stock_k": {
+            "type": "number",
+            "description": "Hydrogen fuel cell bus stock (thousands)"
+          },
+          "ev_lcv_stock_k": {
+            "type": "number",
+            "description": "Light commercial vehicle EV stock (thousands)"
+          },
+          "total_bus_fleet_k": {
+            "type": "number",
+            "description": "Total global bus fleet all powertrains (thousands)"
+          },
+          "total_eu_truck_fleet_k": {
+            "type": "number",
+            "description": "Total EU truck fleet >3.5t all powertrains (thousands)"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "forecast"
+            ]
+          }
+        }
+      },
+      "FleetResponse": {
+        "type": "object",
+        "properties": {
+          "endpoint": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date"
+          },
+          "units": {
+            "type": "object",
+            "description": "Unit definitions for all numeric fields",
+            "properties": {
+              "_k_suffix": {
+                "type": "string",
+                "example": "thousands of vehicles"
+              },
+              "_pct_suffix": {
+                "type": "string",
+                "example": "percent"
+              }
+            }
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FleetSeriesItem"
+            }
+          },
+          "regional": {
+            "type": "object",
+            "description": "NA and EU breakdowns by year"
+          }
+        }
+      },
+      "TamSegment": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "vehicles_k": {
+            "type": "number",
+            "description": "Addressable vehicles (thousands)"
+          },
+          "arpu_usd": {
+            "type": "number",
+            "description": "Annual revenue per vehicle (USD)"
+          },
+          "tam_usd_m": {
+            "type": "number",
+            "description": "TAM contribution (USD millions)"
+          },
+          "geography": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "TamResponse": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "tam_2030_usd_m": {
+                "type": "number",
+                "example": 5551
+              },
+              "sam_2030_usd_m": {
+                "type": "number",
+                "example": 4600
+              },
+              "som_2030_usd_m": {
+                "type": "number",
+                "example": 226
+              },
+              "sam_pct_of_tam": {
+                "type": "number",
+                "example": 83
+              },
+              "som_pct_of_sam": {
+                "type": "number",
+                "example": 5
+              }
+            }
+          },
+          "segments_2030": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TamSegment"
+            }
+          },
+          "total_2030": {
+            "type": "object"
+          }
+        }
+      },
+      "ArrSeriesItem": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer"
+          },
+          "bear": {
+            "type": "number",
+            "description": "Bear scenario ARR (USD millions)"
+          },
+          "bottoms_up": {
+            "type": "number",
+            "description": "Bottoms-up deal model ARR (USD millions)"
+          },
+          "tam_conservative": {
+            "type": "number",
+            "description": "3% SAM penetration ARR (USD millions)"
+          },
+          "tam_base": {
+            "type": "number",
+            "description": "5% SAM penetration ARR (USD millions)"
+          },
+          "tam_upside": {
+            "type": "number",
+            "description": "7% SAM penetration ARR (USD millions)"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "anchor",
+              "actual",
+              "forecast"
+            ]
+          }
+        }
+      },
+      "ArrResponse": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "example": "USD_millions"
+          },
+          "anchors": {
+            "type": "object"
+          },
+          "scenarios": {
+            "type": "object"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArrSeriesItem"
+            }
+          }
+        }
+      },
+      "GartnerResponse": {
+        "type": "object",
+        "properties": {
+          "source_report": {
+            "type": "string",
+            "example": "Gartner G00841141 \u2014 Predicts 2026: Transportation"
+          },
+          "spas": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "ahv_fleet_baseline": {
+            "type": "object",
+            "description": "AHV fleet by operator type with 2024\u20132030 series"
+          }
+        }
+      },
+      "SourceItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "org": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "status": {
+            "type": "string",
+            "description": "Last verified HTTP status code",
+            "example": "200"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "SourcesResponse": {
+        "type": "object",
+        "properties": {
+          "last_verified": {
+            "type": "string",
+            "format": "date"
+          },
+          "total_sources": {
+            "type": "integer",
+            "example": 32
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SourceItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "MetaResponse": {
+        "type": "object",
+        "properties": {
+          "dashboard_version": {
+            "type": "string",
+            "example": "2.3.0"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date"
+          },
+          "data_as_of": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "dashboard_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "api_base_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "changelog": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Discovery",
+      "description": "API manifest and metadata"
+    },
+    {
+      "name": "Fleet Data",
+      "description": "EV and total fleet time series"
+    },
+    {
+      "name": "Market Sizing",
+      "description": "TAM/SAM/SOM analysis"
+    },
+    {
+      "name": "Financial Projections",
+      "description": "ARR scenarios"
+    },
+    {
+      "name": "Market Intelligence",
+      "description": "Gartner SPAs and AHV data"
+    },
+    {
+      "name": "Data Provenance",
+      "description": "Source registry and citations"
+    }
+  ]
+}

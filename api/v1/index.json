@@ -1,6 +1,6 @@
 {
   "api": "Greenbay Fleet Orchestration Market Intelligence",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "base_url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1",
   "description": "Static JSON API \u2014 all endpoints are plain GET requests, no auth required, CORS open. Data is updated with each dashboard release.",
   "last_updated": "2026-02-26",
@@ -96,6 +96,17 @@
         "changelog"
       ],
       "size_approx": "2KB"
+    },
+    {
+      "path": "/openapi.json",
+      "description": "OpenAPI 3.1 schema \u2014 full type definitions, field descriptions, operationIds for all endpoints",
+      "size_kb": 10,
+      "key_fields": [
+        "paths",
+        "components.schemas",
+        "info",
+        "servers"
+      ]
     }
   ],
   "schema_notes": {
@@ -104,5 +115,7 @@
     "china_note": "China figures use 30% accessibility multiplier throughout \u2014 reflects JV/partner route constraint, not full fleet",
     "fleet_age_source": "ACEA Vehicles on European Roads 2026 (FY2024 actuals) \u2014 eu_bus_avg_age_years=12.2, eu_truck_avg_age_years=14.0, eu_van_avg_age_years=12.9",
     "ahv_scope": "L4+ commercial deployment only \u2014 no safety driver in ODD. Excludes L2/L3 ADAS-capable vehicles."
-  }
+  },
+  "openapi_spec": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/openapi.json",
+  "openapi_note": "OpenAPI 3.1 schema for AI agent autodiscovery. Compatible with GPT function calling, LangChain tool definitions, and Claude tool_use."
 }

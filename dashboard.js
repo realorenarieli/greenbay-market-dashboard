@@ -5621,54 +5621,72 @@ window.AppComponent = function TransportPredictions() {
       var endpoints = [{
         file: "index.json",
         label: "index",
-        desc: "Manifest — all endpoints, schemas, usage notes",
+        desc: "Manifest — all endpoints, schemas, usage notes · openapi_spec reference",
         size: "4KB",
-        color: C.teal
+        color: C.teal,
+        tag: null
       }, {
         file: "fleet.json",
         label: "fleet",
         desc: "EV bus/truck/AHV/H2/LCV time series 2021–2030 · diesel decline · regional NA/EU · total fleet denominators",
         size: "8KB",
-        color: C.blue
+        color: C.blue,
+        tag: null
       }, {
         file: "tam.json",
         label: "tam",
         desc: "TAM/SAM/SOM 2030 & 2035 · segment ARPU · vehicle counts · geographic breakdown",
         size: "6KB",
-        color: C.violet
+        color: C.violet,
+        tag: null
       }, {
         file: "arr.json",
         label: "arr",
         desc: "ARR trajectory 2025–2030 · 5 scenarios: bear, bottoms-up, conservative/base/upside",
         size: "3KB",
-        color: C.amber
+        color: C.amber,
+        tag: null
       }, {
         file: "gartner.json",
         label: "gartner",
         desc: "4 Gartner SPAs (G00841141) with time series · AHV fleet baseline by operator",
         size: "5KB",
-        color: C.rose
+        color: C.rose,
+        tag: null
       }, {
         file: "sources.json",
         label: "sources",
         desc: "All 32 sources · URLs · HTTP status (verified 2026-02-26) · methodology notes",
         size: "8KB",
-        color: C.green
+        color: C.green,
+        tag: null
       }, {
         file: "meta.json",
         label: "meta",
         desc: "Dashboard version · changelog · data provenance",
         size: "2KB",
-        color: C.muted
+        color: C.muted,
+        tag: null
+      }, {
+        file: "openapi.json",
+        label: "openapi",
+        desc: "OpenAPI 3.1 schema · full type definitions · operationIds · field descriptions for all endpoints",
+        size: "10KB",
+        color: C.violet,
+        tag: "AI agents"
       }];
       var _React$useState = React.useState(null),
         _React$useState2 = _slicedToArray(_React$useState, 2),
         copiedIdx = _React$useState2[0],
         setCopiedIdx = _React$useState2[1];
-      var _React$useState3 = React.useState(false),
+      var _React$useState3 = React.useState("js"),
         _React$useState4 = _slicedToArray(_React$useState3, 2),
-        copiedSnippet = _React$useState4[0],
-        setCopiedSnippet = _React$useState4[1];
+        snippetLang = _React$useState4[0],
+        setSnippetLang = _React$useState4[1];
+      var _React$useState5 = React.useState(false),
+        _React$useState6 = _slicedToArray(_React$useState5, 2),
+        copiedSnippet = _React$useState6[0],
+        setCopiedSnippet = _React$useState6[1];
       var copyUrl = function copyUrl(url, idx) {
         navigator.clipboard.writeText(url);
         setCopiedIdx(idx);
@@ -5676,7 +5694,41 @@ window.AppComponent = function TransportPredictions() {
           return setCopiedIdx(null);
         }, 1800);
       };
-      var snippet = "// Greenbay Fleet Intelligence API \u2014 v1\nconst API = \"https://realorenarieli.github.io/greenbay-market-dashboard/api/v1\";\n\n// Fetch all endpoints in parallel\nconst [fleet, tam, arr] = await Promise.all([\n  fetch(`${API}/fleet.json`).then(r => r.json()),\n  fetch(`${API}/tam.json`).then(r => r.json()),\n  fetch(`${API}/arr.json`).then(r => r.json()),\n]);\n\n// Key data points\nconsole.log(\"TAM 2030:\", tam.summary.tam_2030_usd_m, \"M USD\");\nconsole.log(\"EV bus 2024:\", fleet.series.find(d => d.year === 2024).ev_bus_stock_k, \"K units\");\nconsole.log(\"ARR base 2030:\", arr.series.find(d => d.year === 2030).tam_base, \"M USD\");";
+      var snippetJS = "// Greenbay Fleet Intelligence API \u2014 v1\nconst API = \"https://realorenarieli.github.io/greenbay-market-dashboard/api/v1\";\n\n// Fetch all endpoints in parallel\nconst [fleet, tam, arr] = await Promise.all([\n  fetch(`${API}/fleet.json`).then(r => r.json()),\n  fetch(`${API}/tam.json`).then(r => r.json()),\n  fetch(`${API}/arr.json`).then(r => r.json()),\n]);\n\n// Key data points\nconsole.log(\"TAM 2030:\", tam.summary.tam_2030_usd_m, \"M USD\");\nconsole.log(\"EV bus 2024:\", fleet.series.find(d => d.year === 2024).ev_bus_stock_k, \"K units\");\nconsole.log(\"ARR base 2030:\", arr.series.find(d => d.year === 2030).tam_base, \"M USD\");";
+      var snippetPY = "# Greenbay Fleet Intelligence API \u2014 v1\nimport httpx, asyncio\n\nAPI = \"https://realorenarieli.github.io/greenbay-market-dashboard/api/v1\"\n\nasync def fetch_all():\n    async with httpx.AsyncClient() as client:\n        responses = await asyncio.gather(\n            client.get(f\"{API}/fleet.json\"),\n            client.get(f\"{API}/tam.json\"),\n            client.get(f\"{API}/arr.json\"),\n        )\n    return [r.json() for r in responses]\n\nfleet, tam, arr = asyncio.run(fetch_all())\n\n# Key data points\nprint(\"TAM 2030:\", tam[\"summary\"][\"tam_2030_usd_m\"], \"M USD\")\nev_2024 = next(d for d in fleet[\"series\"] if d[\"year\"] == 2024)\nprint(\"EV bus 2024:\", ev_2024[\"ev_bus_stock_k\"], \"K units\")\narr_2030 = next(d for d in arr[\"series\"] if d[\"year\"] == 2030)\nprint(\"ARR base 2030:\", arr_2030[\"tam_base\"], \"M USD\")";
+      var snippetCurl = "# Greenbay Fleet Intelligence API \u2014 v1\nAPI=\"https://realorenarieli.github.io/greenbay-market-dashboard/api/v1\"\n\n# Discover all endpoints\ncurl \"$API/index.json\" | jq '.endpoints[].path'\n\n# Get TAM summary\ncurl \"$API/tam.json\" | jq '.summary'\n\n# Get EV bus stock 2024\ncurl \"$API/fleet.json\" | jq '.series[] | select(.year==2024) | {ev_bus_stock_k}'\n\n# Get ARR base scenario 2030\ncurl \"$API/arr.json\" | jq '.series[] | select(.year==2030) | .tam_base'";
+      var snippets = {
+        js: snippetJS,
+        py: snippetPY,
+        curl: snippetCurl
+      };
+      var snippet = snippets[snippetLang];
+      var langLabels = {
+        js: "JavaScript",
+        py: "Python · httpx",
+        curl: "curl · jq"
+      };
+      var colorLine = function colorLine(line, lang) {
+        if (lang === "js") {
+          if (line.trim().startsWith('//')) return C.muted;
+          if (line.trim().startsWith('const') || line.trim().startsWith('await') || line.trim().startsWith(']')) return C.blue;
+          if (line.trim().startsWith('console')) return C.teal;
+          return C.text;
+        }
+        if (lang === "py") {
+          if (line.trim().startsWith('#')) return C.muted;
+          if (line.trim().startsWith('import') || line.trim().startsWith('async') || line.trim().startsWith('def') || line.trim().startsWith('return')) return C.blue;
+          if (line.trim().startsWith('print')) return C.teal;
+          return C.text;
+        }
+        if (lang === "curl") {
+          if (line.trim().startsWith('#')) return C.muted;
+          if (line.trim().startsWith('curl')) return C.teal;
+          if (line.trim().startsWith('API=')) return C.blue;
+          return C.text;
+        }
+        return C.text;
+      };
       return /*#__PURE__*/React.createElement("div", {
         style: {
           background: C.card,
@@ -5725,12 +5777,45 @@ window.AppComponent = function TransportPredictions() {
           borderRadius: 10,
           border: "1px solid ".concat(C.teal, "40")
         }
-      }, "v1.0 \xB7 static JSON")), /*#__PURE__*/React.createElement("div", {
+      }, "v1.1 \xB7 static JSON")), /*#__PURE__*/React.createElement("div", {
         style: {
           fontSize: 10,
           color: C.muted
         }
-      }, "7 endpoints \xB7 no auth \xB7 CORS open \xB7 GitHub Pages CDN \xB7 37KB total")), /*#__PURE__*/React.createElement("a", {
+      }, "8 endpoints \xB7 no auth \xB7 CORS open \xB7 GitHub Pages CDN \xB7 47KB total \xB7 OpenAPI 3.1 schema")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          gap: 8
+        }
+      }, /*#__PURE__*/React.createElement("a", {
+        href: "".concat(API_BASE, "/openapi.json"),
+        target: "_blank",
+        rel: "noopener noreferrer",
+        style: {
+          fontSize: 10,
+          color: C.violet,
+          textDecoration: "none",
+          fontFamily: "'DM Mono', monospace",
+          background: "".concat(C.violet, "15"),
+          border: "1px solid ".concat(C.violet, "40"),
+          padding: "5px 12px",
+          borderRadius: 6,
+          display: "flex",
+          alignItems: "center",
+          gap: 5
+        }
+      }, /*#__PURE__*/React.createElement("svg", {
+        width: "9",
+        height: "9",
+        viewBox: "0 0 10 10",
+        fill: "none"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M1 9L9 1M9 1H3M9 1V7",
+        stroke: C.violet,
+        strokeWidth: "1.5",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      })), "openapi.json"), /*#__PURE__*/React.createElement("a", {
         href: "".concat(API_BASE, "/index.json"),
         target: "_blank",
         rel: "noopener noreferrer",
@@ -5758,13 +5843,65 @@ window.AppComponent = function TransportPredictions() {
         strokeWidth: "1.5",
         strokeLinecap: "round",
         strokeLinejoin: "round"
-      })), "index.json")), /*#__PURE__*/React.createElement("div", {
+      })), "index.json"))), /*#__PURE__*/React.createElement("div", {
         style: {
           padding: "16px 20px",
           display: "grid",
           gap: 12
         }
       }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "flex-start",
+          gap: 10,
+          padding: "10px 14px",
+          background: "".concat(C.violet, "08"),
+          border: "1px solid ".concat(C.violet, "30"),
+          borderRadius: 8
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 15,
+          flexShrink: 0,
+          marginTop: 1
+        }
+      }, "\uD83E\uDD16"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          fontWeight: 700,
+          color: C.violet,
+          marginBottom: 3,
+          fontFamily: "'Plus Jakarta Sans', sans-serif"
+        }
+      }, "AI Agent compatible"), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted,
+          lineHeight: 1.6
+        }
+      }, "The ", /*#__PURE__*/React.createElement("code", {
+        style: {
+          color: C.violet,
+          fontSize: 9
+        }
+      }, "openapi.json"), " endpoint provides a full OpenAPI 3.1 schema with typed definitions for every field. Compatible with ", /*#__PURE__*/React.createElement("strong", {
+        style: {
+          color: C.text
+        }
+      }, "Claude tool_use"), ", ", /*#__PURE__*/React.createElement("strong", {
+        style: {
+          color: C.text
+        }
+      }, "GPT function calling"), ", ", /*#__PURE__*/React.createElement("strong", {
+        style: {
+          color: C.text
+        }
+      }, "LangChain tools"), ", and any framework that ingests OpenAPI specs. Point your agent at ", /*#__PURE__*/React.createElement("code", {
+        style: {
+          color: C.teal,
+          fontSize: 9
+        }
+      }, API_BASE, "/openapi.json"), " to autodiscover all endpoints, operationIds, and response schemas."))), /*#__PURE__*/React.createElement("div", {
         style: {
           display: "grid",
           gap: 6
@@ -5780,7 +5917,7 @@ window.AppComponent = function TransportPredictions() {
             padding: "8px 12px",
             background: "".concat(C.surface, "60"),
             borderRadius: 8,
-            border: "1px solid ".concat(C.border)
+            border: "1px solid ".concat(ep.tag ? "".concat(C.violet, "40") : C.border)
           }
         }, /*#__PURE__*/React.createElement("span", {
           style: {
@@ -5803,7 +5940,7 @@ window.AppComponent = function TransportPredictions() {
             color: ep.color,
             textDecoration: "none",
             flexShrink: 0,
-            minWidth: 120
+            minWidth: 130
           },
           onMouseEnter: function onMouseEnter(e) {
             return e.target.style.textDecoration = "underline";
@@ -5811,7 +5948,18 @@ window.AppComponent = function TransportPredictions() {
           onMouseLeave: function onMouseLeave(e) {
             return e.target.style.textDecoration = "none";
           }
-        }, "/api/v1/", /*#__PURE__*/React.createElement("strong", null, ep.label), ".json"), /*#__PURE__*/React.createElement("span", {
+        }, "/api/v1/", /*#__PURE__*/React.createElement("strong", null, ep.label), ".json"), ep.tag && /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 8,
+            color: C.violet,
+            background: "".concat(C.violet, "20"),
+            padding: "1px 6px",
+            borderRadius: 8,
+            border: "1px solid ".concat(C.violet, "40"),
+            flexShrink: 0,
+            fontFamily: "'DM Mono', monospace"
+          }
+        }, ep.tag), /*#__PURE__*/React.createElement("span", {
           style: {
             fontSize: 10,
             color: C.muted,
@@ -5860,13 +6008,33 @@ window.AppComponent = function TransportPredictions() {
           justifyContent: "space-between",
           alignItems: "center"
         }
-      }, /*#__PURE__*/React.createElement("span", {
+      }, /*#__PURE__*/React.createElement("div", {
         style: {
-          fontFamily: "'DM Mono', monospace",
-          fontSize: 9,
-          color: C.muted
+          display: "flex",
+          gap: 2
         }
-      }, "example \xB7 JavaScript"), /*#__PURE__*/React.createElement("button", {
+      }, Object.entries(langLabels).map(function (_ref24) {
+        var _ref25 = _slicedToArray(_ref24, 2),
+          lang = _ref25[0],
+          label = _ref25[1];
+        return /*#__PURE__*/React.createElement("button", {
+          key: lang,
+          onClick: function onClick() {
+            return setSnippetLang(lang);
+          },
+          style: {
+            fontFamily: "'DM Mono', monospace",
+            fontSize: 9,
+            color: snippetLang === lang ? C.teal : C.muted,
+            background: snippetLang === lang ? "".concat(C.teal, "20") : "transparent",
+            border: "1px solid ".concat(snippetLang === lang ? C.teal : "transparent"),
+            borderRadius: 5,
+            padding: "3px 10px",
+            cursor: "pointer",
+            transition: "all 0.15s"
+          }
+        }, label);
+      })), /*#__PURE__*/React.createElement("button", {
         onClick: function onClick() {
           navigator.clipboard.writeText(snippet);
           setCopiedSnippet(true);
@@ -5896,14 +6064,10 @@ window.AppComponent = function TransportPredictions() {
           lineHeight: 1.7
         }
       }, snippet.split('\n').map(function (line, i) {
-        var isComment = line.trim().startsWith('//');
-        var isConst = line.trim().startsWith('const') || line.trim().startsWith('await') || line.trim().startsWith(']');
-        var isLog = line.trim().startsWith('console');
-        var isKey = line.includes('summary.') || line.includes('series.') || line.includes('.find(') || line.includes('.ev_') || line.includes('.tam_');
         return /*#__PURE__*/React.createElement("span", {
           key: i,
           style: {
-            color: isComment ? C.muted : isConst ? C.blue : isLog ? C.teal : C.text,
+            color: colorLine(line, snippetLang),
             display: "block"
           }
         }, line);
