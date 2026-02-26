@@ -6166,13 +6166,28 @@ window.AppComponent = function TransportPredictions() {
   }, "Greenbay Solutions \xB7 Feb 2026")));
 }
 
-}catch(e){console.error(e);var el=document.getElementById("error-msg");if(el){el.style.display="block";el.textContent=e.message;} return;}
+}catch(e){
+  console.error(e);
+  var el=document.getElementById("error-msg");
+  var ld=document.getElementById("loading");
+  var ls=document.getElementById("load-status");
+  if(ls){ls.textContent="Component error";}
+  if(el){el.style.display="block";el.textContent=e.message;}
+  if(ld){ld.style.zIndex="1";ld.style.background="rgba(5,11,24,0.95)";}
+  return;
+}
 
 // Mount the app
 try {
   var root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(React.createElement(window.AppComponent));
-  document.getElementById("loading").style.display = "none";
+  // React 18 render is async — hide loader after first paint
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      var ld = document.getElementById("loading");
+      if(ld) ld.style.display = "none";
+    });
+  });
 } catch(e) {
   console.error("Mount error:", e);
   document.getElementById("load-status").textContent = "Mount error: " + e.message;
