@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.7/Recharts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.8.0/Recharts.js"></script>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,20 +43,25 @@
   <div id="root"></div>
 
   <script>
-    // Verify all dependencies loaded
-    window.addEventListener('load', function() {
-      var missing = [];
-      if (!window.React)    missing.push('React');
-      if (!window.ReactDOM) missing.push('ReactDOM');
-      if (!window.Recharts) missing.push('Recharts');
+    // Debug: Check dependencies before dashboard loads
+    console.log('Checking dependencies...');
+    console.log('React:', !!window.React);
+    console.log('ReactDOM:', !!window.ReactDOM);
+    console.log('Recharts:', !!window.Recharts);
 
-      if (missing.length) {
-        document.getElementById('load-status').textContent = 'Dependency error';
-        document.getElementById('error-msg').style.display = 'block';
-        document.getElementById('error-msg').textContent = 'Failed to load: ' + missing.join(', ');
-      }
-    });
+    var missing = [];
+    if (!window.React)    missing.push('React');
+    if (!window.ReactDOM) missing.push('ReactDOM');
+    if (!window.Recharts) missing.push('Recharts');
+
+    if (missing.length) {
+      document.getElementById('load-status').textContent = 'Dependency error';
+      document.getElementById('error-msg').style.display = 'block';
+      document.getElementById('error-msg').textContent = 'Failed to load: ' + missing.join(', ');
+    } else {
+      document.getElementById('load-status').textContent = 'Dependencies OK, loading app...';
+    }
   </script>
-  <script src="dashboard.js"></script>
+  <script src="dashboard.js" onerror="document.getElementById('error-msg').style.display='block';document.getElementById('error-msg').textContent='Failed to load dashboard.js';"></script>
 </body>
 </html>
