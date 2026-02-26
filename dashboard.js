@@ -1,3 +1,12 @@
+
+window.onerror = function(msg, src, line, col, err) {
+  document.getElementById('load-status').textContent = 'JS Error';
+  var em = document.getElementById('error-msg');
+  if (em) { em.style.display='block'; em.textContent = msg + ' (line '+line+')'; }
+  return false;
+};
+
+try {
 var {
   useState,
   useEffect
@@ -5198,3 +5207,12 @@ function TransportPredictions() {
 var domRoot = document.getElementById('root');
 var reactRoot = ReactDOM.createRoot(domRoot);
 reactRoot.render(React.createElement(TransportPredictions));
+  // Hide loader once mounted
+  var loader = document.getElementById('loading');
+  if (loader) loader.style.display = 'none';
+} catch(e) {
+  document.getElementById('load-status').textContent = 'Render error';
+  var em = document.getElementById('error-msg');
+  if (em) { em.style.display='block'; em.textContent = e.message; }
+  console.error(e);
+}
