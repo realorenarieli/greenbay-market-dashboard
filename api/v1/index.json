@@ -1,0 +1,108 @@
+{
+  "api": "Greenbay Fleet Orchestration Market Intelligence",
+  "version": "1.0.0",
+  "base_url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1",
+  "description": "Static JSON API \u2014 all endpoints are plain GET requests, no auth required, CORS open. Data is updated with each dashboard release.",
+  "last_updated": "2026-02-26",
+  "usage": {
+    "example_fetch": "fetch('https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/fleet.json').then(r => r.json())",
+    "content_type": "application/json",
+    "cors": "open \u2014 all origins allowed (GitHub Pages default)",
+    "rate_limit": "none \u2014 static files",
+    "cache": "GitHub Pages CDN \u2014 typically 60s TTL"
+  },
+  "endpoints": [
+    {
+      "path": "/api/v1/index.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/index.json",
+      "description": "This manifest \u2014 all endpoints, schemas, usage notes",
+      "size_approx": "4KB"
+    },
+    {
+      "path": "/api/v1/fleet.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/fleet.json",
+      "description": "Global heavy vehicle fleet time series 2021\u20132030. EV bus/truck/AHV/H2/LCV stock and sales. Diesel fleet decline. Regional NA/EU breakdowns. Total fleet denominators (all powertrains, ACEA 2026).",
+      "key_fields": [
+        "series[].year",
+        "series[].ev_bus_stock_k",
+        "series[].ev_truck_sales_k",
+        "series[].ahv_commercial_k",
+        "series[].diesel_bus_fleet_k",
+        "total_fleet_context.eu_total_buses",
+        "total_fleet_context.eu_bus_avg_age_years"
+      ],
+      "size_approx": "8KB"
+    },
+    {
+      "path": "/api/v1/tam.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/tam.json",
+      "description": "TAM/SAM/SOM market sizing. 2030 segments with ARPU and vehicle counts. 2035 growth projections. SAM by geography. ARPU assumptions and benchmarks.",
+      "key_fields": [
+        "summary.tam_2030_usd_m",
+        "summary.sam_2030_usd_m",
+        "summary.som_base_2030_usd_m",
+        "segments_2030[].name",
+        "segments_2030[].arpu_usd",
+        "segments_2030[].total_usd_m",
+        "sam_by_region[].region"
+      ],
+      "size_approx": "6KB"
+    },
+    {
+      "path": "/api/v1/arr.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/arr.json",
+      "description": "Greenbay ARR trajectory 2025\u20132030. Five scenarios: bear, bottoms-up deal model, TAM conservative (3%), base (5%), upside (7%). Anchored at 2026=$0.8M and 2027=$3M.",
+      "key_fields": [
+        "series[].year",
+        "series[].bear",
+        "series[].bottoms_up",
+        "series[].tam_base",
+        "scenarios.tam_base.target_arr_2030_usd_m"
+      ],
+      "size_approx": "3KB"
+    },
+    {
+      "path": "/api/v1/gartner.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/gartner.json",
+      "description": "Gartner SPAs from Predicts 2026: Transportation (G00841141). Four strategic planning assumptions with time series and Greenbay relevance. AHV fleet baseline with confirmed operator data.",
+      "key_fields": [
+        "spas[].id",
+        "spas[].prediction",
+        "spas[].series",
+        "ahv_fleet_baseline[].year",
+        "ahv_fleet_baseline[].global_k"
+      ],
+      "size_approx": "5KB"
+    },
+    {
+      "path": "/api/v1/sources.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/sources.json",
+      "description": "All 32 data sources. Categories: EV fleet, HDV trucks, total fleet, AHV, regulatory, SaaS benchmarks, Gartner. Each with URL, HTTP status, and usage notes.",
+      "key_fields": [
+        "categories[].category",
+        "categories[].items[].name",
+        "categories[].items[].url",
+        "categories[].items[].status"
+      ],
+      "size_approx": "8KB"
+    },
+    {
+      "path": "/api/v1/meta.json",
+      "url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1/meta.json",
+      "description": "Dashboard metadata: version, changelog, company info, API base URL.",
+      "key_fields": [
+        "dashboard_version",
+        "last_updated",
+        "changelog"
+      ],
+      "size_approx": "2KB"
+    }
+  ],
+  "schema_notes": {
+    "types_field": "actual | forecast | forecast_high_scenario | anchor | gartner_spa",
+    "units_currency": "USD millions unless field name specifies _k (thousands) or _pct (percent)",
+    "china_note": "China figures use 30% accessibility multiplier throughout \u2014 reflects JV/partner route constraint, not full fleet",
+    "fleet_age_source": "ACEA Vehicles on European Roads 2026 (FY2024 actuals) \u2014 eu_bus_avg_age_years=12.2, eu_truck_avg_age_years=14.0, eu_van_avg_age_years=12.9",
+    "ahv_scope": "L4+ commercial deployment only \u2014 no safety driver in ODD. Excludes L2/L3 ADAS-capable vehicles."
+  }
+}

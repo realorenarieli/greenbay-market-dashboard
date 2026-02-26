@@ -5616,7 +5616,352 @@ window.AppComponent = function TransportPredictions() {
           }, typeof cell === "number" ? cell >= 100 ? cell.toLocaleString() : cell : cell);
         }));
       })))));
-    }), /*#__PURE__*/React.createElement("div", {
+    }), function () {
+      var API_BASE = "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1";
+      var endpoints = [{
+        file: "index.json",
+        label: "index",
+        desc: "Manifest — all endpoints, schemas, usage notes",
+        size: "4KB",
+        color: C.teal
+      }, {
+        file: "fleet.json",
+        label: "fleet",
+        desc: "EV bus/truck/AHV/H2/LCV time series 2021–2030 · diesel decline · regional NA/EU · total fleet denominators",
+        size: "8KB",
+        color: C.blue
+      }, {
+        file: "tam.json",
+        label: "tam",
+        desc: "TAM/SAM/SOM 2030 & 2035 · segment ARPU · vehicle counts · geographic breakdown",
+        size: "6KB",
+        color: C.violet
+      }, {
+        file: "arr.json",
+        label: "arr",
+        desc: "ARR trajectory 2025–2030 · 5 scenarios: bear, bottoms-up, conservative/base/upside",
+        size: "3KB",
+        color: C.amber
+      }, {
+        file: "gartner.json",
+        label: "gartner",
+        desc: "4 Gartner SPAs (G00841141) with time series · AHV fleet baseline by operator",
+        size: "5KB",
+        color: C.rose
+      }, {
+        file: "sources.json",
+        label: "sources",
+        desc: "All 32 sources · URLs · HTTP status (verified 2026-02-26) · methodology notes",
+        size: "8KB",
+        color: C.green
+      }, {
+        file: "meta.json",
+        label: "meta",
+        desc: "Dashboard version · changelog · data provenance",
+        size: "2KB",
+        color: C.muted
+      }];
+      var _React$useState = React.useState(null),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        copiedIdx = _React$useState2[0],
+        setCopiedIdx = _React$useState2[1];
+      var _React$useState3 = React.useState(false),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        copiedSnippet = _React$useState4[0],
+        setCopiedSnippet = _React$useState4[1];
+      var copyUrl = function copyUrl(url, idx) {
+        navigator.clipboard.writeText(url);
+        setCopiedIdx(idx);
+        setTimeout(function () {
+          return setCopiedIdx(null);
+        }, 1800);
+      };
+      var snippet = "// Greenbay Fleet Intelligence API \u2014 v1\nconst API = \"https://realorenarieli.github.io/greenbay-market-dashboard/api/v1\";\n\n// Fetch all endpoints in parallel\nconst [fleet, tam, arr] = await Promise.all([\n  fetch(`${API}/fleet.json`).then(r => r.json()),\n  fetch(`${API}/tam.json`).then(r => r.json()),\n  fetch(`${API}/arr.json`).then(r => r.json()),\n]);\n\n// Key data points\nconsole.log(\"TAM 2030:\", tam.summary.tam_2030_usd_m, \"M USD\");\nconsole.log(\"EV bus 2024:\", fleet.series.find(d => d.year === 2024).ev_bus_stock_k, \"K units\");\nconsole.log(\"ARR base 2030:\", arr.series.find(d => d.year === 2030).tam_base, \"M USD\");";
+      return /*#__PURE__*/React.createElement("div", {
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.teal, "40"),
+          borderRadius: 12,
+          overflow: "hidden"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          background: "".concat(C.teal, "10"),
+          borderBottom: "1px solid ".concat(C.teal, "30"),
+          padding: "14px 20px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 3
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          background: C.teal,
+          boxShadow: "0 0 6px ".concat(C.teal)
+        }
+      }), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontWeight: 700,
+          fontSize: 13,
+          color: C.text
+        }
+      }, "API Access"), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 9,
+          fontFamily: "'DM Mono', monospace",
+          color: C.teal,
+          background: "".concat(C.teal, "20"),
+          padding: "2px 8px",
+          borderRadius: 10,
+          border: "1px solid ".concat(C.teal, "40")
+        }
+      }, "v1.0 \xB7 static JSON")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, "7 endpoints \xB7 no auth \xB7 CORS open \xB7 GitHub Pages CDN \xB7 37KB total")), /*#__PURE__*/React.createElement("a", {
+        href: "".concat(API_BASE, "/index.json"),
+        target: "_blank",
+        rel: "noopener noreferrer",
+        style: {
+          fontSize: 10,
+          color: C.teal,
+          textDecoration: "none",
+          fontFamily: "'DM Mono', monospace",
+          background: "".concat(C.teal, "15"),
+          border: "1px solid ".concat(C.teal, "40"),
+          padding: "5px 12px",
+          borderRadius: 6,
+          display: "flex",
+          alignItems: "center",
+          gap: 5
+        }
+      }, /*#__PURE__*/React.createElement("svg", {
+        width: "9",
+        height: "9",
+        viewBox: "0 0 10 10",
+        fill: "none"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M1 9L9 1M9 1H3M9 1V7",
+        stroke: C.teal,
+        strokeWidth: "1.5",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      })), "index.json")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          padding: "16px 20px",
+          display: "grid",
+          gap: 12
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "grid",
+          gap: 6
+        }
+      }, endpoints.map(function (ep, i) {
+        var url = "".concat(API_BASE, "/").concat(ep.file);
+        return /*#__PURE__*/React.createElement("div", {
+          key: i,
+          style: {
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "8px 12px",
+            background: "".concat(C.surface, "60"),
+            borderRadius: 8,
+            border: "1px solid ".concat(C.border)
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontFamily: "'DM Mono', monospace",
+            fontSize: 8,
+            fontWeight: 700,
+            color: C.green,
+            background: "".concat(C.green, "15"),
+            padding: "2px 6px",
+            borderRadius: 4,
+            flexShrink: 0
+          }
+        }, "GET"), /*#__PURE__*/React.createElement("a", {
+          href: url,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          style: {
+            fontFamily: "'DM Mono', monospace",
+            fontSize: 10,
+            color: ep.color,
+            textDecoration: "none",
+            flexShrink: 0,
+            minWidth: 120
+          },
+          onMouseEnter: function onMouseEnter(e) {
+            return e.target.style.textDecoration = "underline";
+          },
+          onMouseLeave: function onMouseLeave(e) {
+            return e.target.style.textDecoration = "none";
+          }
+        }, "/api/v1/", /*#__PURE__*/React.createElement("strong", null, ep.label), ".json"), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.muted,
+            flex: 1,
+            minWidth: 0,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap"
+          }
+        }, ep.desc), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontFamily: "'DM Mono', monospace",
+            fontSize: 9,
+            color: C.muted,
+            flexShrink: 0
+          }
+        }, ep.size), /*#__PURE__*/React.createElement("button", {
+          onClick: function onClick() {
+            return copyUrl(url, i);
+          },
+          style: {
+            background: copiedIdx === i ? "".concat(C.green, "20") : "transparent",
+            color: copiedIdx === i ? C.green : C.muted,
+            border: "1px solid ".concat(copiedIdx === i ? C.green : C.border),
+            borderRadius: 5,
+            padding: "3px 9px",
+            fontSize: 9,
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            cursor: "pointer",
+            flexShrink: 0,
+            transition: "all 0.15s"
+          }
+        }, copiedIdx === i ? "✓ copied" : "copy URL"));
+      })), /*#__PURE__*/React.createElement("div", {
+        style: {
+          borderRadius: 8,
+          overflow: "hidden",
+          border: "1px solid ".concat(C.border)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          background: "".concat(C.surface),
+          borderBottom: "1px solid ".concat(C.border),
+          padding: "7px 14px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontFamily: "'DM Mono', monospace",
+          fontSize: 9,
+          color: C.muted
+        }
+      }, "example \xB7 JavaScript"), /*#__PURE__*/React.createElement("button", {
+        onClick: function onClick() {
+          navigator.clipboard.writeText(snippet);
+          setCopiedSnippet(true);
+          setTimeout(function () {
+            return setCopiedSnippet(false);
+          }, 1800);
+        },
+        style: {
+          background: copiedSnippet ? "".concat(C.green, "20") : "transparent",
+          color: copiedSnippet ? C.green : C.muted,
+          border: "1px solid ".concat(copiedSnippet ? C.green : C.border),
+          borderRadius: 5,
+          padding: "3px 9px",
+          fontSize: 9,
+          cursor: "pointer",
+          transition: "all 0.15s"
+        }
+      }, copiedSnippet ? "✓ copied" : "copy snippet")), /*#__PURE__*/React.createElement("pre", {
+        style: {
+          margin: 0,
+          padding: "12px 16px",
+          fontFamily: "'DM Mono', monospace",
+          fontSize: 10,
+          color: C.muted,
+          background: "".concat(C.bg),
+          overflowX: "auto",
+          lineHeight: 1.7
+        }
+      }, snippet.split('\n').map(function (line, i) {
+        var isComment = line.trim().startsWith('//');
+        var isConst = line.trim().startsWith('const') || line.trim().startsWith('await') || line.trim().startsWith(']');
+        var isLog = line.trim().startsWith('console');
+        var isKey = line.includes('summary.') || line.includes('series.') || line.includes('.find(') || line.includes('.ev_') || line.includes('.tam_');
+        return /*#__PURE__*/React.createElement("span", {
+          key: i,
+          style: {
+            color: isComment ? C.muted : isConst ? C.blue : isLog ? C.teal : C.text,
+            display: "block"
+          }
+        }, line);
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 8
+        }
+      }, [{
+        label: "type field values",
+        val: "actual · forecast · forecast_high_scenario · anchor · gartner_spa"
+      }, {
+        label: "currency",
+        val: "USD millions unless field name ends in _k (thousands) or _pct (percent)"
+      }, {
+        label: "China note",
+        val: "All China figures apply 30% accessibility multiplier (JV/partner route)"
+      }, {
+        label: "fleet age source",
+        val: "ACEA 2026 actuals — EU buses 12.2yr, trucks 14.0yr, vans 12.9yr"
+      }, {
+        label: "AHV scope",
+        val: "L4+ commercially deployed only — excludes L2/L3 ADAS (includes ~8K Chinese trucks)"
+      }, {
+        label: "update frequency",
+        val: "With each dashboard release. Check meta.json changelog for version history."
+      }].map(function (s, i) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: i,
+          style: {
+            display: "flex",
+            gap: 7
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            width: 3,
+            background: C.teal,
+            borderRadius: 2,
+            flexShrink: 0,
+            opacity: 0.5
+          }
+        }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 9,
+            color: C.teal,
+            fontWeight: 700,
+            marginBottom: 2,
+            fontFamily: "'DM Mono', monospace"
+          }
+        }, s.label), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 10,
+            color: C.muted
+          }
+        }, s.val)));
+      }))));
+    }(), /*#__PURE__*/React.createElement("div", {
       style: {
         padding: "10px 14px",
         background: "".concat(C.surface, "80"),

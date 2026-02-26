@@ -1,0 +1,178 @@
+{
+  "endpoint": "tam",
+  "version": "1.0.0",
+  "description": "TAM/SAM/SOM market sizing for Greenbay fleet orchestration platform. 2030 and 2035 horizons. Segment-level ARPU and vehicle counts.",
+  "last_updated": "2026-02-26",
+  "currency": "USD_millions",
+  "summary": {
+    "tam_2030_usd_m": 5551,
+    "sam_2030_usd_m": 4600,
+    "som_base_2030_usd_m": 226,
+    "tam_2035_usd_m": 12216,
+    "sam_rationale": "83% of TAM \u2014 EU+NA primary markets, APAC emerging, China 30% accessible via JV/partner",
+    "som_rationale": "5% SAM penetration by 2030 \u2014 ~45 major operator deployments. Samsara precedent: 5% US commercial trucking in 4yr post-Series A"
+  },
+  "segments_2030": [
+    {
+      "name": "Transit Fleet Orchestration",
+      "vehicles_ex_china_k": 450,
+      "arpu_usd": 1920,
+      "revenue_ex_china_usd_m": 864,
+      "vehicles_china_k": 387,
+      "revenue_china_usd_m": 743,
+      "total_usd_m": 1607,
+      "notes": "EV transit buses entering managed depot operations"
+    },
+    {
+      "name": "Freight Fleet Orchestration",
+      "vehicles_ex_china_k": 290,
+      "arpu_usd": 1440,
+      "revenue_ex_china_usd_m": 418,
+      "vehicles_china_k": 261,
+      "revenue_china_usd_m": 376,
+      "total_usd_m": 794,
+      "notes": "EV trucks at large operator depots (20+ vehicles)"
+    },
+    {
+      "name": "Legacy Buses (mixed depot)",
+      "vehicles_ex_china_k": 910,
+      "arpu_usd": 480,
+      "revenue_ex_china_usd_m": 437,
+      "vehicles_china_k": 240,
+      "revenue_china_usd_m": 115,
+      "total_usd_m": 552,
+      "notes": "Diesel buses at depots with \u226510% EV/AV requiring mixed orchestration"
+    },
+    {
+      "name": "Legacy Trucks (mixed depot)",
+      "vehicles_ex_china_k": 2600,
+      "arpu_usd": 480,
+      "revenue_ex_china_usd_m": 1248,
+      "vehicles_china_k": 600,
+      "revenue_china_usd_m": 288,
+      "total_usd_m": 1536,
+      "notes": "Conservative floor: EU 6.2M total trucks (ACEA 2026); 35% managed depot = 2.2M EU + 1.7M NA ceiling = 3.9M. 2.6M excludes owner-operators."
+    },
+    {
+      "name": "Autonomous Fleet Infra Layer",
+      "vehicles_ex_china_k": 28,
+      "arpu_usd": 3000,
+      "revenue_ex_china_usd_m": 84,
+      "vehicles_china_k": 38,
+      "revenue_china_usd_m": 114,
+      "total_usd_m": 198,
+      "notes": "NA+EU confirmed 28K L4; 38K APAC L4 at 30% accessibility"
+    },
+    {
+      "name": "Light Commercial Vehicles",
+      "vehicles_ex_china_k": 720,
+      "arpu_usd": 960,
+      "revenue_ex_china_usd_m": 691,
+      "vehicles_china_k": 180,
+      "revenue_china_usd_m": 173,
+      "total_usd_m": 864,
+      "notes": "EV managed vans ex-China. 31.1M EU total LCVs (ACEA); 720K = 2.3% penetration \u2014 conservative floor"
+    }
+  ],
+  "total_2030": {
+    "vehicles_ex_china_k": 5000,
+    "revenue_ex_china_usd_m": 3742,
+    "revenue_china_usd_m": 1809,
+    "total_usd_m": 5551
+  },
+  "segments_2035": [
+    {
+      "name": "Transit Fleet Orchestration",
+      "val_2030_usd_m": 1607,
+      "val_2035_usd_m": 3226,
+      "growth_usd_m": 1619,
+      "multiplier": "2.0x"
+    },
+    {
+      "name": "Freight Fleet Orchestration",
+      "val_2030_usd_m": 794,
+      "val_2035_usd_m": 1915,
+      "growth_usd_m": 1121,
+      "multiplier": "2.4x"
+    },
+    {
+      "name": "Legacy Vehicles (mixed depot)",
+      "val_2030_usd_m": 2088,
+      "val_2035_usd_m": 2947,
+      "growth_usd_m": 859,
+      "multiplier": "1.4x"
+    },
+    {
+      "name": "Autonomous Fleet Infra Layer",
+      "val_2030_usd_m": 198,
+      "val_2035_usd_m": 2400,
+      "growth_usd_m": 2202,
+      "multiplier": "12.1x"
+    },
+    {
+      "name": "Light Commercial Vehicles",
+      "val_2030_usd_m": 864,
+      "val_2035_usd_m": 1728,
+      "growth_usd_m": 864,
+      "multiplier": "2.0x"
+    }
+  ],
+  "total_2035": {
+    "total_usd_m": 12216
+  },
+  "sam_by_region": [
+    {
+      "region": "EU",
+      "sam_usd_m": 1024,
+      "share_pct": 22,
+      "key_driver": "Clean Vehicle Directive + EU Green Deal mandate"
+    },
+    {
+      "region": "North America",
+      "sam_usd_m": 975,
+      "share_pct": 21,
+      "key_driver": "ZEV state mandates + IRA credits (under review)"
+    },
+    {
+      "region": "APAC ex-China",
+      "sam_usd_m": 340,
+      "share_pct": 7,
+      "key_driver": "India FAME, Japan ZEV, Korea H2 roadmap"
+    },
+    {
+      "region": "China (30% acc.)",
+      "sam_usd_m": 186,
+      "share_pct": 4,
+      "key_driver": "Regulatory barriers + domestic incumbents. Note: 30% label reflects JV/partner route constraint; actual vehicles in scope ~1.8% of China fleet"
+    },
+    {
+      "region": "All segments (full)",
+      "sam_usd_m": 2075,
+      "share_pct": 45,
+      "key_driver": "Remaining fleet segments across all regions"
+    },
+    {
+      "region": "TOTAL SAM",
+      "sam_usd_m": 4600,
+      "share_pct": 100,
+      "key_driver": "EU + NA primary; APAC emerging; China restricted"
+    }
+  ],
+  "arpu": {
+    "transit_usd_per_vehicle_yr": 1920,
+    "freight_usd_per_vehicle_yr": 1440,
+    "legacy_usd_per_vehicle_yr": 480,
+    "ahv_usd_per_vehicle_yr": 3000,
+    "lcv_usd_per_vehicle_yr": 960,
+    "benchmark_samsara_blended": "1200-2400",
+    "benchmark_source": "Samsara FY2025 10-K (SEC) \u2014 $1.46B ARR \u00f7 ~600-700K managed vehicles"
+  },
+  "sources": [
+    "IEA GEO 2025",
+    "ACEA Vehicles on European Roads 2026",
+    "Gartner G00841141",
+    "McKinsey Sep 2024",
+    "Samsara FY2025 10-K",
+    "FMCSA fleet data"
+  ]
+}

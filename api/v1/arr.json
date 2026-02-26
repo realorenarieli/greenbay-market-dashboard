@@ -1,0 +1,100 @@
+{
+  "endpoint": "arr",
+  "version": "1.0.0",
+  "description": "Greenbay ARR trajectory 2025\u20132030. Five scenarios: bear, bottoms-up deal model, TAM conservative (3% SAM), TAM base (5% SAM), TAM upside (7% SAM). All scenarios anchored at 2026=$0.8M and 2027=$3.0M; diverge from 2028.",
+  "last_updated": "2026-02-26",
+  "currency": "USD_millions",
+  "anchors": {
+    "2025": 0,
+    "2026": 0.8,
+    "2027": 3.0,
+    "notes": "Greenbay funded mid-2025 (no revenue year 1). 2026 = <$1M first commercial revenue. 2027 = ~$3M product maturity milestone. All 5 scenarios pinned at these anchors."
+  },
+  "scenarios": {
+    "bear": {
+      "description": "~50% CAGR from 2027 anchor. Conservative base: slow enterprise sales cycles, limited mandate tailwinds.",
+      "cagr_2027_2030": "50%"
+    },
+    "bottoms_up": {
+      "description": "Deal model: 3\u201314 enterprise contracts/yr at $350K\u2013800K ACV. ~97% CAGR from 2027 anchor.",
+      "cagr_2027_2030": "97%"
+    },
+    "tam_conservative": {
+      "description": "3% SAM penetration by 2030. Requires EU mandate tailwind; limited AV activation.",
+      "sam_penetration_pct": 3,
+      "target_arr_2030_usd_m": 136
+    },
+    "tam_base": {
+      "description": "5% SAM penetration by 2030. ~45 operator deployments. Samsara precedent: 5% US commercial trucking in 4yr post-Series A.",
+      "sam_penetration_pct": 5,
+      "target_arr_2030_usd_m": 226
+    },
+    "tam_upside": {
+      "description": "7% SAM penetration by 2030. Full AV OEM partnership ecosystem + agentic ops tier live.",
+      "sam_penetration_pct": 7,
+      "target_arr_2030_usd_m": 317
+    }
+  },
+  "series": [
+    {
+      "year": 2025,
+      "bear": 0,
+      "bottoms_up": 0,
+      "tam_conservative": 0,
+      "tam_base": 0,
+      "tam_upside": 0,
+      "type": "anchor"
+    },
+    {
+      "year": 2026,
+      "bear": 0.8,
+      "bottoms_up": 0.8,
+      "tam_conservative": 0.8,
+      "tam_base": 0.8,
+      "tam_upside": 0.8,
+      "type": "anchor"
+    },
+    {
+      "year": 2027,
+      "bear": 3.0,
+      "bottoms_up": 3.0,
+      "tam_conservative": 3.0,
+      "tam_base": 3.0,
+      "tam_upside": 3.0,
+      "type": "anchor"
+    },
+    {
+      "year": 2028,
+      "bear": 4.5,
+      "bottoms_up": 7.0,
+      "tam_conservative": 11.0,
+      "tam_base": 25.0,
+      "tam_upside": 35.0,
+      "type": "forecast"
+    },
+    {
+      "year": 2029,
+      "bear": 6.8,
+      "bottoms_up": 16.5,
+      "tam_conservative": 39.0,
+      "tam_base": 85.0,
+      "tam_upside": 120.0,
+      "type": "forecast"
+    },
+    {
+      "year": 2030,
+      "bear": 10.1,
+      "bottoms_up": 38.5,
+      "tam_conservative": 136.0,
+      "tam_base": 226.0,
+      "tam_upside": 317.0,
+      "type": "forecast"
+    }
+  ],
+  "sources": [
+    "Internal Greenbay model",
+    "Samsara FY2025 10-K (SAM penetration precedent)",
+    "Gartner G00841141 (AV deployment timing)",
+    "EU CVD mandate timeline"
+  ]
+}

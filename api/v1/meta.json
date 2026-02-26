@@ -1,0 +1,48 @@
+{
+  "endpoint": "meta",
+  "version": "1.0.0",
+  "description": "Dashboard metadata: version, update dates, endpoint registry, data provenance.",
+  "dashboard_version": "2.3.0",
+  "last_updated": "2026-02-26",
+  "data_as_of": "FY2024 actuals, Feb 2026 forecasts",
+  "company": "Greenbay Solutions",
+  "company_description": "Infrastructure layer for electric and autonomous fleets. AI-powered depot operations, smart charging, energy optimization, yard management.",
+  "dashboard_url": "https://realorenarieli.github.io/greenbay-market-dashboard/",
+  "api_base_url": "https://realorenarieli.github.io/greenbay-market-dashboard/api/v1",
+  "changelog": [
+    {
+      "version": "2.3.0",
+      "date": "2026-02-26",
+      "changes": [
+        "Added /api/v1 static JSON endpoints",
+        "Added fleet age narrative (ACEA 2026 actuals)",
+        "Added total fleet context across all tabs",
+        "Fixed 4 broken source URLs"
+      ]
+    },
+    {
+      "version": "2.2.0",
+      "date": "2026-02-24",
+      "changes": [
+        "Validated actuals vs ACEA 2026 and IEA GEO-25",
+        "Fixed US bus 2030 forecast discrepancy",
+        "Added ACEA 2026 as primary source"
+      ]
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-20",
+      "changes": [
+        "ARR base year corrected to 2026",
+        "AHV actuals corrected to L4-only commercial deployment"
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-15",
+      "changes": [
+        "Initial public dashboard deployment"
+      ]
+    }
+  ]
+}
