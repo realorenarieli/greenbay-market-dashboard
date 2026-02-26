@@ -742,6 +742,14 @@ window.AppComponent = function TransportPredictions() {
     _useState6 = _slicedToArray(_useState5, 2),
     animateRevenue = _useState6[0],
     setAnimateRevenue = _useState6[1];
+  var _useState7 = useState(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    apiCopiedIdx = _useState8[0],
+    setApiCopiedIdx = _useState8[1];
+  var _useState9 = useState(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    apiCopiedSnippet = _useState0[0],
+    setApiCopiedSnippet = _useState0[1];
   useEffect(function () {
     var t = setTimeout(function () {
       return setAnimateRevenue(true);
@@ -5675,18 +5683,10 @@ window.AppComponent = function TransportPredictions() {
         color: C.violet,
         tag: "AI agents"
       }];
-      var _React$useState = React.useState(null),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        copiedIdx = _React$useState2[0],
-        setCopiedIdx = _React$useState2[1];
-      var _React$useState3 = React.useState("js"),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        snippetLang = _React$useState4[0],
-        setSnippetLang = _React$useState4[1];
-      var _React$useState5 = React.useState(false),
-        _React$useState6 = _slicedToArray(_React$useState5, 2),
-        copiedSnippet = _React$useState6[0],
-        setCopiedSnippet = _React$useState6[1];
+      var copiedIdx = apiCopiedIdx;
+      var setCopiedIdx = setApiCopiedIdx;
+      var copiedSnippet = apiCopiedSnippet;
+      var setCopiedSnippet = setApiCopiedSnippet;
       var copyUrl = function copyUrl(url, idx) {
         navigator.clipboard.writeText(url);
         setCopiedIdx(idx);
