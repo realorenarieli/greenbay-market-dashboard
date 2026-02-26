@@ -743,6 +743,10 @@ window.AppComponent = function TransportPredictions() {
     _useState6 = _slicedToArray(_useState5, 2),
     animateRevenue = _useState6[0],
     setAnimateRevenue = _useState6[1];
+  var _useState7 = useState("evBusData"),
+    _useState8 = _slicedToArray(_useState7, 2),
+    selectedDataset = _useState8[0],
+    setSelectedDataset = _useState8[1];
 
   useEffect(function () {
     var t = setTimeout(function () {
@@ -4823,11 +4827,6 @@ window.AppComponent = function TransportPredictions() {
       }, source));
     }))));
   }(), activeTab === "data" && function () {
-    var _useState7 = useState("evBusData"),
-      _useState8 = _slicedToArray(_useState7, 2),
-      selectedDataset = _useState8[0],
-      setSelectedDataset = _useState8[1];
-
     var datasets = {
       evBusData: { name: "EV Bus Fleet", data: evBusData, unit: "K vehicles" },
       evTruckData: { name: "EV Truck Fleet", data: evTruckData, unit: "K vehicles" },
