@@ -1,5 +1,8 @@
+console.log('[Dashboard] Script starting...');
+document.getElementById('load-status').textContent = 'Script loaded, initializing...';
 window.onerror=function(m,s,l){var e=document.getElementById('error-msg');if(e){e.style.display='block';e.textContent=m+' (line '+l+')';}return false;};
 try{
+console.log('[Dashboard] Inside try block...');
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -734,6 +737,8 @@ var gridProps = {
 };
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
+console.log('[Dashboard] Defining AppComponent...');
+document.getElementById('load-status').textContent = 'Defining components...';
 window.AppComponent = function TransportPredictions() {
   var _useState3 = useState("overview"),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -5294,30 +5299,37 @@ window.AppComponent = function TransportPredictions() {
   }, "Greenbay Solutions \xB7 Feb 2026"))));
 }
 
+console.log('[Dashboard] Component defined successfully');
+document.getElementById('load-status').textContent = 'Components ready, mounting...';
 }catch(e){
-  console.error(e);
+  console.error('[Dashboard] Component error:', e);
   var el=document.getElementById("error-msg");
   var ld=document.getElementById("loading");
   var ls=document.getElementById("load-status");
   if(ls){ls.textContent="Component error";}
-  if(el){el.style.display="block";el.textContent=e.message;}
+  if(el){el.style.display="block";el.textContent=e.message + '\n' + e.stack;}
   if(ld){ld.style.zIndex="1";ld.style.background="rgba(5,11,24,0.95)";}
   return;
 }
 
 // Mount the app
+console.log('[Dashboard] Mounting app...');
 try {
   var root = ReactDOM.createRoot(document.getElementById("root"));
+  console.log('[Dashboard] Root created, rendering...');
   root.render(React.createElement(window.AppComponent));
+  console.log('[Dashboard] Render called, waiting for paint...');
   // React 18 render is async — hide loader after first paint
   requestAnimationFrame(function() {
     requestAnimationFrame(function() {
+      console.log('[Dashboard] Hiding loader...');
       var ld = document.getElementById("loading");
       if(ld) ld.style.display = "none";
+      console.log('[Dashboard] Done!');
     });
   });
 } catch(e) {
-  console.error("Mount error:", e);
+  console.error("[Dashboard] Mount error:", e);
   document.getElementById("load-status").textContent = "Mount error: " + e.message;
   document.getElementById("error-msg").style.display = "block";
   document.getElementById("error-msg").textContent = e.stack || e.message;
