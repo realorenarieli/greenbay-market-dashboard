@@ -1,29 +1,22 @@
 window.onerror=function(m,s,l){var e=document.getElementById('error-msg');if(e){e.style.display='block';e.textContent=m+' (line '+l+')';}return false;};
 try{
-var {
-  useState,
-  useEffect
-} = React;
-var {
-  LineChart,
-  Line,
-  AreaChart,
-  Area,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  ReferenceLine,
-  ReferenceArea,
-  ComposedChart,
-  Scatter
-} = Recharts;
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+import { useState, useEffect } from "react";
+import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, ReferenceArea, ComposedChart, Scatter } from "recharts";
+
 // ── PALETTE ──────────────────────────────────────────────────────────────────
-const C = {
+var C = {
   bg: "#050B18",
   surface: "#0A1628",
   card: "#0F1E35",
@@ -40,13 +33,11 @@ const C = {
 };
 
 // ── FONT INJECT ───────────────────────────────────────────────────────────────
-const fontStyle = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-`;
+var fontStyle = "\n  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');\n";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
-const evBusData = [{
+var evBusData = [{
   year: 2021,
   value: 514,
   type: "actual"
@@ -87,7 +78,7 @@ const evBusData = [{
   value: 1740,
   type: "forecast"
 }];
-const evTruckData = [{
+var evTruckData = [{
   year: 2021,
   value: 11,
   type: "actual"
@@ -133,7 +124,7 @@ const evTruckData = [{
 // Old 2021-2024: 1.1 / 2.7 / 5.7 / 10.0  (included Chinese L2/L3 ADAS trucks)
 // New 2021-2024: 0.05 / 0.12 / 0.30 / 1.20 (NA + EU L4 commercial only; APAC L4 negligible)
 // Source: Aurora Q4 2025 Earnings, Waymo public data, Einride fleet reports
-const ahvData = [{
+var ahvData = [{
   year: 2021,
   value: 0.05,
   type: "actual"
@@ -175,7 +166,7 @@ const ahvData = [{
   type: "scenario"
 } // high scenario incl. APAC L4 scale-up
 ];
-const h2Data = [{
+var h2Data = [{
   year: 2021,
   value: 12,
   type: "actual"
@@ -216,7 +207,7 @@ const h2Data = [{
   value: 68,
   type: "forecast"
 }];
-const agenticAIData = [{
+var agenticAIData = [{
   year: 2025,
   value: 2,
   type: "actual"
@@ -241,7 +232,7 @@ const agenticAIData = [{
   value: 25,
   type: "gartner"
 }];
-const eamAIData = [{
+var eamAIData = [{
   year: 2025,
   value: 5,
   type: "actual"
@@ -266,7 +257,7 @@ const eamAIData = [{
   value: 80,
   type: "gartner"
 }];
-const euDataSharingData = [{
+var euDataSharingData = [{
   year: 2025,
   value: 3,
   type: "actual"
@@ -283,7 +274,7 @@ const euDataSharingData = [{
   value: 30,
   type: "gartner"
 }];
-const robotaxiData = [{
+var robotaxiData = [{
   year: 2025,
   value: 5,
   type: "actual"
@@ -316,7 +307,7 @@ const robotaxiData = [{
   value: 60,
   type: "gartner"
 }];
-const dieselBusData = [{
+var dieselBusData = [{
   year: 2021,
   value: 6100
 }, {
@@ -347,7 +338,7 @@ const dieselBusData = [{
   year: 2030,
   value: 4600
 }];
-const dieselTruckData = [{
+var dieselTruckData = [{
   year: 2021,
   value: 59600
 }, {
@@ -383,7 +374,7 @@ const dieselTruckData = [{
 // Anchored to TAM assumption: 720K ex-China by 2030
 // Actuals: Amazon Rivian ~10K+ (2024), DHL ~10K, La Poste ~10K, Royal Mail ~4K
 // Source: IEA GEO 2025 EV LCV tracking; Amazon sustainability report
-const lcvData = [{
+var lcvData = [{
   year: 2021,
   value: 32,
   type: "actual"
@@ -425,14 +416,28 @@ const lcvData = [{
   type: "forecast"
 } // = TAM assumption (720K managed EV vans ex-China)
 ];
-const combinedData = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030].map(yr => {
-  const evBus = evBusData.find(d => d.year === yr);
-  const evTruck = evTruckData.find(d => d.year === yr);
-  const ahv = ahvData.find(d => d.year === yr);
-  const h2 = h2Data.find(d => d.year === yr);
-  const dBus = dieselBusData.find(d => d.year === yr);
-  const dTruck = dieselTruckData.find(d => d.year === yr);
-  const lcv = lcvData.find(d => d.year === yr);
+var combinedData = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030].map(function (yr) {
+  var evBus = evBusData.find(function (d) {
+    return d.year === yr;
+  });
+  var evTruck = evTruckData.find(function (d) {
+    return d.year === yr;
+  });
+  var ahv = ahvData.find(function (d) {
+    return d.year === yr;
+  });
+  var h2 = h2Data.find(function (d) {
+    return d.year === yr;
+  });
+  var dBus = dieselBusData.find(function (d) {
+    return d.year === yr;
+  });
+  var dTruck = dieselTruckData.find(function (d) {
+    return d.year === yr;
+  });
+  var lcv = lcvData.find(function (d) {
+    return d.year === yr;
+  });
   return {
     year: yr,
     "EV Buses (stock)": evBus ? evBus.value : null,
@@ -447,17 +452,17 @@ const combinedData = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030
 });
 
 // ── CUSTOM TOOLTIP ────────────────────────────────────────────────────────────
-const CustomTooltip = ({
-  active,
-  payload,
-  label,
-  unit = "K units"
-}) => {
-  if (!active || !payload?.length) return null;
+var CustomTooltip = function CustomTooltip(_ref) {
+  var active = _ref.active,
+    payload = _ref.payload,
+    label = _ref.label,
+    _ref$unit = _ref.unit,
+    unit = _ref$unit === void 0 ? "K units" : _ref$unit;
+  if (!active || !(payload !== null && payload !== void 0 && payload.length)) return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
       background: C.card,
-      border: `1px solid ${C.border}`,
+      border: "1px solid ".concat(C.border),
       borderRadius: 8,
       padding: "10px 14px",
       fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -471,45 +476,46 @@ const CustomTooltip = ({
       fontWeight: 600,
       letterSpacing: 1
     }
-  }, label), payload.map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: "flex",
-      alignItems: "center",
-      gap: 8,
-      marginBottom: 3
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 8,
-      height: 8,
-      borderRadius: 2,
-      background: p.color
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.muted,
-      fontSize: 11
-    }
-  }, p.name, ":"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.text,
-      fontWeight: 600,
-      fontSize: 12,
-      fontFamily: "'DM Mono', monospace"
-    }
-  }, typeof p.value === "number" ? p.value.toLocaleString() : p.value, " ", unit))));
+  }, label), payload.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 3
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 8,
+        height: 8,
+        borderRadius: 2,
+        background: p.color
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: C.muted,
+        fontSize: 11
+      }
+    }, p.name, ":"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: C.text,
+        fontWeight: 600,
+        fontSize: 12,
+        fontFamily: "'DM Mono', monospace"
+      }
+    }, typeof p.value === "number" ? p.value.toLocaleString() : p.value, " ", unit));
+  }));
 };
-const PctTooltip = ({
-  active,
-  payload,
-  label
-}) => {
-  if (!active || !payload?.length) return null;
+var PctTooltip = function PctTooltip(_ref2) {
+  var active = _ref2.active,
+    payload = _ref2.payload,
+    label = _ref2.label;
+  if (!active || !(payload !== null && payload !== void 0 && payload.length)) return null;
   return /*#__PURE__*/React.createElement("div", {
     style: {
       background: C.card,
-      border: `1px solid ${C.border}`,
+      border: "1px solid ".concat(C.border),
       borderRadius: 8,
       padding: "10px 14px",
       fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -523,118 +529,127 @@ const PctTooltip = ({
       fontWeight: 600,
       letterSpacing: 1
     }
-  }, label), payload.map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      display: "flex",
-      alignItems: "center",
-      gap: 8,
-      marginBottom: 3
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 8,
-      height: 8,
-      borderRadius: 2,
-      background: p.color
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.muted,
-      fontSize: 11
-    }
-  }, p.name, ":"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.text,
-      fontWeight: 600,
-      fontSize: 12,
-      fontFamily: "'DM Mono', monospace"
-    }
-  }, p.value, "%"))));
+  }, label), payload.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 3
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 8,
+        height: 8,
+        borderRadius: 2,
+        background: p.color
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: C.muted,
+        fontSize: 11
+      }
+    }, p.name, ":"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: C.text,
+        fontWeight: 600,
+        fontSize: 12,
+        fontFamily: "'DM Mono', monospace"
+      }
+    }, p.value, "%"));
+  }));
 };
 
 // ── CARD ──────────────────────────────────────────────────────────────────────
-const Card = ({
-  children,
-  title,
-  subtitle,
-  badge,
-  badgeColor,
-  style = {}
-}) => /*#__PURE__*/React.createElement("div", {
-  style: {
-    background: C.card,
-    border: `1px solid ${C.border}`,
-    borderRadius: 12,
-    padding: "20px 22px",
-    position: "relative",
-    overflow: "hidden",
-    ...style
-  }
-}, /*#__PURE__*/React.createElement("div", {
-  style: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 2,
-    background: `linear-gradient(90deg, transparent, ${badgeColor || C.teal}60, transparent)`,
-    borderRadius: "12px 12px 0 0"
-  }
-}), title && /*#__PURE__*/React.createElement("div", {
-  style: {
-    marginBottom: 14
-  }
-}, /*#__PURE__*/React.createElement("div", {
-  style: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 2
-  }
-}, /*#__PURE__*/React.createElement("span", {
-  style: {
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-    fontWeight: 700,
-    fontSize: 13,
-    color: C.text,
-    letterSpacing: 0.3
-  }
-}, title), badge && /*#__PURE__*/React.createElement("span", {
-  style: {
-    background: `${badgeColor || C.teal}20`,
-    color: badgeColor || C.teal,
-    border: `1px solid ${badgeColor || C.teal}40`,
-    borderRadius: 20,
-    padding: "2px 9px",
-    fontSize: 10,
-    fontFamily: "'DM Mono', monospace",
-    fontWeight: 500,
-    letterSpacing: 0.5
-  }
-}, badge)), subtitle && /*#__PURE__*/React.createElement("span", {
-  style: {
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
-    fontSize: 11,
-    color: C.muted
-  }
-}, subtitle)), children);
+var Card = function Card(_ref3) {
+  var children = _ref3.children,
+    title = _ref3.title,
+    subtitle = _ref3.subtitle,
+    badge = _ref3.badge,
+    badgeColor = _ref3.badgeColor,
+    _ref3$style = _ref3.style,
+    style = _ref3$style === void 0 ? {} : _ref3$style;
+  return /*#__PURE__*/React.createElement("div", {
+    style: _objectSpread({
+      background: C.card,
+      border: "1px solid ".concat(C.border),
+      borderRadius: 12,
+      padding: "20px 22px",
+      position: "relative",
+      overflow: "hidden"
+    }, style)
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 2,
+      background: "linear-gradient(90deg, transparent, ".concat(badgeColor || C.teal, "60, transparent)"),
+      borderRadius: "12px 12px 0 0"
+    }
+  }), title && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 2
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "'Plus Jakarta Sans', sans-serif",
+      fontWeight: 700,
+      fontSize: 13,
+      color: C.text,
+      letterSpacing: 0.3
+    }
+  }, title), badge && /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: "".concat(badgeColor || C.teal, "20"),
+      color: badgeColor || C.teal,
+      border: "1px solid ".concat(badgeColor || C.teal, "40"),
+      borderRadius: 20,
+      padding: "2px 9px",
+      fontSize: 10,
+      fontFamily: "'DM Mono', monospace",
+      fontWeight: 500,
+      letterSpacing: 0.5
+    }
+  }, badge)), subtitle && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: "'Plus Jakarta Sans', sans-serif",
+      fontSize: 11,
+      color: C.muted
+    }
+  }, subtitle)), children);
+};
 
 // ── GARTNER SPA ROW ───────────────────────────────────────────────────────────
-const SPARow = ({
-  label,
-  from,
-  to,
-  deadline,
-  color,
-  icon
-}) => {
-  const [animated, setAnimated] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setAnimated(true), 300);
-    return () => clearTimeout(t);
+var SPARow = function SPARow(_ref4) {
+  var label = _ref4.label,
+    from = _ref4.from,
+    to = _ref4.to,
+    deadline = _ref4.deadline,
+    color = _ref4.color,
+    icon = _ref4.icon;
+  var _useState = useState(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    animated = _useState2[0],
+    setAnimated = _useState2[1];
+  useEffect(function () {
+    var t = setTimeout(function () {
+      return setAnimated(true);
+    }, 300);
+    return function () {
+      return clearTimeout(t);
+    };
   }, []);
-  const pct = animated ? to / 100 * 100 : 0;
+  var pct = animated ? to / 100 * 100 : 0;
   return /*#__PURE__*/React.createElement("div", {
     style: {
       marginBottom: 16
@@ -657,7 +672,7 @@ const SPARow = ({
     style: {
       fontSize: 11,
       fontFamily: "'DM Mono', monospace",
-      color
+      color: color
     }
   }, "\u2192 ", to, "% by ", deadline)), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -671,21 +686,21 @@ const SPARow = ({
     style: {
       position: "absolute",
       left: 0,
-      width: `${from}%`,
+      width: "".concat(from, "%"),
       height: "100%",
-      background: `${color}50`,
+      background: "".concat(color, "50"),
       borderRadius: 4
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: "absolute",
       left: 0,
-      width: `${pct}%`,
+      width: "".concat(pct, "%"),
       height: "100%",
-      background: `linear-gradient(90deg, ${color}80, ${color})`,
+      background: "linear-gradient(90deg, ".concat(color, "80, ").concat(color, ")"),
       borderRadius: 4,
       transition: "width 1.2s cubic-bezier(0.4,0,0.2,1)",
-      boxShadow: `0 0 8px ${color}60`
+      boxShadow: "0 0 8px ".concat(color, "60")
     }
   })), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -707,25 +722,35 @@ const SPARow = ({
     }
   }, "100%")));
 };
-const axisStyle = {
+var axisStyle = {
   fontFamily: "'DM Mono', monospace",
   fontSize: 10,
   fill: C.muted
 };
-const gridProps = {
+var gridProps = {
   stroke: C.border,
   strokeDasharray: "3 3"
 };
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-function TransportPredictions() {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [animateRevenue, setAnimateRevenue] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setAnimateRevenue(true), 200);
-    return () => clearTimeout(t);
+window.AppComponent = function TransportPredictions() {
+  var _useState3 = useState("overview"),
+    _useState4 = _slicedToArray(_useState3, 2),
+    activeTab = _useState4[0],
+    setActiveTab = _useState4[1];
+  var _useState5 = useState(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    animateRevenue = _useState6[0],
+    setAnimateRevenue = _useState6[1];
+  useEffect(function () {
+    var t = setTimeout(function () {
+      return setAnimateRevenue(true);
+    }, 200);
+    return function () {
+      return clearTimeout(t);
+    };
   }, []);
-  const tabs = [{
+  var tabs = [{
     id: "overview",
     label: "Fleet Overview"
   }, {
@@ -756,8 +781,8 @@ function TransportPredictions() {
     }
   }, /*#__PURE__*/React.createElement("style", null, fontStyle), /*#__PURE__*/React.createElement("div", {
     style: {
-      background: `linear-gradient(135deg, ${C.surface} 0%, ${C.bg} 100%)`,
-      borderBottom: `1px solid ${C.border}`,
+      background: "linear-gradient(135deg, ".concat(C.surface, " 0%, ").concat(C.bg, " 100%)"),
+      borderBottom: "1px solid ".concat(C.border),
       padding: "28px 32px 20px"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -779,7 +804,7 @@ function TransportPredictions() {
       height: 28,
       background: C.teal,
       borderRadius: 3,
-      boxShadow: `0 0 12px ${C.teal}`
+      boxShadow: "0 0 12px ".concat(C.teal)
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -805,8 +830,8 @@ function TransportPredictions() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      background: `${C.amber}15`,
-      border: `1px solid ${C.amber}40`,
+      background: "".concat(C.amber, "15"),
+      border: "1px solid ".concat(C.amber, "40"),
       borderRadius: 8,
       padding: "6px 12px",
       display: "inline-block"
@@ -856,63 +881,69 @@ function TransportPredictions() {
     delta: "Gartner SPA",
     color: C.amber,
     note: "up from <2% · G00841141"
-  }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      background: C.card,
-      border: `1px solid ${C.border}`,
-      borderRadius: 8,
-      padding: "12px 14px",
-      borderLeft: `3px solid ${k.color}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      color: C.muted,
-      marginBottom: 4
-    }
-  }, k.label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: "'DM Serif Display', serif",
-      fontSize: 20,
-      color: k.color,
-      marginBottom: 2
-    }
-  }, k.value), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 10,
-      color: C.muted
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: C.green,
-      fontWeight: 600
-    }
-  }, k.delta), " ", k.note))))), /*#__PURE__*/React.createElement("div", {
+  }].map(function (k, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: C.card,
+        border: "1px solid ".concat(C.border),
+        borderRadius: 8,
+        padding: "12px 14px",
+        borderLeft: "3px solid ".concat(k.color)
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        marginBottom: 4
+      }
+    }, k.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'DM Serif Display', serif",
+        fontSize: 20,
+        color: k.color,
+        marginBottom: 2
+      }
+    }, k.value), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: C.green,
+        fontWeight: 600
+      }
+    }, k.delta), " ", k.note));
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 4,
       padding: "14px 32px 0",
-      borderBottom: `1px solid ${C.border}`,
+      borderBottom: "1px solid ".concat(C.border),
       background: C.surface
     }
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    onClick: () => setActiveTab(t.id),
-    style: {
-      background: activeTab === t.id ? C.card : "transparent",
-      border: activeTab === t.id ? `1px solid ${C.border}` : "1px solid transparent",
-      borderBottom: activeTab === t.id ? `2px solid ${C.teal}` : "2px solid transparent",
-      borderRadius: "6px 6px 0 0",
-      padding: "8px 18px",
-      color: activeTab === t.id ? C.text : C.muted,
-      fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontWeight: activeTab === t.id ? 600 : 400,
-      fontSize: 12,
-      cursor: "pointer",
-      transition: "all 0.2s"
-    }
-  }, t.label))), /*#__PURE__*/React.createElement("div", {
+  }, tabs.map(function (t) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: t.id,
+      onClick: function onClick() {
+        return setActiveTab(t.id);
+      },
+      style: {
+        background: activeTab === t.id ? C.card : "transparent",
+        border: activeTab === t.id ? "1px solid ".concat(C.border) : "1px solid transparent",
+        borderBottom: activeTab === t.id ? "2px solid ".concat(C.teal) : "2px solid transparent",
+        borderRadius: "6px 6px 0 0",
+        padding: "8px 18px",
+        color: activeTab === t.id ? C.text : C.muted,
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontWeight: activeTab === t.id ? 600 : 400,
+        fontSize: 12,
+        cursor: "pointer",
+        transition: "all 0.2s"
+      }
+    }, t.label);
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "22px 32px 32px"
     }
@@ -947,13 +978,14 @@ function TransportPredictions() {
   }), /*#__PURE__*/React.createElement(YAxis, {
     yAxisId: "diesel",
     orientation: "left",
-    tick: {
-      ...axisStyle,
+    tick: _objectSpread(_objectSpread({}, axisStyle), {}, {
       fill: "#888"
-    },
+    }),
     tickLine: false,
     axisLine: false,
-    tickFormatter: v => `${(v / 1000).toFixed(0)}M`,
+    tickFormatter: function tickFormatter(v) {
+      return "".concat((v / 1000).toFixed(0), "M");
+    },
     domain: [0, 75000],
     label: {
       value: "Diesel fleet (M units)",
@@ -969,10 +1001,9 @@ function TransportPredictions() {
   }), /*#__PURE__*/React.createElement(YAxis, {
     yAxisId: "ev",
     orientation: "right",
-    tick: {
-      ...axisStyle,
+    tick: _objectSpread(_objectSpread({}, axisStyle), {}, {
       fill: C.teal
-    },
+    }),
     tickLine: false,
     axisLine: false,
     domain: [0, 2000],
@@ -988,16 +1019,15 @@ function TransportPredictions() {
       }
     }
   }), /*#__PURE__*/React.createElement(Tooltip, {
-    content: ({
-      active,
-      payload,
-      label
-    }) => {
-      if (!active || !payload?.length) return null;
+    content: function content(_ref5) {
+      var active = _ref5.active,
+        payload = _ref5.payload,
+        label = _ref5.label;
+      if (!active || !(payload !== null && payload !== void 0 && payload.length)) return null;
       return /*#__PURE__*/React.createElement("div", {
         style: {
           background: C.card,
-          border: `1px solid ${C.border}`,
+          border: "1px solid ".concat(C.border),
           borderRadius: 8,
           padding: "10px 14px",
           fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -1011,10 +1041,10 @@ function TransportPredictions() {
           fontWeight: 600,
           letterSpacing: 1
         }
-      }, label), payload.map((p, i) => {
-        const isDiesel = p.name.includes("Diesel");
-        const isAhv = p.name.includes("L4 AHV") && p.value < 2;
-        const fmt = isDiesel ? `${(p.value / 1000).toFixed(2)}M units` : isAhv ? `${Math.round(p.value * 1000)} units` : `${Number(p.value).toLocaleString()}K`;
+      }, label), payload.map(function (p, i) {
+        var isDiesel = p.name.includes("Diesel");
+        var isAhv = p.name.includes("L4 AHV") && p.value < 2;
+        var fmt = isDiesel ? "".concat((p.value / 1000).toFixed(2), "M units") : isAhv ? "".concat(Math.round(p.value * 1000), " units") : "".concat(Number(p.value).toLocaleString(), "K");
         return /*#__PURE__*/React.createElement("div", {
           key: i,
           style: {
@@ -1106,36 +1136,39 @@ function TransportPredictions() {
   }, {
     key: "H₂ Vehicles",
     color: C.amber
-  }].map(({
-    key,
-    color
-  }) => /*#__PURE__*/React.createElement(Line, {
-    key: key,
-    yAxisId: "ev",
-    type: "monotone",
-    dataKey: key,
-    stroke: color,
-    strokeWidth: 2,
-    dot: p => p.payload.isForecast ? /*#__PURE__*/React.createElement("circle", {
-      key: p.key,
-      cx: p.cx,
-      cy: p.cy,
-      r: 3,
-      fill: "none",
+  }].map(function (_ref6) {
+    var key = _ref6.key,
+      color = _ref6.color;
+    return /*#__PURE__*/React.createElement(Line, {
+      key: key,
+      yAxisId: "ev",
+      type: "monotone",
+      dataKey: key,
       stroke: color,
-      strokeDasharray: "2 2"
-    }) : /*#__PURE__*/React.createElement("circle", {
-      key: p.key,
-      cx: p.cx,
-      cy: p.cy,
-      r: 3,
-      fill: color
-    }),
-    activeDot: {
-      r: 5,
-      fill: color
-    }
-  })))), /*#__PURE__*/React.createElement("div", {
+      strokeWidth: 2,
+      dot: function dot(p) {
+        return p.payload.isForecast ? /*#__PURE__*/React.createElement("circle", {
+          key: p.key,
+          cx: p.cx,
+          cy: p.cy,
+          r: 3,
+          fill: "none",
+          stroke: color,
+          strokeDasharray: "2 2"
+        }) : /*#__PURE__*/React.createElement("circle", {
+          key: p.key,
+          cx: p.cx,
+          cy: p.cy,
+          r: 3,
+          fill: color
+        });
+      },
+      activeDot: {
+        r: 5,
+        fill: color
+      }
+    });
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       gap: 16,
@@ -1143,18 +1176,24 @@ function TransportPredictions() {
       flexWrap: "wrap",
       alignItems: "center"
     }
-  }, [["—", "#6B7280", "Diesel Trucks · fleet stock · left axis"], ["—", "#9CA3AF", "Diesel Buses · public transit fleet · left axis"], ["●", C.teal, "EV Bus stock · right axis"], ["●", C.blue, "EV Truck annual sales · right axis"], ["●", C.green, "EV LCV stock · managed depot vans ex-China · right axis"], ["●", C.violet, "L4 AHV · commercial deployment only (true L4+) · right axis"], ["●", C.amber, "H₂ Vehicles · right axis"], ["○", C.muted, "Hollow/dashed = forecast · 2030 AHV = high scenario incl. APAC"], ["◆", C.amber, "H₂ vehicles tracked for fleet mix context · not a separate TAM segment (included in legacy/transit fleet counts in Market tab)"]].map(([sym, col, lbl], i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    style: {
-      fontSize: 10,
-      color: C.muted,
-      fontFamily: "'DM Mono', monospace"
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: col
-    }
-  }, sym), " ", lbl)))), /*#__PURE__*/React.createElement("div", {
+  }, [["—", "#6B7280", "Diesel Trucks · fleet stock · left axis"], ["—", "#9CA3AF", "Diesel Buses · public transit fleet · left axis"], ["●", C.teal, "EV Bus stock · right axis"], ["●", C.blue, "EV Truck annual sales · right axis"], ["●", C.green, "EV LCV stock · managed depot vans ex-China · right axis"], ["●", C.violet, "L4 AHV · commercial deployment only (true L4+) · right axis"], ["●", C.amber, "H₂ Vehicles · right axis"], ["○", C.muted, "Hollow/dashed = forecast · 2030 AHV = high scenario incl. APAC"], ["◆", C.amber, "H₂ vehicles tracked for fleet mix context · not a separate TAM segment (included in legacy/transit fleet counts in Market tab)"]].map(function (_ref7, i) {
+    var _ref8 = _slicedToArray(_ref7, 3),
+      sym = _ref8[0],
+      col = _ref8[1],
+      lbl = _ref8[2];
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        fontFamily: "'DM Mono', monospace"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: col
+      }
+    }, sym), " ", lbl);
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "repeat(5, 1fr)",
@@ -1185,36 +1224,158 @@ function TransportPredictions() {
     value: "+14.5%",
     sub: "Actual",
     color: C.amber
-  }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
+  }].map(function (k, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: C.card,
+        border: "1px solid ".concat(C.border),
+        borderRadius: 10,
+        padding: "14px 16px",
+        textAlign: "center"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        marginBottom: 6,
+        whiteSpace: "pre-line"
+      }
+    }, k.title), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'DM Serif Display', serif",
+        fontSize: 26,
+        color: k.color,
+        marginBottom: 2
+      }
+    }, k.value), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted
+      }
+    }, k.sub));
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       background: C.card,
-      border: `1px solid ${C.border}`,
-      borderRadius: 10,
-      padding: "14px 16px",
-      textAlign: "center"
+      border: "1px solid ".concat(C.border),
+      borderRadius: 12,
+      padding: "18px 22px",
+      borderLeft: "4px solid ".concat(C.amber)
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 10,
-      color: C.muted,
-      marginBottom: 6,
-      whiteSpace: "pre-line"
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+      gap: 12
     }
-  }, k.title), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontFamily: "'DM Serif Display', serif",
-      fontSize: 26,
-      color: k.color,
-      marginBottom: 2
+      flex: 1,
+      minWidth: 200
     }
-  }, k.value), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 10,
+      background: "".concat(C.amber, "25"),
+      color: C.amber,
+      borderRadius: 6,
+      padding: "2px 8px",
+      fontWeight: 700,
+      letterSpacing: 0.8,
+      textTransform: "uppercase"
+    }
+  }, "Fleet Age Reality"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 9,
       color: C.muted
     }
-  }, k.sub))))), activeTab === "ev" && (() => {
-    const naEuBusData = [{
+  }, "Source: ACEA Vehicles on European Roads 2026")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: C.text,
+      fontWeight: 600,
+      lineHeight: 1.5,
+      marginBottom: 6
+    }
+  }, "The EV transition creates the opportunity \u2014 its ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.amber
+    }
+  }, "slowness sustains it for a decade.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: C.muted,
+      lineHeight: 1.7
+    }
+  }, "At 1\u20132% annual fleet replacement rates, ", /*#__PURE__*/React.createElement("strong", {
+    style: {
+      color: C.text
+    }
+  }, "85\u201395% of today's EU fleet will still be diesel or mixed in 2030"), " regardless of mandate pace. This means depot orchestration software is not a transition-period niche \u2014 it is a structurally required infrastructure layer for the entire decade.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: 10,
+      minWidth: 280
+    }
+  }, [{
+    label: "EU Trucks",
+    value: "14.0 yrs",
+    sub: "avg fleet age · ACEA 2026",
+    color: C.violet
+  }, {
+    label: "EU Buses",
+    value: "12.2 yrs",
+    sub: "avg fleet age · ACEA 2026",
+    color: C.amber
+  }, {
+    label: "EU Vans",
+    value: "12.9 yrs",
+    sub: "avg fleet age · ACEA 2026",
+    color: C.green
+  }].map(function (m, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: "".concat(m.color, "10"),
+        borderRadius: 8,
+        padding: "10px 12px",
+        textAlign: "center",
+        border: "1px solid ".concat(m.color, "30")
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: C.muted,
+        marginBottom: 4,
+        textTransform: "uppercase",
+        letterSpacing: 0.6
+      }
+    }, m.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: "'DM Mono', monospace",
+        fontSize: 20,
+        fontWeight: 700,
+        color: m.color,
+        marginBottom: 2
+      }
+    }, m.value), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 9,
+        color: C.muted
+      }
+    }, m.sub));
+  }))))), activeTab === "ev" && function () {
+    var naEuBusData = [{
       year: 2021,
       NA: 4,
       EU: 8
@@ -1255,7 +1416,7 @@ function TransportPredictions() {
       NA: 68,
       EU: 88
     }];
-    const naEuTruckData = [{
+    var naEuTruckData = [{
       year: 2021,
       NA: 0.3,
       EU: 0.5
@@ -1296,7 +1457,7 @@ function TransportPredictions() {
       NA: 38,
       EU: 62
     }];
-    const euBusShareData = [{
+    var euBusShareData = [{
       year: 2021,
       value: 4
     }, {
@@ -1327,7 +1488,7 @@ function TransportPredictions() {
       year: 2030,
       value: 68
     }];
-    const naBusShareData = [{
+    var naBusShareData = [{
       year: 2021,
       value: 2
     }, {
@@ -1399,54 +1560,56 @@ function TransportPredictions() {
       delta: "+900%",
       sub: "vs 3.8K/yr in 2024",
       color: C.teal
-    }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 8,
-        padding: "12px 14px",
-        borderLeft: `3px solid ${k.color}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.muted
-      }
-    }, k.label), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        fontFamily: "'DM Mono', monospace",
-        color: k.color,
-        background: `${k.color}15`,
-        padding: "1px 6px",
-        borderRadius: 10
-      }
-    }, k.region)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'DM Serif Display', serif",
-        fontSize: 22,
-        color: k.color,
-        marginBottom: 2
-      }
-    }, k.value), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.green,
-        fontWeight: 600
-      }
-    }, k.delta), " ", k.sub)))), /*#__PURE__*/React.createElement(Card, {
+    }].map(function (k, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 8,
+          padding: "12px 14px",
+          borderLeft: "3px solid ".concat(k.color)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 4
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, k.label), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 9,
+          fontFamily: "'DM Mono', monospace",
+          color: k.color,
+          background: "".concat(k.color, "15"),
+          padding: "1px 6px",
+          borderRadius: 10
+        }
+      }, k.region)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'DM Serif Display', serif",
+          fontSize: 22,
+          color: k.color,
+          marginBottom: 2
+        }
+      }, k.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: C.green,
+          fontWeight: 600
+        }
+      }, k.delta), " ", k.sub));
+    })), /*#__PURE__*/React.createElement(Card, {
       title: "NA vs EU \u2014 EV Bus Fleet Stock",
       subtitle: "'000 units \xB7 fleet stock 2021\u20132030",
       badge: "BUSES",
@@ -1551,28 +1714,34 @@ function TransportPredictions() {
         gridTemplateColumns: "1fr 1fr",
         gap: 8
       }
-    }, [["EU CAGR '21→'24", "+40%", C.blue], ["NA CAGR '21→'24", "+52%", C.teal]].map(([lbl, v, c], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        textAlign: "center",
-        background: `${c}10`,
-        borderRadius: 6,
-        padding: "6px 0"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        marginBottom: 2
-      }
-    }, lbl), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 16,
-        color: c,
-        fontFamily: "'DM Mono', monospace",
-        fontWeight: 700
-      }
-    }, v))))), /*#__PURE__*/React.createElement(Card, {
+    }, [["EU CAGR '21→'24", "+40%", C.blue], ["NA CAGR '21→'24", "+52%", C.teal]].map(function (_ref9, i) {
+      var _ref0 = _slicedToArray(_ref9, 3),
+        lbl = _ref0[0],
+        v = _ref0[1],
+        c = _ref0[2];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          textAlign: "center",
+          background: "".concat(c, "10"),
+          borderRadius: 6,
+          padding: "6px 0"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginBottom: 2
+        }
+      }, lbl), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 16,
+          color: c,
+          fontFamily: "'DM Mono', monospace",
+          fontWeight: 700
+        }
+      }, v));
+    }))), /*#__PURE__*/React.createElement(Card, {
       title: "NA vs EU \u2014 EV Truck Annual Sales",
       subtitle: "'000 units \xB7 new registrations per year (not fleet stock)",
       badge: "TRUCKS",
@@ -1677,28 +1846,34 @@ function TransportPredictions() {
         gridTemplateColumns: "1fr 1fr",
         gap: 8
       }
-    }, [["EU CAGR '21→'24", "+176%", C.blue], ["NA CAGR '21→'24", "+133%", C.teal]].map(([lbl, v, c], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        textAlign: "center",
-        background: `${c}10`,
-        borderRadius: 6,
-        padding: "6px 0"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        marginBottom: 2
-      }
-    }, lbl), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 16,
-        color: c,
-        fontFamily: "'DM Mono', monospace",
-        fontWeight: 700
-      }
-    }, v))))), /*#__PURE__*/React.createElement(Card, {
+    }, [["EU CAGR '21→'24", "+176%", C.blue], ["NA CAGR '21→'24", "+133%", C.teal]].map(function (_ref1, i) {
+      var _ref10 = _slicedToArray(_ref1, 3),
+        lbl = _ref10[0],
+        v = _ref10[1],
+        c = _ref10[2];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          textAlign: "center",
+          background: "".concat(c, "10"),
+          borderRadius: 6,
+          padding: "6px 0"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginBottom: 2
+        }
+      }, lbl), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 16,
+          color: c,
+          fontFamily: "'DM Mono', monospace",
+          fontWeight: 700
+        }
+      }, v));
+    }))), /*#__PURE__*/React.createElement(Card, {
       title: "EU \u2014 EV Share of New Bus Purchases",
       subtitle: "% of all new bus orders that are battery-electric",
       badge: "EU MANDATE DRIVER",
@@ -1873,6 +2048,98 @@ function TransportPredictions() {
     }, "EPA Clean School Bus Program funded 8,100+ units (disbursements under review post-2025). State ZEV mandates (CA, NY, WA) remain primary growth drivers as federal incentive landscape shifts.")), /*#__PURE__*/React.createElement("div", {
       style: {
         gridColumn: "1 / -1",
+        background: C.card,
+        border: "1px solid ".concat(C.border),
+        borderRadius: 10,
+        padding: "14px 20px",
+        borderLeft: "4px solid ".concat(C.muted)
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        fontWeight: 700,
+        letterSpacing: 0.8,
+        textTransform: "uppercase",
+        marginBottom: 8
+      }
+    }, "Total Fleet Context \u2014 Beyond EV"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: 10
+      }
+    }, [{
+      label: "EU Total Buses",
+      value: "699K",
+      sub: "all powertrains · ACEA 2026",
+      pct: "3.5% EV today",
+      color: C.blue
+    }, {
+      label: "EU Total Trucks",
+      value: "6.2M",
+      sub: "medium+heavy >3.5t · ACEA 2026",
+      pct: "0.3% EV today",
+      color: C.violet
+    }, {
+      label: "EU Total Vans",
+      value: "31.1M",
+      sub: "LCV fleet · ACEA 2026",
+      pct: "1.3% EV today",
+      color: C.green
+    }, {
+      label: "Global Buses",
+      value: "~21M",
+      sub: "all powertrains · IEA implied",
+      pct: "~3% EV today",
+      color: C.teal
+    }].map(function (m, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: "".concat(m.color, "08"),
+          borderRadius: 8,
+          padding: "10px 12px"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginBottom: 3,
+          textTransform: "uppercase",
+          letterSpacing: 0.5
+        }
+      }, m.label), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'DM Mono', monospace",
+          fontSize: 18,
+          fontWeight: 700,
+          color: m.color
+        }
+      }, m.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginTop: 2
+        }
+      }, m.sub), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.amber,
+          marginTop: 4,
+          fontWeight: 600
+        }
+      }, m.pct));
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 10,
+        fontSize: 10,
+        color: C.muted,
+        lineHeight: 1.6
+      }
+    }, "EV charts above show the electrified slice. The 96\u201399% of each fleet that remains diesel/gas is the mixed-depot opportunity \u2014 managed simultaneously with incoming EVs at the same depot.")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        gridColumn: "1 / -1",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gap: 12
@@ -1889,104 +2156,110 @@ function TransportPredictions() {
       color: C.teal,
       drivers: ["EPA Clean School Bus Program ($5B committed)", "California ACF Rule: 100% ZEV transit buses by 2040", "IRA Section 45W clean vehicle credits (up to $40K/vehicle)", "Tesla Semi, Freightliner eCascadia now in commercial fleets"],
       risks: ["Federal vehicle GHG standards eliminated by EPA (Feb 2026) — removes key HD truck mandate driver", "IRA Section 45W clean vehicle credits under Congressional rollback review — status uncertain", "EPA Clean School Bus disbursements frozen — $5B committed but payout delayed", "Charging infrastructure gaps in rural corridors"]
-    }].map((r, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 10,
-        padding: "14px 16px",
-        borderTop: `3px solid ${r.color}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        marginBottom: 12
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 18
-      }
-    }, r.flag), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontWeight: 700,
-        fontSize: 13,
-        color: r.color
-      }
-    }, r.region)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginBottom: 8
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        fontWeight: 600,
-        letterSpacing: 0.5,
-        marginBottom: 5,
-        textTransform: "uppercase"
-      }
-    }, "Growth Drivers"), r.drivers.map((d, j) => /*#__PURE__*/React.createElement("div", {
-      key: j,
-      style: {
-        display: "flex",
-        gap: 6,
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: r.color,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u25B8"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.text,
-        lineHeight: 1.5
-      }
-    }, d)))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        borderTop: `1px solid ${C.border}`,
-        paddingTop: 8,
-        marginTop: 4
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        fontWeight: 600,
-        letterSpacing: 0.5,
-        marginBottom: 5,
-        textTransform: "uppercase"
-      }
-    }, "Key Risks"), r.risks.map((d, j) => /*#__PURE__*/React.createElement("div", {
-      key: j,
-      style: {
-        display: "flex",
-        gap: 6,
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.amber,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u26A0"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        lineHeight: 1.5
-      }
-    }, d))))))));
-  })(), activeTab === "ahv" && (() => {
+    }].map(function (r, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 10,
+          padding: "14px 16px",
+          borderTop: "3px solid ".concat(r.color)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 12
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 18
+        }
+      }, r.flag), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 700,
+          fontSize: 13,
+          color: r.color
+        }
+      }, r.region)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          marginBottom: 8
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted,
+          fontWeight: 600,
+          letterSpacing: 0.5,
+          marginBottom: 5,
+          textTransform: "uppercase"
+        }
+      }, "Growth Drivers"), r.drivers.map(function (d, j) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: j,
+          style: {
+            display: "flex",
+            gap: 6,
+            marginBottom: 4
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            color: r.color,
+            fontSize: 10,
+            flexShrink: 0,
+            marginTop: 1
+          }
+        }, "\u25B8"), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.text,
+            lineHeight: 1.5
+          }
+        }, d));
+      })), /*#__PURE__*/React.createElement("div", {
+        style: {
+          borderTop: "1px solid ".concat(C.border),
+          paddingTop: 8,
+          marginTop: 4
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted,
+          fontWeight: 600,
+          letterSpacing: 0.5,
+          marginBottom: 5,
+          textTransform: "uppercase"
+        }
+      }, "Key Risks"), r.risks.map(function (d, j) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: j,
+          style: {
+            display: "flex",
+            gap: 6,
+            marginBottom: 4
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            color: C.amber,
+            fontSize: 10,
+            flexShrink: 0,
+            marginTop: 1
+          }
+        }, "\u26A0"), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.muted,
+            lineHeight: 1.5
+          }
+        }, d));
+      })));
+    })));
+  }(), activeTab === "ahv" && function () {
     // FIX #6 — naEuAhvData now consistent with corrected global ahvData (sum = global)
-    const naEuAhvData = [{
+    var naEuAhvData = [{
       year: 2021,
       NA: 0.15,
       EU: 0.06
@@ -2029,7 +2302,7 @@ function TransportPredictions() {
       NA: 11.0,
       EU: 17.0
     }];
-    const robotaxiNAEU = [{
+    var robotaxiNAEU = [{
       year: 2025,
       NA: 4,
       EU: 3
@@ -2062,7 +2335,7 @@ function TransportPredictions() {
       NA: 63,
       EU: 60
     }];
-    const euMilestones = [{
+    var euMilestones = [{
       year: 2025,
       event: "Germany & France: Level 4 AV permits for hub-to-hub freight"
     }, {
@@ -2081,7 +2354,7 @@ function TransportPredictions() {
 
     // Aurora route confirmed: Dallas–Houston (I-45) per May 1, 2025 press release
     // Prior session incorrectly changed this to I-35; now reverted to correct route
-    const naMilestones = [{
+    var naMilestones = [{
       year: 2025,
       event: "Aurora Launch (May 1, 2025): Commercial driverless freight Dallas–Houston (I-45) — first L4 commercial HD trucking on public roads"
     }, {
@@ -2138,54 +2411,56 @@ function TransportPredictions() {
       delta: "Gartner",
       sub: "meets 60% SPA",
       color: C.rose
-    }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 8,
-        padding: "12px 14px",
-        borderLeft: `3px solid ${k.color}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.muted
-      }
-    }, k.label), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        fontFamily: "'DM Mono', monospace",
-        color: k.color,
-        background: `${k.color}15`,
-        padding: "1px 6px",
-        borderRadius: 10
-      }
-    }, k.region)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'DM Serif Display', serif",
-        fontSize: 22,
-        color: k.color,
-        marginBottom: 2
-      }
-    }, k.value), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.green,
-        fontWeight: 600
-      }
-    }, k.delta), " ", k.sub)))), /*#__PURE__*/React.createElement("div", {
+    }].map(function (k, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 8,
+          padding: "12px 14px",
+          borderLeft: "3px solid ".concat(k.color)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 4
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, k.label), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 9,
+          fontFamily: "'DM Mono', monospace",
+          color: k.color,
+          background: "".concat(k.color, "15"),
+          padding: "1px 6px",
+          borderRadius: 10
+        }
+      }, k.region)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'DM Serif Display', serif",
+          fontSize: 22,
+          color: k.color,
+          marginBottom: 2
+        }
+      }, k.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: C.green,
+          fontWeight: 600
+        }
+      }, k.delta), " ", k.sub));
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         gridColumn: "1 / -1",
         background: "rgba(168,85,247,.07)",
@@ -2325,26 +2600,32 @@ function TransportPredictions() {
         gridTemplateColumns: "1fr 1fr",
         gap: 8
       }
-    }, [["EU surges post-2025", "Regulatory clarity + Einride scale", C.blue], ["NA first mover", "Aurora I-45 Dallas–Houston launch", C.teal]].map(([lbl, sub, c], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: `${c}10`,
-        borderRadius: 6,
-        padding: "6px 10px"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: c,
-        fontWeight: 700
-      }
-    }, lbl), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        marginTop: 2
-      }
-    }, sub))))), /*#__PURE__*/React.createElement(Card, {
+    }, [["EU surges post-2025", "Regulatory clarity + Einride scale", C.blue], ["NA first mover", "Aurora I-45 Dallas–Houston launch", C.teal]].map(function (_ref11, i) {
+      var _ref12 = _slicedToArray(_ref11, 3),
+        lbl = _ref12[0],
+        sub = _ref12[1],
+        c = _ref12[2];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: "".concat(c, "10"),
+          borderRadius: 6,
+          padding: "6px 10px"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: c,
+          fontWeight: 700
+        }
+      }, lbl), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginTop: 2
+        }
+      }, sub));
+    }))), /*#__PURE__*/React.createElement(Card, {
       title: "NA vs EU \u2014 Robotaxi AV Share of New Taxi Fleet",
       subtitle: "% of new taxi registrations that are autonomous \xB7 Gartner SPA target: 60% by 2032",
       badge: "GARTNER SPA",
@@ -2435,73 +2716,77 @@ function TransportPredictions() {
       region: "European Union",
       color: C.blue,
       milestones: euMilestones
-    }].map((r, ri) => /*#__PURE__*/React.createElement(Card, {
-      key: ri,
-      title: `${r.flag} ${r.region} — AV Regulatory & Commercial Milestones`,
-      subtitle: "Key events shaping autonomous heavy vehicle adoption",
-      badge: `${r.region.split(" ")[0].toUpperCase()} ROADMAP`,
-      badgeColor: r.color
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: "relative",
-        paddingLeft: 20
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: "absolute",
-        left: 7,
-        top: 6,
-        bottom: 6,
-        width: 2,
-        background: `linear-gradient(to bottom, ${r.color}, ${r.color}20)`,
-        borderRadius: 2
-      }
-    }), r.milestones.map((m, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "flex",
-        gap: 12,
-        marginBottom: i < r.milestones.length - 1 ? 14 : 0,
-        position: "relative"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: "absolute",
-        left: -14,
-        top: 3,
-        width: 8,
-        height: 8,
-        borderRadius: "50%",
-        background: r.color,
-        boxShadow: `0 0 6px ${r.color}80`,
-        border: `2px solid ${C.card}`
-      }
+    }].map(function (r, ri) {
+      return /*#__PURE__*/React.createElement(Card, {
+        key: ri,
+        title: "".concat(r.flag, " ").concat(r.region, " \u2014 AV Regulatory & Commercial Milestones"),
+        subtitle: "Key events shaping autonomous heavy vehicle adoption",
+        badge: "".concat(r.region.split(" ")[0].toUpperCase(), " ROADMAP"),
+        badgeColor: r.color
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          position: "relative",
+          paddingLeft: 20
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          position: "absolute",
+          left: 7,
+          top: 6,
+          bottom: 6,
+          width: 2,
+          background: "linear-gradient(to bottom, ".concat(r.color, ", ").concat(r.color, "20)"),
+          borderRadius: 2
+        }
+      }), r.milestones.map(function (m, i) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: i,
+          style: {
+            display: "flex",
+            gap: 12,
+            marginBottom: i < r.milestones.length - 1 ? 14 : 0,
+            position: "relative"
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            position: "absolute",
+            left: -14,
+            top: 3,
+            width: 8,
+            height: 8,
+            borderRadius: "50%",
+            background: r.color,
+            boxShadow: "0 0 6px ".concat(r.color, "80"),
+            border: "2px solid ".concat(C.card)
+          }
+        }), /*#__PURE__*/React.createElement("div", {
+          style: {
+            flex: 1
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            display: "flex",
+            alignItems: "baseline",
+            gap: 8,
+            marginBottom: 2
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontFamily: "'DM Mono', monospace",
+            fontSize: 10,
+            color: r.color,
+            fontWeight: 700,
+            flexShrink: 0
+          }
+        }, m.year), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.text,
+            lineHeight: 1.5
+          }
+        }, m.event))));
+      })));
     }), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "baseline",
-        gap: 8,
-        marginBottom: 2
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'DM Mono', monospace",
-        fontSize: 10,
-        color: r.color,
-        fontWeight: 700,
-        flexShrink: 0
-      }
-    }, m.year), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.text,
-        lineHeight: 1.5
-      }
-    }, m.event)))))))), /*#__PURE__*/React.createElement("div", {
       style: {
         gridColumn: "1 / -1",
         display: "grid",
@@ -2520,102 +2805,108 @@ function TransportPredictions() {
       color: C.teal,
       drivers: ["Aurora Commercial Launch (Apr 2025): driverless freight, Dallas–Houston I-45 corridor", "Waymo Via freight expansion — lessons from 250K+ weekly robotaxi rides applied", "Tesla Semi scale production enabling cost parity with diesel Class 8", "Sunbelt state AV-friendly legislation (TX, AZ, FL): no permits required for ops", "Driver shortage crisis (60K+ unfilled CDL positions) accelerating operator adoption"],
       risks: ["FMCSA federal framework still pending — regulatory uncertainty for multi-state ops", "Liability & insurance frameworks lagging commercial deployment pace"]
-    }].map((r, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 10,
-        padding: "14px 16px",
-        borderTop: `3px solid ${r.color}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        marginBottom: 12
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 18
-      }
-    }, r.flag), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontWeight: 700,
-        fontSize: 13,
-        color: r.color
-      }
-    }, r.region)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginBottom: 8
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        fontWeight: 600,
-        letterSpacing: 0.5,
-        marginBottom: 5,
-        textTransform: "uppercase"
-      }
-    }, "Growth Drivers"), r.drivers.map((d, j) => /*#__PURE__*/React.createElement("div", {
-      key: j,
-      style: {
-        display: "flex",
-        gap: 6,
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: r.color,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u25B8"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.text,
-        lineHeight: 1.5
-      }
-    }, d)))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        borderTop: `1px solid ${C.border}`,
-        paddingTop: 8,
-        marginTop: 4
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        fontWeight: 600,
-        letterSpacing: 0.5,
-        marginBottom: 5,
-        textTransform: "uppercase"
-      }
-    }, "Key Risks"), r.risks.map((d, j) => /*#__PURE__*/React.createElement("div", {
-      key: j,
-      style: {
-        display: "flex",
-        gap: 6,
-        marginBottom: 4
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.amber,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u26A0"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        lineHeight: 1.5
-      }
-    }, d))))))));
-  })(), activeTab === "gartner" && /*#__PURE__*/React.createElement("div", {
+    }].map(function (r, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 10,
+          padding: "14px 16px",
+          borderTop: "3px solid ".concat(r.color)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 12
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 18
+        }
+      }, r.flag), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 700,
+          fontSize: 13,
+          color: r.color
+        }
+      }, r.region)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          marginBottom: 8
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted,
+          fontWeight: 600,
+          letterSpacing: 0.5,
+          marginBottom: 5,
+          textTransform: "uppercase"
+        }
+      }, "Growth Drivers"), r.drivers.map(function (d, j) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: j,
+          style: {
+            display: "flex",
+            gap: 6,
+            marginBottom: 4
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            color: r.color,
+            fontSize: 10,
+            flexShrink: 0,
+            marginTop: 1
+          }
+        }, "\u25B8"), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.text,
+            lineHeight: 1.5
+          }
+        }, d));
+      })), /*#__PURE__*/React.createElement("div", {
+        style: {
+          borderTop: "1px solid ".concat(C.border),
+          paddingTop: 8,
+          marginTop: 4
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted,
+          fontWeight: 600,
+          letterSpacing: 0.5,
+          marginBottom: 5,
+          textTransform: "uppercase"
+        }
+      }, "Key Risks"), r.risks.map(function (d, j) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: j,
+          style: {
+            display: "flex",
+            gap: 6,
+            marginBottom: 4
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            color: C.amber,
+            fontSize: 10,
+            flexShrink: 0,
+            marginTop: 1
+          }
+        }, "\u26A0"), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.muted,
+            lineHeight: 1.5
+          }
+        }, d));
+      })));
+    })));
+  }(), activeTab === "gartner" && /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
@@ -2845,55 +3136,57 @@ function TransportPredictions() {
     title: "EU Data-Sharing Mandate",
     deadline: "2028 deadline",
     body: "30%+ of EU transport firms/OEMs will join data-sharing platforms by 2028 for regulatory compliance. Green Deal, emissions mandates, and GTFS/SIRI standards are forcing convergence onto common data infrastructure."
-  }].map((c, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      background: C.card,
-      border: `1px solid ${C.border}`,
-      borderRadius: 10,
-      padding: "14px 16px",
-      borderLeft: `3px solid ${c.color}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      alignItems: "center",
-      gap: 8,
-      marginBottom: 6
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 16
-    }
-  }, c.icon), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 700,
-      fontSize: 12,
-      color: C.text
-    }
-  }, c.title), /*#__PURE__*/React.createElement("span", {
-    style: {
-      marginLeft: "auto",
-      fontSize: 9,
-      fontFamily: "'DM Mono', monospace",
-      color: c.color,
-      background: `${c.color}15`,
-      padding: "2px 7px",
-      borderRadius: 10
-    }
-  }, c.deadline)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 11,
-      color: C.muted,
-      lineHeight: 1.6,
-      margin: 0
-    }
-  }, c.body))))), activeTab === "market" && (() => {
+  }].map(function (c, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        background: C.card,
+        border: "1px solid ".concat(C.border),
+        borderRadius: 10,
+        padding: "14px 16px",
+        borderLeft: "3px solid ".concat(c.color)
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 6
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 16
+      }
+    }, c.icon), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 700,
+        fontSize: 12,
+        color: C.text
+      }
+    }, c.title), /*#__PURE__*/React.createElement("span", {
+      style: {
+        marginLeft: "auto",
+        fontSize: 9,
+        fontFamily: "'DM Mono', monospace",
+        color: c.color,
+        background: "".concat(c.color, "15"),
+        padding: "2px 7px",
+        borderRadius: 10
+      }
+    }, c.deadline)), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 11,
+        color: C.muted,
+        lineHeight: 1.6,
+        margin: 0
+      }
+    }, c.body));
+  }))), activeTab === "market" && function () {
     // ── MARKET DATA ──────────────────────────────────────────────────────
     // All figures in $M USD · 2030 horizon
 
     // ── 2030 segments (includes LCV) ─────────────────────────────────
-    const tamSegments = [{
+    var tamSegments = [{
       name: "Transit Fleet Orchestration",
       exChina: 864,
       china: 743,
@@ -2938,7 +3231,7 @@ function TransportPredictions() {
     }];
 
     // ── 2035 segments for side-by-side ────────────────────────────────
-    const tamSegments2035 = [{
+    var tamSegments2035 = [{
       name: "Transit Fleet Orchestration",
       val2030: 1607,
       val2035: 3226,
@@ -2964,10 +3257,14 @@ function TransportPredictions() {
       val2035: 1728,
       color: C.green
     }];
-    const tamTotal = tamSegments.reduce((s, x) => s + x.exChina + x.china, 0); // ~$5.6B
-    const tamTotal35 = tamSegments2035.reduce((s, x) => s + x.val2035, 0); // ~$12.2B
+    var tamTotal = tamSegments.reduce(function (s, x) {
+      return s + x.exChina + x.china;
+    }, 0); // ~$5.6B
+    var tamTotal35 = tamSegments2035.reduce(function (s, x) {
+      return s + x.val2035;
+    }, 0); // ~$12.2B
 
-    const samByRegion = [{
+    var samByRegion = [{
       name: "EU",
       value: 1024,
       color: C.blue,
@@ -2988,7 +3285,9 @@ function TransportPredictions() {
       color: C.muted,
       note: "Limited access: local incumbents, regulatory barriers"
     }];
-    const samTotal = samByRegion.reduce((s, x) => s + x.value, 0); // 2525 geo-breakdown total; full SAM $4.6B incl. all fleet types across all regions
+    var samTotal = samByRegion.reduce(function (s, x) {
+      return s + x.value;
+    }, 0); // 2525 geo-breakdown total; full SAM $4.6B incl. all fleet types across all regions
 
     // Revenue trajectory (ARR $M)
     // bear   = ~50% CAGR from 2027 anchor ($3M→$10.1M, 3yr). Upper scenarios: exponential divergence post-2027.
@@ -2998,7 +3297,7 @@ function TransportPredictions() {
     // ARR ramp — base year 2026 (Greenbay funded mid-2025, first revenue 2026)
     // 2026 anchor: <$1M (early pilots converting). 2027 anchor: ~$3M (product maturity).
     // 2028–2030: scenarios diverge — bear stays conservative, upper scenarios hockey-stick.
-    const revenueRamp = [{
+    var revenueRamp = [{
       year: 2025,
       bear: 0,
       rebase: 0,
@@ -3051,7 +3350,7 @@ function TransportPredictions() {
     }];
 
     // Funnel data
-    const funnelData = [{
+    var funnelData = [{
       label: "Global TAM 2030",
       sublabel: "All heavy + LCV fleets · AI orchestration context layer",
       value: 5600,
@@ -3086,7 +3385,7 @@ function TransportPredictions() {
     }];
 
     // [param, value, rationale, source]
-    const assumptionRows = [["Transit fleet ARPU", "$1,920/vehicle/yr", "Full orchestration stack: AI dispatch, energy, yard, compliance audit", "Internal estimate; benchmarked vs Samsara $1.2–2.4K blended ARPU (FY2025) for narrower telematics-only scope"], ["Freight fleet ARPU", "$1,440/vehicle/yr", "75% of transit — similar energy complexity, simpler yard scheduling", "Internal; benchmarked vs Samsara $1.2–2.4K fleet ARPU (FY2025 ARR ÷ ~600K vehicles)"], ["Legacy vehicle ARPU", "$480/vehicle/yr", "Context layer lite: depot visibility + handoff coordination only", "Internal estimate; 25% of full orchestration tier"], ["LCV ARPU", "$960/vehicle/yr", "50% of transit tier — simpler depot ops, fewer vehicles per depot, no complex yard scheduling", "Internal; land-and-expand wedge priced below Samsara's $1.2K floor to maximise LCV operator adoption"], ["AHV ARPU", "$3,000/vehicle/yr", "Premium AI tier — Greenbay covers 11/21 AV infra components; no human fallback", "Internal; McKinsey AV trucking report (Sep 2024) cites infra premium over standard fleet SaaS"], ["China accessibility", "30%", "Regulatory barriers + domestic incumbents (Suntrans, CATL FleetPower, Everon)", "IEA GEO 2025; documented barriers to non-Chinese fleet software platforms"], ["Mixed depot trigger", "≥10% AV/EV by 2027", "Operator deploys context layer when fleet heterogeneity creates coordination risk", "IEA GEO 2024 Fig. 4.7 — fleet transition threshold analysis"], ["Legacy vehicles in scope", "2.6M trucks (ex-CN)", "Managed depot fleets only — AI context layer governs mixed-autonomy handoffs", "IEA + Precedence Research HD truck fleet estimates; owner-operators excluded"], ["SAM market share", "3–7% by 2030", "Base 5% = ~45 operator deployments. Precedent: Samsara reached ~5% of US commercial trucking in 4yr post-Series A ($1.46B ARR, FY2025)", "Samsara FY2025 Annual Report (SEC); US commercial truck fleet ~12M vehicles"], ["AHV 2030 baseline", "155K (high scenario)", "NA+EU 28K L4 confirmed (Aurora I-45, Einride EU routes); 155K = Gartner high scenario incl. APAC", "Gartner G00841141; Aurora Q4 2025 commercial launch press release"], ["AHV 2035 projection", "800K (McKinsey-sourced)", "US: 13% of 3.5M HD trucks = 455K (McKinsey Sep 2024). EU: 4% of 4.5M = 180K. APAC + China: 165K", "McKinsey: 'Will autonomy usher in the future of truck freight?' Sep 2024"], ["Revenue ramp shape", "S-curve 2025–2030", "Context layer adoption follows AV deployment density — accelerates post-2027 as EU CVD + ZEV mandates activate", "Gartner S-curve; EU Clean Vehicle Directive enforcement timeline"]];
+    var assumptionRows = [["Transit fleet ARPU", "$1,920/vehicle/yr", "Full orchestration stack: AI dispatch, energy, yard, compliance audit", "Internal estimate; benchmarked vs Samsara $1.2–2.4K blended ARPU (FY2025) for narrower telematics-only scope"], ["Freight fleet ARPU", "$1,440/vehicle/yr", "75% of transit — similar energy complexity, simpler yard scheduling", "Internal; benchmarked vs Samsara $1.2–2.4K fleet ARPU (FY2025 ARR ÷ ~600K vehicles)"], ["Legacy vehicle ARPU", "$480/vehicle/yr", "Context layer lite: depot visibility + handoff coordination only", "Internal estimate; 25% of full orchestration tier"], ["LCV ARPU", "$960/vehicle/yr", "50% of transit tier — simpler depot ops, fewer vehicles per depot, no complex yard scheduling", "Internal; land-and-expand wedge priced below Samsara's $1.2K floor to maximise LCV operator adoption"], ["AHV ARPU", "$3,000/vehicle/yr", "Premium AI tier — Greenbay covers 11/21 AV infra components; no human fallback", "Internal; McKinsey AV trucking report (Sep 2024) cites infra premium over standard fleet SaaS"], ["China accessibility", "30%", "Regulatory barriers + domestic incumbents (Suntrans, CATL FleetPower, Everon)", "IEA GEO 2025; documented barriers to non-Chinese fleet software platforms"], ["Mixed depot trigger", "≥10% AV/EV by 2027", "Operator deploys context layer when fleet heterogeneity creates coordination risk", "IEA GEO 2024 Fig. 4.7 — fleet transition threshold analysis"], ["Legacy vehicles in scope", "2.6M trucks (ex-CN)", "Managed depot fleets (20+ vehicle operators). Conservative floor: EU alone has 6.2M trucks (ACEA 2026); at 35% in managed depots = 2.2M EU + ~1.7M NA = ~3.9M ceiling. 2.6M reflects owner-operators excluded.", "ACEA Vehicles on European Roads 2026 (6.2M EU trucks); FMCSA US fleet data; internal filter for large-fleet operators only"], ["SAM market share", "3–7% by 2030", "Base 5% = ~45 operator deployments. Precedent: Samsara reached ~5% of US commercial trucking in 4yr post-Series A ($1.46B ARR, FY2025)", "Samsara FY2025 Annual Report (SEC); US commercial truck fleet ~12M vehicles"], ["AHV 2030 baseline", "155K (high scenario)", "NA+EU 28K L4 confirmed (Aurora I-45, Einride EU routes); 155K = Gartner high scenario incl. APAC", "Gartner G00841141; Aurora Q4 2025 commercial launch press release"], ["AHV 2035 projection", "800K (McKinsey-sourced)", "US: 13% of 3.5M HD trucks = 455K (McKinsey Sep 2024). EU: 4% of 4.5M = 180K. APAC + China: 165K", "McKinsey: 'Will autonomy usher in the future of truck freight?' Sep 2024"], ["Revenue ramp shape", "S-curve 2025–2030", "Context layer adoption follows AV deployment density — accelerates post-2027 as EU CVD + ZEV mandates activate", "Gartner S-curve; EU Clean Vehicle Directive enforcement timeline"]];
     return /*#__PURE__*/React.createElement("div", {
       style: {
         display: "grid",
@@ -3122,68 +3421,70 @@ function TransportPredictions() {
       sub: "Of TAM vs 7% today · fastest-growing segment",
       color: C.rose,
       badge: "KEY TREND"
-    }].map((k, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
+    }].map(function (k, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 10,
+          padding: "14px 16px",
+          borderLeft: "3px solid ".concat(k.color),
+          position: "relative",
+          overflow: "hidden"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          position: "absolute",
+          top: -15,
+          right: -8,
+          fontSize: 52,
+          opacity: 0.04,
+          fontFamily: "'DM Serif Display', serif",
+          color: k.color
+        }
+      }, "$"), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          marginBottom: 6
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          textTransform: "uppercase",
+          letterSpacing: 0.8
+        }
+      }, k.label), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 8,
+          color: k.color,
+          background: "".concat(k.color, "15"),
+          border: "1px solid ".concat(k.color, "30"),
+          borderRadius: 10,
+          padding: "1px 6px",
+          fontFamily: "'DM Mono', monospace"
+        }
+      }, k.badge)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'DM Serif Display', serif",
+          fontSize: 28,
+          color: k.color,
+          lineHeight: 1,
+          marginBottom: 4
+        }
+      }, k.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, k.sub));
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 10,
-        padding: "14px 16px",
-        borderLeft: `3px solid ${k.color}`,
-        position: "relative",
-        overflow: "hidden"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: "absolute",
-        top: -15,
-        right: -8,
-        fontSize: 52,
-        opacity: 0.04,
-        fontFamily: "'DM Serif Display', serif",
-        color: k.color
-      }
-    }, "$"), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        marginBottom: 6
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        textTransform: "uppercase",
-        letterSpacing: 0.8
-      }
-    }, k.label), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 8,
-        color: k.color,
-        background: `${k.color}15`,
-        border: `1px solid ${k.color}30`,
-        borderRadius: 10,
-        padding: "1px 6px",
-        fontFamily: "'DM Mono', monospace"
-      }
-    }, k.badge)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'DM Serif Display', serif",
-        fontSize: 28,
-        color: k.color,
-        lineHeight: 1,
-        marginBottom: 4
-      }
-    }, k.value), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted
-      }
-    }, k.sub)))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        background: `linear-gradient(135deg, ${C.violet}15, ${C.blue}08)`,
-        border: `1px solid ${C.violet}30`,
+        background: "linear-gradient(135deg, ".concat(C.violet, "15, ").concat(C.blue, "08)"),
+        border: "1px solid ".concat(C.violet, "30"),
         borderRadius: 10,
         padding: "12px 18px",
         display: "flex",
@@ -3229,9 +3530,84 @@ function TransportPredictions() {
         gap: 8,
         marginTop: 6
       }
-    }, tamSegments.map((s, i) => {
-      const total = s.exChina + s.china;
-      const pct = Math.round(total / 5551 * 100);
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "".concat(C.amber, "08"),
+        border: "1px solid ".concat(C.amber, "30"),
+        borderRadius: 10,
+        padding: "14px 16px",
+        marginBottom: 4
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.amber,
+        fontWeight: 700,
+        letterSpacing: 0.8,
+        textTransform: "uppercase",
+        marginBottom: 6
+      }
+    }, "Why Legacy Segments Persist Through 2030"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: 8,
+        marginBottom: 8
+      }
+    }, [{
+      label: "EU Trucks avg age",
+      value: "14.0 yrs",
+      delta: "→ full fleet turnover: ~50 yrs at current rate"
+    }, {
+      label: "EU Buses avg age",
+      value: "12.2 yrs",
+      delta: "→ only 7 EU countries have <10yr avg bus fleet"
+    }, {
+      label: "EU Vans avg age",
+      value: "12.9 yrs",
+      delta: "→ 98.7% of 31.1M EU vans remain non-EV (2024)"
+    }].map(function (m, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.bg,
+          borderRadius: 6,
+          padding: "8px 10px"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginBottom: 2
+        }
+      }, m.label), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'DM Mono', monospace",
+          fontSize: 16,
+          fontWeight: 700,
+          color: C.amber
+        }
+      }, m.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 8,
+          color: C.muted,
+          marginTop: 2,
+          lineHeight: 1.4
+        }
+      }, m.delta));
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: C.muted,
+        lineHeight: 1.6
+      }
+    }, /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: C.text
+      }
+    }, "Source: ACEA Vehicles on European Roads 2026 (FY2024 actuals)."), " At 1\u20132%/yr fleet replacement, 85\u201395% of current EU fleets remain ICE/diesel by 2030. Legacy segments in the TAM reflect real vehicles requiring mixed-depot orchestration today \u2014 not future EV conversions.")), tamSegments.map(function (s, i) {
+      var total = s.exChina + s.china;
+      var pct = Math.round(total / 5551 * 100);
       return /*#__PURE__*/React.createElement("div", {
         key: i
       }, /*#__PURE__*/React.createElement("div", {
@@ -3276,9 +3652,9 @@ function TransportPredictions() {
         }
       }, /*#__PURE__*/React.createElement("div", {
         style: {
-          width: `${pct}%`,
+          width: "".concat(pct, "%"),
           height: "100%",
-          background: `linear-gradient(90deg, ${s.color}80, ${s.color})`,
+          background: "linear-gradient(90deg, ".concat(s.color, "80, ").concat(s.color, ")"),
           borderRadius: 3
         }
       })), /*#__PURE__*/React.createElement("div", {
@@ -3294,7 +3670,7 @@ function TransportPredictions() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderTop: `1px solid ${C.border}`,
+        borderTop: "1px solid ".concat(C.border),
         paddingTop: 10
       }
     }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
@@ -3331,8 +3707,8 @@ function TransportPredictions() {
       style: {
         marginTop: 8,
         padding: "6px 8px",
-        background: `${C.green}08`,
-        border: `1px solid ${C.green}20`,
+        background: "".concat(C.green, "08"),
+        border: "1px solid ".concat(C.green, "20"),
         borderRadius: 6,
         fontSize: 9,
         color: C.muted
@@ -3354,10 +3730,10 @@ function TransportPredictions() {
         gap: 8,
         marginTop: 6
       }
-    }, tamSegments2035.map((s, i) => {
-      const growth = Math.round((s.val2035 / s.val2030 - 1) * 100);
-      const pct35 = Math.round(s.val2035 / 12216 * 100);
-      const pct30 = Math.round(s.val2030 / 12216 * 100);
+    }, tamSegments2035.map(function (s, i) {
+      var growth = Math.round((s.val2035 / s.val2030 - 1) * 100);
+      var pct35 = Math.round(s.val2035 / 12216 * 100);
+      var pct30 = Math.round(s.val2030 / 12216 * 100);
       return /*#__PURE__*/React.createElement("div", {
         key: i
       }, /*#__PURE__*/React.createElement("div", {
@@ -3406,7 +3782,7 @@ function TransportPredictions() {
       }, "\u2192 $", s.val2035, "M"), /*#__PURE__*/React.createElement("span", {
         style: {
           fontSize: 8,
-          background: `${s.color}20`,
+          background: "".concat(s.color, "20"),
           color: s.color,
           borderRadius: 8,
           padding: "1px 5px",
@@ -3423,17 +3799,17 @@ function TransportPredictions() {
       }, /*#__PURE__*/React.createElement("div", {
         style: {
           position: "absolute",
-          width: `${pct30}%`,
+          width: "".concat(pct30, "%"),
           height: "100%",
-          background: `${s.color}40`,
+          background: "".concat(s.color, "40"),
           borderRadius: 3
         }
       }), /*#__PURE__*/React.createElement("div", {
         style: {
           position: "absolute",
-          width: `${pct35}%`,
+          width: "".concat(pct35, "%"),
           height: "100%",
-          background: `linear-gradient(90deg, ${s.color}80, ${s.color})`,
+          background: "linear-gradient(90deg, ".concat(s.color, "80, ").concat(s.color, ")"),
           borderRadius: 3
         }
       })));
@@ -3443,7 +3819,7 @@ function TransportPredictions() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderTop: `1px solid ${C.border}`,
+        borderTop: "1px solid ".concat(C.border),
         paddingTop: 10
       }
     }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
@@ -3480,8 +3856,8 @@ function TransportPredictions() {
       style: {
         marginTop: 8,
         padding: "6px 8px",
-        background: `${C.violet}08`,
-        border: `1px solid ${C.violet}20`,
+        background: "".concat(C.violet, "08"),
+        border: "1px solid ".concat(C.violet, "20"),
         borderRadius: 6,
         fontSize: 9,
         color: C.muted
@@ -3496,13 +3872,15 @@ function TransportPredictions() {
       subtitle: "Incremental contribution by fleet segment \xB7 $M",
       badge: "+$6.6B EXPANSION",
       badgeColor: C.violet
-    }, (() => {
-      const bridgeData = tamSegments2035.map(s => ({
-        name: s.name.replace(" Fleet Orchestration", "").replace(" (mixed depot)", "").replace(" Fleet Infra Layer", "").replace(" Commercial Vehicles", ""),
-        "2030": s.val2030,
-        "Growth": s.val2035 - s.val2030,
-        color: s.color
-      }));
+    }, function () {
+      var bridgeData = tamSegments2035.map(function (s) {
+        return {
+          name: s.name.replace(" Fleet Orchestration", "").replace(" (mixed depot)", "").replace(" Fleet Infra Layer", "").replace(" Commercial Vehicles", ""),
+          "2030": s.val2030,
+          "Growth": s.val2035 - s.val2030,
+          color: s.color
+        };
+      });
       return /*#__PURE__*/React.createElement(ResponsiveContainer, {
         width: "100%",
         height: 200
@@ -3516,29 +3894,34 @@ function TransportPredictions() {
         }
       }, /*#__PURE__*/React.createElement(CartesianGrid, gridProps), /*#__PURE__*/React.createElement(XAxis, {
         dataKey: "name",
-        tick: {
-          ...axisStyle,
+        tick: _objectSpread(_objectSpread({}, axisStyle), {}, {
           fontSize: 9
-        },
+        }),
         tickLine: false
       }), /*#__PURE__*/React.createElement(YAxis, {
         tick: axisStyle,
         tickLine: false,
         axisLine: false,
-        tickFormatter: v => `$${v}M`
+        tickFormatter: function tickFormatter(v) {
+          return "$".concat(v, "M");
+        }
       }), /*#__PURE__*/React.createElement(Tooltip, {
-        content: ({
-          active,
-          payload,
-          label
-        }) => {
-          if (!active || !payload?.length) return null;
-          const base = payload.find(p => p.dataKey === "2030")?.value || 0;
-          const growth = payload.find(p => p.dataKey === "Growth")?.value || 0;
+        content: function content(_ref13) {
+          var _payload$find, _payload$find2;
+          var active = _ref13.active,
+            payload = _ref13.payload,
+            label = _ref13.label;
+          if (!active || !(payload !== null && payload !== void 0 && payload.length)) return null;
+          var base = ((_payload$find = payload.find(function (p) {
+            return p.dataKey === "2030";
+          })) === null || _payload$find === void 0 ? void 0 : _payload$find.value) || 0;
+          var growth = ((_payload$find2 = payload.find(function (p) {
+            return p.dataKey === "Growth";
+          })) === null || _payload$find2 === void 0 ? void 0 : _payload$find2.value) || 0;
           return /*#__PURE__*/React.createElement("div", {
             style: {
               background: C.card,
-              border: `1px solid ${C.border}`,
+              border: "1px solid ".concat(C.border),
               borderRadius: 8,
               padding: "10px 14px",
               fontFamily: "'Plus Jakarta Sans', sans-serif"
@@ -3604,15 +3987,15 @@ function TransportPredictions() {
         radius: [3, 3, 0, 0],
         opacity: 0.85
       })));
-    })(), /*#__PURE__*/React.createElement("div", {
+    }(), /*#__PURE__*/React.createElement("div", {
       style: {
         display: "grid",
         gridTemplateColumns: "repeat(5, 1fr)",
         gap: 8,
         marginTop: 10
       }
-    }, tamSegments2035.map((s, i) => {
-      const mult = (s.val2035 / s.val2030).toFixed(1);
+    }, tamSegments2035.map(function (s, i) {
+      var mult = (s.val2035 / s.val2030).toFixed(1);
       return /*#__PURE__*/React.createElement("div", {
         key: i,
         style: {
@@ -3620,7 +4003,7 @@ function TransportPredictions() {
           padding: "6px 4px",
           background: C.surface,
           borderRadius: 6,
-          border: `1px solid ${C.border}`
+          border: "1px solid ".concat(C.border)
         }
       }, /*#__PURE__*/React.createElement("div", {
         style: {
@@ -3662,8 +4045,8 @@ function TransportPredictions() {
         gap: 10,
         marginTop: 6
       }
-    }, samByRegion.map((r, i) => {
-      const pct = Math.round(r.value / samTotal * 100);
+    }, samByRegion.map(function (r, i) {
+      var pct = Math.round(r.value / samTotal * 100);
       return /*#__PURE__*/React.createElement("div", {
         key: i
       }, /*#__PURE__*/React.createElement("div", {
@@ -3703,9 +4086,9 @@ function TransportPredictions() {
         }
       }, /*#__PURE__*/React.createElement("div", {
         style: {
-          width: `${pct}%`,
+          width: "".concat(pct, "%"),
           height: "100%",
-          background: `linear-gradient(90deg, ${r.color}70, ${r.color})`,
+          background: "linear-gradient(90deg, ".concat(r.color, "70, ").concat(r.color, ")"),
           borderRadius: 3
         }
       })), /*#__PURE__*/React.createElement("div", {
@@ -3718,8 +4101,8 @@ function TransportPredictions() {
     })), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 12,
-        background: `${C.amber}10`,
-        border: `1px solid ${C.amber}25`,
+        background: "".concat(C.amber, "10"),
+        border: "1px solid ".concat(C.amber, "25"),
         borderRadius: 8,
         padding: "8px 10px"
       }
@@ -3809,18 +4192,19 @@ function TransportPredictions() {
       tick: axisStyle,
       tickLine: false,
       axisLine: false,
-      tickFormatter: v => `$${v}M`
+      tickFormatter: function tickFormatter(v) {
+        return "$".concat(v, "M");
+      }
     }), /*#__PURE__*/React.createElement(Tooltip, {
-      content: ({
-        active,
-        payload,
-        label
-      }) => {
-        if (!active || !payload?.length) return null;
+      content: function content(_ref14) {
+        var active = _ref14.active,
+          payload = _ref14.payload,
+          label = _ref14.label;
+        if (!active || !(payload !== null && payload !== void 0 && payload.length)) return null;
         return /*#__PURE__*/React.createElement("div", {
           style: {
             background: C.card,
-            border: `1px solid ${C.border}`,
+            border: "1px solid ".concat(C.border),
             borderRadius: 8,
             padding: "10px 14px",
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -3833,22 +4217,26 @@ function TransportPredictions() {
             fontWeight: 700,
             marginBottom: 6
           }
-        }, label, " ARR"), payload.filter(p => p.value > 0).map((p, i) => /*#__PURE__*/React.createElement("div", {
-          key: i,
-          style: {
-            fontSize: 10,
-            color: p.color,
-            marginBottom: 2,
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 12
-          }
-        }, /*#__PURE__*/React.createElement("span", null, p.name), /*#__PURE__*/React.createElement("span", {
-          style: {
-            fontFamily: "'DM Mono', monospace",
-            fontWeight: 700
-          }
-        }, "$", p.value, "M"))));
+        }, label, " ARR"), payload.filter(function (p) {
+          return p.value > 0;
+        }).map(function (p, i) {
+          return /*#__PURE__*/React.createElement("div", {
+            key: i,
+            style: {
+              fontSize: 10,
+              color: p.color,
+              marginBottom: 2,
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 12
+            }
+          }, /*#__PURE__*/React.createElement("span", null, p.name), /*#__PURE__*/React.createElement("span", {
+            style: {
+              fontFamily: "'DM Mono', monospace",
+              fontWeight: 700
+            }
+          }, "$", p.value, "M"));
+        }));
       }
     }), /*#__PURE__*/React.createElement(ReferenceArea, {
       x1: 2025,
@@ -3999,61 +4387,63 @@ function TransportPredictions() {
       dash: true,
       assumption: "TAM model: 7% SAM by 2030. Full AV OEM partnership ecosystem + agentic ops tier live.",
       condition: "If: AV deployment accelerates; Greenbay becomes depot standard"
-    }].map((s, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: C.surface,
-        borderRadius: 6,
-        padding: "8px 8px",
-        border: `1px solid ${C.border}`,
-        borderTop: `2px solid ${s.color}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "baseline",
-        marginBottom: 3
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        color: s.color,
-        fontWeight: 700
-      }
-    }, s.label), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 8,
-        color: C.muted,
-        fontFamily: "'DM Mono', monospace"
-      }
-    }, s.sublabel)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'DM Serif Display', serif",
-        fontSize: 18,
-        color: s.color,
-        marginBottom: 4
-      }
-    }, s.arr2030), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        color: C.muted,
-        lineHeight: 1.4,
-        marginBottom: 4
-      }
-    }, s.assumption), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        color: s.color,
-        fontStyle: "italic",
-        lineHeight: 1.4
-      }
-    }, s.condition)))), /*#__PURE__*/React.createElement("div", {
+    }].map(function (s, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.surface,
+          borderRadius: 6,
+          padding: "8px 8px",
+          border: "1px solid ".concat(C.border),
+          borderTop: "2px solid ".concat(s.color)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          marginBottom: 3
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 9,
+          color: s.color,
+          fontWeight: 700
+        }
+      }, s.label), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 8,
+          color: C.muted,
+          fontFamily: "'DM Mono', monospace"
+        }
+      }, s.sublabel)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontFamily: "'DM Serif Display', serif",
+          fontSize: 18,
+          color: s.color,
+          marginBottom: 4
+        }
+      }, s.arr2030), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 8,
+          color: C.muted,
+          lineHeight: 1.4,
+          marginBottom: 4
+        }
+      }, s.assumption), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 8,
+          color: s.color,
+          fontStyle: "italic",
+          lineHeight: 1.4
+        }
+      }, s.condition));
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 10,
         padding: "8px 12px",
-        background: `${C.blue}06`,
-        border: `1px solid ${C.blue}20`,
+        background: "".concat(C.blue, "06"),
+        border: "1px solid ".concat(C.blue, "20"),
         borderRadius: 6,
         display: "flex",
         gap: 10,
@@ -4096,47 +4486,51 @@ function TransportPredictions() {
       label: "Path to $226M ARR",
       points: ["2025–26: Pilots convert to SaaS → $4–6M ARR (Transit UK, KCATA)", "2027: EU transit agencies embed context layer pre-AV rollout → $20–30M ARR", "2028: AV OEM partnership deals (Greenbay as depot infra standard) → $43M ARR [McKinsey: US reaches 13% L4 HD truck penetration by 2035, depot infra contracts accelerate 2027–29]", "2029: AI agentic ops tier launches — context layer becomes decision engine → $87M ARR", "2030: Full AV fleet orchestration premium tier live → $226M ARR"],
       color: C.teal
-    }].map((col, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 10,
-        padding: "14px 16px",
-        borderTop: `3px solid ${col.color}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 13,
-        marginBottom: 6
-      }
-    }, col.icon, " ", /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontWeight: 700,
-        fontSize: 11,
-        color: col.color
-      }
-    }, col.label)), col.points.map((p, j) => /*#__PURE__*/React.createElement("div", {
-      key: j,
-      style: {
-        display: "flex",
-        gap: 6,
-        marginBottom: 5
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: col.color,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u25B8"), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        lineHeight: 1.5
-      }
-    }, p)))))), /*#__PURE__*/React.createElement(Card, {
+    }].map(function (col, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 10,
+          padding: "14px 16px",
+          borderTop: "3px solid ".concat(col.color)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 13,
+          marginBottom: 6
+        }
+      }, col.icon, " ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 700,
+          fontSize: 11,
+          color: col.color
+        }
+      }, col.label)), col.points.map(function (p, j) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: j,
+          style: {
+            display: "flex",
+            gap: 6,
+            marginBottom: 5
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            color: col.color,
+            fontSize: 10,
+            flexShrink: 0,
+            marginTop: 1
+          }
+        }, "\u25B8"), /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 10,
+            color: C.muted,
+            lineHeight: 1.5
+          }
+        }, p));
+      }));
+    })), /*#__PURE__*/React.createElement(Card, {
       title: "The 21 AV Depot Infrastructure Components \u2014 Greenbay Coverage Map",
       subtitle: "Mapped against SAE J3016 Operational Design Domain framework + CCAV depot readiness taxonomy",
       badge: "11 OF 21 COVERED",
@@ -4157,34 +4551,39 @@ function TransportPredictions() {
         letterSpacing: 0.8,
         marginBottom: 8
       }
-    }, "\u2705 Greenbay Covers (11 of 21)"), [["Depot energy state management", "Charging slot scheduling, SoC tracking, grid demand"], ["AI dispatch & route assignment", "Vehicle↔task matching, priority queuing"], ["Yard geometry & slot management", "Physical depot space orchestration"], ["Mixed-autonomy handoff coordination", "AV↔human driver transition arbitration"], ["Predictive maintenance scheduling", "Fault prediction, downtime avoidance"], ["Regulatory audit trail", "Compliance logging for AV incidents & CVD"], ["Fleet state context graph", "Unified operational memory across vehicle types"], ["EV charging optimisation (V1G)", "Smart charging, demand shifting, TOU pricing"], ["Driver & operator workflow mgmt", "Shift scheduling, task assignment, alerts"], ["Multi-fleet type orchestration", "EV + diesel + AV + LCV in single depot"], ["Real-time depot telemetry ingestion", "10–40TB/day AHV data ingestion & processing"]].map(([comp, desc], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "flex",
-        gap: 8,
-        marginBottom: 5,
-        alignItems: "flex-start"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.violet,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u25B8"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.text,
-        fontWeight: 600
-      }
-    }, comp), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        color: C.muted,
-        lineHeight: 1.4
-      }
-    }, desc))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    }, "\u2705 Greenbay Covers (11 of 21)"), [["Depot energy state management", "Charging slot scheduling, SoC tracking, grid demand"], ["AI dispatch & route assignment", "Vehicle↔task matching, priority queuing"], ["Yard geometry & slot management", "Physical depot space orchestration"], ["Mixed-autonomy handoff coordination", "AV↔human driver transition arbitration"], ["Predictive maintenance scheduling", "Fault prediction, downtime avoidance"], ["Regulatory audit trail", "Compliance logging for AV incidents & CVD"], ["Fleet state context graph", "Unified operational memory across vehicle types"], ["EV charging optimisation (V1G)", "Smart charging, demand shifting, TOU pricing"], ["Driver & operator workflow mgmt", "Shift scheduling, task assignment, alerts"], ["Multi-fleet type orchestration", "EV + diesel + AV + LCV in single depot"], ["Real-time depot telemetry ingestion", "10–40TB/day AHV data ingestion & processing"]].map(function (_ref15, i) {
+      var _ref16 = _slicedToArray(_ref15, 2),
+        comp = _ref16[0],
+        desc = _ref16[1];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          display: "flex",
+          gap: 8,
+          marginBottom: 5,
+          alignItems: "flex-start"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: C.violet,
+          fontSize: 10,
+          flexShrink: 0,
+          marginTop: 1
+        }
+      }, "\u25B8"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.text,
+          fontWeight: 600
+        }
+      }, comp), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 8,
+          color: C.muted,
+          lineHeight: 1.4
+        }
+      }, desc)));
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 9,
         color: C.muted,
@@ -4193,40 +4592,45 @@ function TransportPredictions() {
         letterSpacing: 0.8,
         marginBottom: 8
       }
-    }, "\u26AA Not in Greenbay Scope (10 of 21)"), [["AV perception & sensor fusion", "LIDAR/radar stack — OEM domain"], ["HD mapping & localisation", "Mobileye, HERE, TomTom domain"], ["V2X communications", "C-V2X / DSRC — network layer"], ["Remote operations centre (ROC)", "Tele-op fallback — AV OEM / specialist"], ["AV safety validation & ODD testing", "SAE J3016 testing — OEM responsibility"], ["Vehicle cybersecurity stack", "OEM + tier-1 supplier domain"], ["Insurance & liability frameworks", "Regulatory / actuarial domain"], ["AV software update (OTA) mgmt", "OEM + Mobileye / NVIDIA domain"], ["Charging hardware & installation", "Charger-agnostic: ABB, Kempower, etc."], ["Grid connection & utility contracts", "Utility / DSO domain"]].map(([comp, desc], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "flex",
-        gap: 8,
-        marginBottom: 5,
-        alignItems: "flex-start"
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: C.muted,
-        fontSize: 10,
-        flexShrink: 0,
-        marginTop: 1
-      }
-    }, "\u25CB"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        fontWeight: 500
-      }
-    }, comp), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 8,
-        color: C.muted,
-        lineHeight: 1.4,
-        opacity: 0.7
-      }
-    }, desc)))), /*#__PURE__*/React.createElement("div", {
+    }, "\u26AA Not in Greenbay Scope (10 of 21)"), [["AV perception & sensor fusion", "LIDAR/radar stack — OEM domain"], ["HD mapping & localisation", "Mobileye, HERE, TomTom domain"], ["V2X communications", "C-V2X / DSRC — network layer"], ["Remote operations centre (ROC)", "Tele-op fallback — AV OEM / specialist"], ["AV safety validation & ODD testing", "SAE J3016 testing — OEM responsibility"], ["Vehicle cybersecurity stack", "OEM + tier-1 supplier domain"], ["Insurance & liability frameworks", "Regulatory / actuarial domain"], ["AV software update (OTA) mgmt", "OEM + Mobileye / NVIDIA domain"], ["Charging hardware & installation", "Charger-agnostic: ABB, Kempower, etc."], ["Grid connection & utility contracts", "Utility / DSO domain"]].map(function (_ref17, i) {
+      var _ref18 = _slicedToArray(_ref17, 2),
+        comp = _ref18[0],
+        desc = _ref18[1];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          display: "flex",
+          gap: 8,
+          marginBottom: 5,
+          alignItems: "flex-start"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: C.muted,
+          fontSize: 10,
+          flexShrink: 0,
+          marginTop: 1
+        }
+      }, "\u25CB"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          fontWeight: 500
+        }
+      }, comp), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 8,
+          color: C.muted,
+          lineHeight: 1.4,
+          opacity: 0.7
+        }
+      }, desc)));
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 12,
         padding: "8px 10px",
-        background: `${C.violet}08`,
-        border: `1px solid ${C.violet}20`,
+        background: "".concat(C.violet, "08"),
+        border: "1px solid ".concat(C.violet, "20"),
         borderRadius: 6,
         fontSize: 9,
         color: C.muted
@@ -4263,7 +4667,7 @@ function TransportPredictions() {
         gridTemplateColumns: "1fr 80px 1fr",
         gap: 0
       }
-    }, [["Vendor / Product", "ARPU/yr", "Scope"], null, ["Samsara (telematics + safety)", "$1,200–2,400", "GPS, ELD, video safety, fuel"], ["Motive (ex-KeepTruckin)", "$800–1,400", "Fleet mgmt, ELD, dash cam"], ["Omnitracs", "$600–1,200", "Routing, compliance, HOS"], ["Geotab", "$500–900", "Telematics, data analytics"], null, ["Greenbay Transit/Freight", "$1,440–1,920", "AI dispatch + energy + yard + compliance"], ["Greenbay AHV Premium", "$3,000", "Full AV infra layer (11/21 components)"]].map((row, i) => {
+    }, [["Vendor / Product", "ARPU/yr", "Scope"], null, ["Samsara (telematics + safety)", "$1,200–2,400", "GPS, ELD, video safety, fuel"], ["Motive (ex-KeepTruckin)", "$800–1,400", "Fleet mgmt, ELD, dash cam"], ["Omnitracs", "$600–1,200", "Routing, compliance, HOS"], ["Geotab", "$500–900", "Telematics, data analytics"], null, ["Greenbay Transit/Freight", "$1,440–1,920", "AI dispatch + energy + yard + compliance"], ["Greenbay AHV Premium", "$3,000", "Full AV infra layer (11/21 components)"]].map(function (row, i) {
       if (!row) return /*#__PURE__*/React.createElement("div", {
         key: i,
         style: {
@@ -4273,25 +4677,23 @@ function TransportPredictions() {
           margin: "4px 0"
         }
       });
-      const isHeader = i === 0;
-      const isGreenbay = row[0].includes("Greenbay");
+      var isHeader = i === 0;
+      var isGreenbay = row[0].includes("Greenbay");
       return /*#__PURE__*/React.createElement(React.Fragment, {
         key: i
-      }, row.map((cell, j) => /*#__PURE__*/React.createElement("div", {
-        key: j,
-        style: {
-          fontSize: isHeader ? 8 : 9,
-          color: isHeader ? C.muted : isGreenbay ? C.text : C.muted,
-          fontWeight: isHeader ? 700 : isGreenbay ? 700 : 400,
-          textTransform: isHeader ? "uppercase" : "none",
-          letterSpacing: isHeader ? 0.6 : 0,
-          fontFamily: j === 1 ? "'DM Mono', monospace" : "inherit",
-          color: j === 1 && isGreenbay ? C.teal : j === 1 ? C.muted : isGreenbay ? C.text : C.muted,
-          padding: "3px 4px",
-          background: isGreenbay ? `${C.teal}08` : "transparent",
-          borderLeft: j === 0 && isGreenbay ? `2px solid ${C.teal}` : "2px solid transparent"
-        }
-      }, cell)));
+      }, row.map(function (cell, j) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: j,
+          style: _defineProperty(_defineProperty(_defineProperty(_defineProperty({
+            fontSize: isHeader ? 8 : 9,
+            color: isHeader ? C.muted : isGreenbay ? C.text : C.muted,
+            fontWeight: isHeader ? 700 : isGreenbay ? 700 : 400,
+            textTransform: isHeader ? "uppercase" : "none",
+            letterSpacing: isHeader ? 0.6 : 0,
+            fontFamily: j === 1 ? "'DM Mono', monospace" : "inherit"
+          }, "color", j === 1 && isGreenbay ? C.teal : j === 1 ? C.muted : isGreenbay ? C.text : C.muted), "padding", "3px 4px"), "background", isGreenbay ? "".concat(C.teal, "08") : "transparent"), "borderLeft", j === 0 && isGreenbay ? "2px solid ".concat(C.teal) : "2px solid transparent")
+        }, cell);
+      }));
     })), /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: 8,
@@ -4314,28 +4716,33 @@ function TransportPredictions() {
         letterSpacing: 0.8,
         marginBottom: 2
       }
-    }, "Why Greenbay ARPU Is Defensible"), [["Samsara validates the range", "Samsara's ~$1,800 blended ARPU on telematics + safety — a narrower scope than Greenbay's full orchestration stack — shows operators routinely pay in the $1,200–2,400 band. Greenbay's $1,920 sits in the middle of that range."], ["Wider scope justifies pricing", "Greenbay adds AI depot dispatch, energy optimisation, yard management, and AV handoff coordination — capabilities Samsara and Motive do not offer. This is a larger value surface for the same price point."], ["AHV premium is structurally different", "The $3,000 AHV tier is not a price increase — it's a new SKU covering 11/21 AV infrastructure components with no existing vendor covering more than 4. McKinsey (Sep 2024) identifies depot-side infra as a key cost driver in AV fleet TCO."], ["LCV at $960 is intentionally low", "$960 is 50% of transit ARPU, reflecting a leaner 'depot-lite' module. Designed as a land-and-expand wedge — upgrade path to full orchestration as LCV depot complexity grows with autonomy."]].map(([title, body], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        padding: "8px 10px",
-        background: C.surface,
-        borderRadius: 6,
-        border: `1px solid ${C.border}`
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.text,
-        fontWeight: 700,
-        marginBottom: 3
-      }
-    }, title), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        lineHeight: 1.5
-      }
-    }, body)))))), /*#__PURE__*/React.createElement(Card, {
+    }, "Why Greenbay ARPU Is Defensible"), [["Samsara validates the range", "Samsara's ~$1,800 blended ARPU on telematics + safety — a narrower scope than Greenbay's full orchestration stack — shows operators routinely pay in the $1,200–2,400 band. Greenbay's $1,920 sits in the middle of that range."], ["Wider scope justifies pricing", "Greenbay adds AI depot dispatch, energy optimisation, yard management, and AV handoff coordination — capabilities Samsara and Motive do not offer. This is a larger value surface for the same price point."], ["AHV premium is structurally different", "The $3,000 AHV tier is not a price increase — it's a new SKU covering 11/21 AV infrastructure components with no existing vendor covering more than 4. McKinsey (Sep 2024) identifies depot-side infra as a key cost driver in AV fleet TCO."], ["LCV at $960 is intentionally low", "$960 is 50% of transit ARPU, reflecting a leaner 'depot-lite' module. Designed as a land-and-expand wedge — upgrade path to full orchestration as LCV depot complexity grows with autonomy."]].map(function (_ref20, i) {
+      var _ref21 = _slicedToArray(_ref20, 2),
+        title = _ref21[0],
+        body = _ref21[1];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          padding: "8px 10px",
+          background: C.surface,
+          borderRadius: 6,
+          border: "1px solid ".concat(C.border)
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.text,
+          fontWeight: 700,
+          marginBottom: 3
+        }
+      }, title), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          lineHeight: 1.5
+        }
+      }, body));
+    })))), /*#__PURE__*/React.createElement(Card, {
       title: "Model Assumptions",
       subtitle: "Fleet orchestration context layer \xB7 TAM/SAM/SOM inputs and rationale",
       badge: "TRANSPARENT",
@@ -4352,62 +4759,71 @@ function TransportPredictions() {
         gridTemplateColumns: "150px 120px 1fr 1fr",
         gap: 8,
         padding: "5px 10px",
-        borderBottom: `1px solid ${C.border}`,
+        borderBottom: "1px solid ".concat(C.border),
         marginBottom: 2
       }
-    }, ["Parameter", "Value", "Rationale", "Source"].map((h, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        fontWeight: 700,
-        textTransform: "uppercase",
-        letterSpacing: 0.8
-      }
-    }, h))), assumptionRows.map(([param, value, rationale, source], i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "grid",
-        gridTemplateColumns: "150px 120px 1fr 1fr",
-        gap: 8,
-        padding: "6px 10px",
-        background: i % 2 === 0 ? "transparent" : `${C.surface}60`,
-        borderRadius: 3,
-        alignItems: "flex-start"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        fontFamily: "'DM Mono', monospace",
-        paddingTop: 1
-      }
-    }, param), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.teal,
-        fontWeight: 700,
-        fontFamily: "'DM Mono', monospace",
-        paddingTop: 1
-      }
-    }, value), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        lineHeight: 1.5
-      }
-    }, rationale), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.blue,
-        lineHeight: 1.5,
-        fontStyle: "italic"
-      }
-    }, source))))));
-  })(), activeTab === "sources" && (() => {
+    }, ["Parameter", "Value", "Rationale", "Source"].map(function (h, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: 0.8
+        }
+      }, h);
+    })), assumptionRows.map(function (_ref22, i) {
+      var _ref23 = _slicedToArray(_ref22, 4),
+        param = _ref23[0],
+        value = _ref23[1],
+        rationale = _ref23[2],
+        source = _ref23[3];
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          display: "grid",
+          gridTemplateColumns: "150px 120px 1fr 1fr",
+          gap: 8,
+          padding: "6px 10px",
+          background: i % 2 === 0 ? "transparent" : "".concat(C.surface, "60"),
+          borderRadius: 3,
+          alignItems: "flex-start"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          fontFamily: "'DM Mono', monospace",
+          paddingTop: 1
+        }
+      }, param), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.teal,
+          fontWeight: 700,
+          fontFamily: "'DM Mono', monospace",
+          paddingTop: 1
+        }
+      }, value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          lineHeight: 1.5
+        }
+      }, rationale), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.blue,
+          lineHeight: 1.5,
+          fontStyle: "italic"
+        }
+      }, source));
+    }))));
+  }(), activeTab === "sources" && function () {
     // FIX #10 — Replaced SeaRates + MaxDispatch with primary Aurora/Waymo sources
     // FIX #11 — Added Nikola bankruptcy note to H2 source
-    const sources = [{
+    var sources = [{
       category: "Electric Vehicles — Fleet & Sales",
       color: C.teal,
       items: [{
@@ -4419,7 +4835,7 @@ function TransportPredictions() {
         name: "IEA Global EV Outlook 2025 — Heavy-Duty EV Trends",
         org: "International Energy Agency",
         url: "https://iea.blob.core.windows.net/assets/7ea38b60-3033-42a6-9589-71134f4229f4/GlobalEVOutlook2025.pdf",
-        note: "EV truck annual sales 93K (2024), China 75K+. EV bus stock 766K (IEA transit BEV scope). Regional breakdowns."
+        note: "EV truck annual sales 93K (2024), China 75K+. EV bus stock 766K (IEA transit BEV scope). Regional breakdowns. GEO-25 implies global total bus fleet ~20–21M (derived: STEPS 2035 EV bus stock 4.5M = 20% of total → ~22.5M 2035, back-calculated ~20M 2024). China: 680K+ EV buses = 30% electric share. EU: 2nd largest EV bus fleet globally at ~2% share."
       }, {
         name: "WRI — Countries Electrifying Bus Fleets Fastest",
         org: "World Resources Institute",
@@ -4502,6 +4918,11 @@ function TransportPredictions() {
       category: "Regional & Sector Statistics",
       color: C.rose,
       items: [{
+        name: "ACEA — Vehicles on European Roads 2026",
+        org: "European Automobile Manufacturers Association",
+        url: "https://www.acea.auto/publication/report-vehicles-on-european-roads-2026/",
+        note: "FY2024 EU total fleet actuals. EU buses: 699,238 total (+1.8%, avg age 12.2 yrs). EU trucks: 6.2M total (+0.9%, avg age 14.0 yrs). EU vans: 31.1M total (+1.9%, avg age 12.9 yrs). BEV shares: buses 3.5%, trucks 0.3%, vans 1.3%. Primary source for fleet age narrative and total fleet denominators. Published January 2026."
+      }, {
         name: "ACEA — EU Bus & Truck Registrations",
         org: "European Automobile Manufacturers Association",
         url: "https://www.acea.auto/fuel-pc/fuel-types-of-new-buses-eu/",
@@ -4603,10 +5024,10 @@ function TransportPredictions() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         background: C.card,
-        border: `1px solid ${C.border}`,
+        border: "1px solid ".concat(C.border),
         borderRadius: 12,
         padding: "18px 22px",
-        borderLeft: `4px solid ${C.teal}`
+        borderLeft: "4px solid ".concat(C.teal)
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -4627,147 +5048,157 @@ function TransportPredictions() {
         fontSize: 11,
         color: C.muted
       }
-    }, sources.reduce((a, s) => a + s.items.length, 0), " sources across ", sources.length, " categories \xB7 Click any link to open the original source")))), /*#__PURE__*/React.createElement("div", {
+    }, sources.reduce(function (a, s) {
+      return a + s.items.length;
+    }, 0), " sources across ", sources.length, " categories \xB7 Click any link to open the original source")))), /*#__PURE__*/React.createElement("div", {
       style: {
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         gap: 16
       }
-    }, sources.map((cat, ci) => /*#__PURE__*/React.createElement("div", {
-      key: ci,
+    }, sources.map(function (cat, ci) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: ci,
+        style: {
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 12,
+          padding: "16px 18px",
+          overflow: "hidden",
+          position: "relative"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 2,
+          background: "linear-gradient(90deg, ".concat(cat.color, ", ").concat(cat.color, "20)")
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 14,
+          paddingTop: 4
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          background: cat.color,
+          boxShadow: "0 0 6px ".concat(cat.color)
+        }
+      }), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontWeight: 700,
+          fontSize: 11,
+          color: cat.color,
+          letterSpacing: 0.5,
+          textTransform: "uppercase"
+        }
+      }, cat.category), /*#__PURE__*/React.createElement("span", {
+        style: {
+          marginLeft: "auto",
+          fontSize: 9,
+          color: C.muted,
+          fontFamily: "'DM Mono', monospace"
+        }
+      }, cat.items.length, " sources")), cat.items.map(function (src, si) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: si,
+          style: {
+            borderTop: si > 0 ? "1px solid ".concat(C.border) : "none",
+            paddingTop: si > 0 ? 10 : 0,
+            marginBottom: si < cat.items.length - 1 ? 10 : 0
+          }
+        }, /*#__PURE__*/React.createElement("a", {
+          href: src.url,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          style: {
+            display: "flex",
+            alignItems: "flex-start",
+            gap: 8,
+            textDecoration: "none",
+            cursor: "pointer",
+            padding: "6px 8px",
+            borderRadius: 6,
+            margin: "-6px -8px",
+            transition: "background 0.15s"
+          },
+          onMouseEnter: function onMouseEnter(e) {
+            return e.currentTarget.style.background = "".concat(cat.color, "12");
+          },
+          onMouseLeave: function onMouseLeave(e) {
+            return e.currentTarget.style.background = "transparent";
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            width: 22,
+            height: 22,
+            borderRadius: 5,
+            flexShrink: 0,
+            marginTop: 1,
+            background: "".concat(cat.color, "20"),
+            border: "1px solid ".concat(cat.color, "40"),
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }
+        }, /*#__PURE__*/React.createElement("svg", {
+          width: "9",
+          height: "9",
+          viewBox: "0 0 10 10",
+          fill: "none"
+        }, /*#__PURE__*/React.createElement("path", {
+          d: "M1 9L9 1M9 1H3M9 1V7",
+          stroke: cat.color,
+          strokeWidth: "1.5",
+          strokeLinecap: "round",
+          strokeLinejoin: "round"
+        }))), /*#__PURE__*/React.createElement("div", {
+          style: {
+            flex: 1,
+            minWidth: 0
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 11,
+            fontWeight: 600,
+            color: C.text,
+            marginBottom: 1,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis"
+          }
+        }, src.name), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 9,
+            color: cat.color,
+            fontFamily: "'DM Mono', monospace",
+            marginBottom: 3
+          }
+        }, src.org), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 10,
+            color: C.muted,
+            lineHeight: 1.5
+          }
+        }, src.note))));
+      }));
+    })), /*#__PURE__*/React.createElement("div", {
       style: {
         background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 12,
-        padding: "16px 18px",
-        overflow: "hidden",
-        position: "relative"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 2,
-        background: `linear-gradient(90deg, ${cat.color}, ${cat.color}20)`
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        marginBottom: 14,
-        paddingTop: 4
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 8,
-        height: 8,
-        borderRadius: "50%",
-        background: cat.color,
-        boxShadow: `0 0 6px ${cat.color}`
-      }
-    }), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontWeight: 700,
-        fontSize: 11,
-        color: cat.color,
-        letterSpacing: 0.5,
-        textTransform: "uppercase"
-      }
-    }, cat.category), /*#__PURE__*/React.createElement("span", {
-      style: {
-        marginLeft: "auto",
-        fontSize: 9,
-        color: C.muted,
-        fontFamily: "'DM Mono', monospace"
-      }
-    }, cat.items.length, " sources")), cat.items.map((src, si) => /*#__PURE__*/React.createElement("div", {
-      key: si,
-      style: {
-        borderTop: si > 0 ? `1px solid ${C.border}` : "none",
-        paddingTop: si > 0 ? 10 : 0,
-        marginBottom: si < cat.items.length - 1 ? 10 : 0
-      }
-    }, /*#__PURE__*/React.createElement("a", {
-      href: src.url,
-      target: "_blank",
-      rel: "noopener noreferrer",
-      style: {
-        display: "flex",
-        alignItems: "flex-start",
-        gap: 8,
-        textDecoration: "none",
-        cursor: "pointer",
-        padding: "6px 8px",
-        borderRadius: 6,
-        margin: "-6px -8px",
-        transition: "background 0.15s"
-      },
-      onMouseEnter: e => e.currentTarget.style.background = `${cat.color}12`,
-      onMouseLeave: e => e.currentTarget.style.background = "transparent"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 22,
-        height: 22,
-        borderRadius: 5,
-        flexShrink: 0,
-        marginTop: 1,
-        background: `${cat.color}20`,
-        border: `1px solid ${cat.color}40`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "9",
-      height: "9",
-      viewBox: "0 0 10 10",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M1 9L9 1M9 1H3M9 1V7",
-      stroke: cat.color,
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    }))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        flex: 1,
-        minWidth: 0
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: 11,
-        fontWeight: 600,
-        color: C.text,
-        marginBottom: 1,
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis"
-      }
-    }, src.name), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: cat.color,
-        fontFamily: "'DM Mono', monospace",
-        marginBottom: 3
-      }
-    }, src.org), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted,
-        lineHeight: 1.5
-      }
-    }, src.note)))))))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
+        border: "1px solid ".concat(C.border),
         borderRadius: 10,
         padding: "14px 18px",
-        borderLeft: `3px solid ${C.muted}`
+        borderLeft: "3px solid ".concat(C.muted)
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -4811,36 +5242,38 @@ function TransportPredictions() {
       detail: "Samsara reached ~5% US commercial trucking penetration within 4yr post-Series A. Basis: FY2025 ARR $1.46B; US commercial truck fleet ~12M vehicles (FMCSA); implied ~600K managed vehicles = ~5%. Source: Samsara 10-K + FMCSA fleet data."
     }, {
       label: "Internal estimates",
-      detail: "Transit/freight/LCV/legacy ARPU, AHV ARPU, China 30% accessibility, mixed depot trigger ≥10%, and legacy vehicles in scope are all internal Greenbay estimates. Labelled as such throughout. External sources provide directional benchmarks only."
-    }].map((m, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: "flex",
-        gap: 8
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        width: 3,
-        background: C.muted,
-        borderRadius: 2,
-        flexShrink: 0
-      }
-    }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.text,
-        fontWeight: 600,
-        marginBottom: 2
-      }
-    }, m.label), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 10,
-        color: C.muted
-      }
-    }, m.detail)))))));
-  })()), activeTab === "rawdata" && (() => {
+      detail: "Transit/freight/LCV/legacy ARPU, AHV ARPU, China 30% accessibility, mixed depot trigger ≥10%, and legacy vehicles in scope are all internal Greenbay estimates. Labelled as such throughout. External sources provide directional benchmarks only. Fleet age figures (EU trucks 14.0yr, buses 12.2yr, vans 12.9yr) are ACEA 2026 actuals — not internal estimates."
+    }].map(function (m, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          display: "flex",
+          gap: 8
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          width: 3,
+          background: C.muted,
+          borderRadius: 2,
+          flexShrink: 0
+        }
+      }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.text,
+          fontWeight: 600,
+          marginBottom: 2
+        }
+      }, m.label), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: C.muted
+        }
+      }, m.detail)));
+    }))));
+  }()), activeTab === "rawdata" && function () {
     // ── All datasets ──────────────────────────────────────────────────────
-    const datasets = [{
+    var datasets = [{
       id: "tam_2030",
       title: "TAM 2030 — Segment Breakdown",
       badge: "$5.6B",
@@ -4907,64 +5340,70 @@ function TransportPredictions() {
     }];
 
     // ── CSV download helper ───────────────────────────────────────────────
-    const toCSV = (columns, rows) => {
-      const escape = v => String(v).includes(",") || String(v).includes('"') || String(v).includes("\n") ? `"${String(v).replace(/"/g, '""')}"` : String(v);
-      const header = columns.map(escape).join(",");
-      const body = rows.map(r => r.map(escape).join(",")).join("\n");
+    var toCSV = function toCSV(columns, rows) {
+      var escape = function escape(v) {
+        return String(v).includes(",") || String(v).includes('"') || String(v).includes("\n") ? "\"".concat(String(v).replace(/"/g, '""'), "\"") : String(v);
+      };
+      var header = columns.map(escape).join(",");
+      var body = rows.map(function (r) {
+        return r.map(escape).join(",");
+      }).join("\n");
       return header + "\n" + body;
     };
-    const downloadCSV = (id, title, columns, rows) => {
-      const csv = toCSV(columns, rows);
-      const blob = new Blob([csv], {
+    var downloadCSV = function downloadCSV(id, title, columns, rows) {
+      var csv = toCSV(columns, rows);
+      var blob = new Blob([csv], {
         type: "text/csv;charset=utf-8;"
       });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
       a.href = url;
-      a.download = `greenbay_${id}_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = "greenbay_".concat(id, "_").concat(new Date().toISOString().slice(0, 10), ".csv");
       a.click();
       URL.revokeObjectURL(url);
     };
-    const downloadAllCSV = () => {
+    var downloadAllCSV = function downloadAllCSV() {
       // combine all datasets into one multi-sheet CSV with section headers
-      let combined = `Greenbay Solutions — Market Data Export\nGenerated: ${new Date().toISOString().slice(0, 10)}\n\n`;
-      datasets.forEach(ds => {
-        combined += `\n## ${ds.title}\n## Source: ${ds.source}\n`;
+      var combined = "Greenbay Solutions \u2014 Market Data Export\nGenerated: ".concat(new Date().toISOString().slice(0, 10), "\n\n");
+      datasets.forEach(function (ds) {
+        combined += "\n## ".concat(ds.title, "\n## Source: ").concat(ds.source, "\n");
         combined += toCSV(ds.columns, ds.rows);
         combined += "\n";
       });
-      const blob = new Blob([combined], {
+      var blob = new Blob([combined], {
         type: "text/csv;charset=utf-8;"
       });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
       a.href = url;
-      a.download = `greenbay_full_dataset_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = "greenbay_full_dataset_".concat(new Date().toISOString().slice(0, 10), ".csv");
       a.click();
       URL.revokeObjectURL(url);
     };
-    const downloadJSON = () => {
-      const payload = {
+    var downloadJSON = function downloadJSON() {
+      var payload = {
         meta: {
           company: "Greenbay Solutions",
           generated: new Date().toISOString().slice(0, 10),
           description: "Fleet orchestration market sizing — TAM/SAM/SOM model + ARR scenarios"
         },
-        datasets: datasets.map(ds => ({
-          id: ds.id,
-          title: ds.title,
-          source: ds.source,
-          columns: ds.columns,
-          rows: ds.rows
-        }))
+        datasets: datasets.map(function (ds) {
+          return {
+            id: ds.id,
+            title: ds.title,
+            source: ds.source,
+            columns: ds.columns,
+            rows: ds.rows
+          };
+        })
       };
-      const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      var blob = new Blob([JSON.stringify(payload, null, 2)], {
         type: "application/json"
       });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
       a.href = url;
-      a.download = `greenbay_full_dataset_${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = "greenbay_full_dataset_".concat(new Date().toISOString().slice(0, 10), ".json");
       a.click();
       URL.revokeObjectURL(url);
     };
@@ -4976,7 +5415,7 @@ function TransportPredictions() {
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         background: C.card,
-        border: `1px solid ${C.border}`,
+        border: "1px solid ".concat(C.border),
         borderRadius: 12,
         padding: "20px 24px",
         display: "flex",
@@ -5004,7 +5443,9 @@ function TransportPredictions() {
         color: C.muted,
         fontFamily: "'DM Mono', monospace"
       }
-    }, datasets.length, " datasets \xB7 ", datasets.reduce((s, d) => s + d.rows.length, 0), " total rows \xB7 Internal estimates explicitly labelled")), /*#__PURE__*/React.createElement("div", {
+    }, datasets.length, " datasets \xB7 ", datasets.reduce(function (s, d) {
+      return s + d.rows.length;
+    }, 0), " total rows \xB7 Internal estimates explicitly labelled")), /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         gap: 8,
@@ -5032,7 +5473,7 @@ function TransportPredictions() {
       style: {
         background: "transparent",
         color: C.teal,
-        border: `1px solid ${C.teal}`,
+        border: "1px solid ".concat(C.teal),
         borderRadius: 8,
         padding: "10px 18px",
         fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -5043,135 +5484,143 @@ function TransportPredictions() {
         alignItems: "center",
         gap: 6
       }
-    }, "\u2B07 Download All (JSON)"))), datasets.map((ds, di) => /*#__PURE__*/React.createElement("div", {
-      key: ds.id,
-      style: {
-        background: C.card,
-        border: `1px solid ${C.border}`,
-        borderRadius: 12,
-        overflow: "hidden"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: "12px 18px",
-        borderBottom: `1px solid ${C.border}`,
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        background: `${C.surface}80`
-      }
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        gap: 10
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 12,
-        fontWeight: 700,
-        color: C.text
-      }
-    }, ds.title), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 9,
-        fontFamily: "'DM Mono', monospace",
-        color: C.teal,
-        background: `${C.teal}15`,
-        padding: "2px 7px",
-        borderRadius: 4,
-        fontWeight: 700
-      }
-    }, ds.badge)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 9,
-        color: C.muted,
-        marginTop: 3,
-        fontStyle: "italic",
-        maxWidth: 700,
-        lineHeight: 1.4
-      }
-    }, "Source: ", ds.source)), /*#__PURE__*/React.createElement("button", {
-      onClick: () => downloadCSV(ds.id, ds.title, ds.columns, ds.rows),
-      style: {
-        background: "transparent",
-        color: C.muted,
-        border: `1px solid ${C.border}`,
-        borderRadius: 6,
-        padding: "6px 12px",
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: 10,
-        fontWeight: 600,
-        cursor: "pointer",
-        whiteSpace: "nowrap",
-        flexShrink: 0,
-        marginLeft: 16,
-        display: "flex",
-        alignItems: "center",
-        gap: 5
-      },
-      onMouseEnter: e => {
-        e.target.style.color = C.teal;
-        e.target.style.borderColor = C.teal;
-      },
-      onMouseLeave: e => {
-        e.target.style.color = C.muted;
-        e.target.style.borderColor = C.border;
-      }
-    }, "\u2B07 CSV")), /*#__PURE__*/React.createElement("div", {
-      style: {
-        overflowX: "auto"
-      }
-    }, /*#__PURE__*/React.createElement("table", {
-      style: {
-        width: "100%",
-        borderCollapse: "collapse",
-        fontFamily: "'Plus Jakarta Sans', sans-serif"
-      }
-    }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
-      style: {
-        background: `${C.surface}60`
-      }
-    }, ds.columns.map((col, ci) => /*#__PURE__*/React.createElement("th", {
-      key: ci,
-      style: {
-        padding: "7px 12px",
-        fontSize: 9,
-        fontWeight: 700,
-        color: C.muted,
-        textAlign: ci === 0 ? "left" : "right",
-        textTransform: "uppercase",
-        letterSpacing: "0.6px",
-        borderBottom: `1px solid ${C.border}`,
-        whiteSpace: "nowrap"
-      }
-    }, col)))), /*#__PURE__*/React.createElement("tbody", null, ds.rows.map((row, ri) => {
-      const isTotal = String(row[0]).toUpperCase().startsWith("TOTAL");
-      const isHeader = typeof row[0] === "string" && row[0] === row[0].toUpperCase() && row[0].length < 10 && !isTotal;
-      return /*#__PURE__*/React.createElement("tr", {
-        key: ri,
+    }, "\u2B07 Download All (JSON)"))), datasets.map(function (ds, di) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: ds.id,
         style: {
-          background: isTotal ? `${C.teal}10` : ri % 2 === 0 ? "transparent" : `${C.surface}40`,
-          borderTop: isTotal ? `1px solid ${C.teal}40` : "none"
+          background: C.card,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 12,
+          overflow: "hidden"
         }
-      }, row.map((cell, ci) => /*#__PURE__*/React.createElement("td", {
-        key: ci,
+      }, /*#__PURE__*/React.createElement("div", {
         style: {
-          padding: "7px 12px",
+          padding: "12px 18px",
+          borderBottom: "1px solid ".concat(C.border),
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          background: "".concat(C.surface, "80")
+        }
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 10
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 12,
+          fontWeight: 700,
+          color: C.text
+        }
+      }, ds.title), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 9,
+          fontFamily: "'DM Mono', monospace",
+          color: C.teal,
+          background: "".concat(C.teal, "15"),
+          padding: "2px 7px",
+          borderRadius: 4,
+          fontWeight: 700
+        }
+      }, ds.badge)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 9,
+          color: C.muted,
+          marginTop: 3,
+          fontStyle: "italic",
+          maxWidth: 700,
+          lineHeight: 1.4
+        }
+      }, "Source: ", ds.source)), /*#__PURE__*/React.createElement("button", {
+        onClick: function onClick() {
+          return downloadCSV(ds.id, ds.title, ds.columns, ds.rows);
+        },
+        style: {
+          background: "transparent",
+          color: C.muted,
+          border: "1px solid ".concat(C.border),
+          borderRadius: 6,
+          padding: "6px 12px",
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontSize: 10,
-          color: isTotal ? C.teal : ci === 0 ? C.text : C.muted,
-          fontWeight: isTotal ? 700 : ci === 0 ? 500 : 400,
-          textAlign: ci === 0 ? "left" : "right",
-          fontFamily: ci > 0 && typeof cell === "number" ? "'DM Mono', monospace" : "inherit",
-          borderBottom: `1px solid ${C.border}20`,
-          whiteSpace: ci === 0 ? "normal" : "nowrap"
+          fontWeight: 600,
+          cursor: "pointer",
+          whiteSpace: "nowrap",
+          flexShrink: 0,
+          marginLeft: 16,
+          display: "flex",
+          alignItems: "center",
+          gap: 5
+        },
+        onMouseEnter: function onMouseEnter(e) {
+          e.target.style.color = C.teal;
+          e.target.style.borderColor = C.teal;
+        },
+        onMouseLeave: function onMouseLeave(e) {
+          e.target.style.color = C.muted;
+          e.target.style.borderColor = C.border;
         }
-      }, typeof cell === "number" ? cell >= 100 ? cell.toLocaleString() : cell : cell)));
-    })))))), /*#__PURE__*/React.createElement("div", {
+      }, "\u2B07 CSV")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          overflowX: "auto"
+        }
+      }, /*#__PURE__*/React.createElement("table", {
+        style: {
+          width: "100%",
+          borderCollapse: "collapse",
+          fontFamily: "'Plus Jakarta Sans', sans-serif"
+        }
+      }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
+        style: {
+          background: "".concat(C.surface, "60")
+        }
+      }, ds.columns.map(function (col, ci) {
+        return /*#__PURE__*/React.createElement("th", {
+          key: ci,
+          style: {
+            padding: "7px 12px",
+            fontSize: 9,
+            fontWeight: 700,
+            color: C.muted,
+            textAlign: ci === 0 ? "left" : "right",
+            textTransform: "uppercase",
+            letterSpacing: "0.6px",
+            borderBottom: "1px solid ".concat(C.border),
+            whiteSpace: "nowrap"
+          }
+        }, col);
+      }))), /*#__PURE__*/React.createElement("tbody", null, ds.rows.map(function (row, ri) {
+        var isTotal = String(row[0]).toUpperCase().startsWith("TOTAL");
+        var isHeader = typeof row[0] === "string" && row[0] === row[0].toUpperCase() && row[0].length < 10 && !isTotal;
+        return /*#__PURE__*/React.createElement("tr", {
+          key: ri,
+          style: {
+            background: isTotal ? "".concat(C.teal, "10") : ri % 2 === 0 ? "transparent" : "".concat(C.surface, "40"),
+            borderTop: isTotal ? "1px solid ".concat(C.teal, "40") : "none"
+          }
+        }, row.map(function (cell, ci) {
+          return /*#__PURE__*/React.createElement("td", {
+            key: ci,
+            style: {
+              padding: "7px 12px",
+              fontSize: 10,
+              color: isTotal ? C.teal : ci === 0 ? C.text : C.muted,
+              fontWeight: isTotal ? 700 : ci === 0 ? 500 : 400,
+              textAlign: ci === 0 ? "left" : "right",
+              fontFamily: ci > 0 && typeof cell === "number" ? "'DM Mono', monospace" : "inherit",
+              borderBottom: "1px solid ".concat(C.border, "20"),
+              whiteSpace: ci === 0 ? "normal" : "nowrap"
+            }
+          }, typeof cell === "number" ? cell >= 100 ? cell.toLocaleString() : cell : cell);
+        }));
+      })))));
+    }), /*#__PURE__*/React.createElement("div", {
       style: {
         padding: "10px 14px",
-        background: `${C.surface}80`,
-        border: `1px solid ${C.border}`,
+        background: "".concat(C.surface, "80"),
+        border: "1px solid ".concat(C.border),
         borderRadius: 8,
         fontSize: 9,
         color: C.muted,
@@ -5183,9 +5632,9 @@ function TransportPredictions() {
         fontWeight: 700
       }
     }, "Data notes: "), "All figures in $M USD unless labelled otherwise. Vehicle counts in thousands (K). ARPU = annual recurring revenue per managed vehicle per year. \"Internal estimate\" = Greenbay internal modelling, not confirmed contract data. China accessibility = 30% applied uniformly based on IEA GEO 2025 documented regulatory barriers. AHV = Autonomous/Highly Automated Vehicles (SAE L4+). 2030e and 2035e = estimated/extrapolated. TAM model scenarios assume operator adoption follows regulatory mandate curves and AV deployment density \u2014 not a bottoms-up sales forecast."));
-  })(), /*#__PURE__*/React.createElement("div", {
+  }(), /*#__PURE__*/React.createElement("div", {
     style: {
-      borderTop: `1px solid ${C.border}`,
+      borderTop: "1px solid ".concat(C.border),
       padding: "12px 32px",
       display: "flex",
       justifyContent: "space-between",
@@ -5206,7 +5655,5 @@ function TransportPredictions() {
     }
   }, "Greenbay Solutions \xB7 Feb 2026")));
 }
-var reactRoot = ReactDOM.createRoot(document.getElementById('root'));
-reactRoot.render(React.createElement(TransportPredictions));
-document.getElementById('loading').style.display='none';
-}catch(e){document.getElementById('load-status').textContent='Error: '+e.message;console.error(e);}
+
+}catch(e){console.error(e);var el=document.getElementById("error-msg");if(el){el.style.display="block";el.textContent=e.message;}}
