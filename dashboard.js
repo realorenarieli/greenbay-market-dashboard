@@ -743,10 +743,6 @@ window.AppComponent = function TransportPredictions() {
     _useState6 = _slicedToArray(_useState5, 2),
     animateRevenue = _useState6[0],
     setAnimateRevenue = _useState6[1];
-  var _useState7 = useState("evBusData"),
-    _useState8 = _slicedToArray(_useState7, 2),
-    selectedDataset = _useState8[0],
-    setSelectedDataset = _useState8[1];
 
   useEffect(function () {
     var t = setTimeout(function () {
@@ -771,9 +767,6 @@ window.AppComponent = function TransportPredictions() {
   }, {
     id: "market",
     label: "🟢 Greenbay Opportunity"
-  }, {
-    id: "data",
-    label: "📊 Raw Data"
   }, {
     id: "sources",
     label: "Sources"
@@ -4826,120 +4819,6 @@ window.AppComponent = function TransportPredictions() {
         }
       }, source));
     }))));
-  }(), activeTab === "data" && function () {
-    var datasets = {
-      evBusData: { name: "EV Bus Fleet", data: evBusData, unit: "K vehicles" },
-      evTruckData: { name: "EV Truck Fleet", data: evTruckData, unit: "K vehicles" },
-      ahvData: { name: "Autonomous Heavy Vehicles", data: ahvData, unit: "K vehicles" },
-      h2Data: { name: "Hydrogen Trucks", data: h2Data, unit: "K vehicles" },
-      dieselBusData: { name: "Diesel Bus Fleet", data: dieselBusData, unit: "M vehicles" },
-      dieselTruckData: { name: "Diesel Truck Fleet", data: dieselTruckData, unit: "M vehicles" },
-      lcvData: { name: "Light Commercial Vehicles", data: lcvData, unit: "K vehicles" },
-      robotaxiData: { name: "Robotaxi Fleet", data: robotaxiData, unit: "K vehicles" },
-      agenticAIData: { name: "Agentic AI Market", data: agenticAIData, unit: "$B" },
-      eamAIData: { name: "EAM AI Market", data: eamAIData, unit: "$B" }
-    };
-
-    var currentData = datasets[selectedDataset];
-    var columns = currentData.data.length > 0 ? Object.keys(currentData.data[0]) : [];
-
-    var downloadCSV = function() {
-      var csv = columns.join(",") + "\n";
-      currentData.data.forEach(function(row) {
-        csv += columns.map(function(col) { return row[col]; }).join(",") + "\n";
-      });
-      var blob = new Blob([csv], { type: "text/csv" });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.href = url;
-      a.download = selectedDataset + ".csv";
-      a.click();
-      URL.revokeObjectURL(url);
-    };
-
-    var copyJSON = function() {
-      navigator.clipboard.writeText(JSON.stringify(currentData.data, null, 2));
-      alert("JSON copied to clipboard!");
-    };
-
-    return /*#__PURE__*/React.createElement("div", { style: { padding: "24px 32px" } },
-      /*#__PURE__*/React.createElement("div", { style: { marginBottom: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 } },
-        /*#__PURE__*/React.createElement("div", null,
-          /*#__PURE__*/React.createElement("h2", { style: { fontFamily: "'DM Serif Display', serif", fontSize: 24, color: C.text, marginBottom: 8 } }, "Raw Data Access"),
-          /*#__PURE__*/React.createElement("p", { style: { fontSize: 13, color: C.muted } }, "Select a dataset to view and export")
-        ),
-        /*#__PURE__*/React.createElement("div", { style: { display: "flex", gap: 8 } },
-          /*#__PURE__*/React.createElement("button", {
-            onClick: downloadCSV,
-            style: { padding: "8px 16px", background: C.teal, color: C.bg, border: "none", borderRadius: 4, cursor: "pointer", fontWeight: 600, fontSize: 13 }
-          }, "⬇ Download CSV"),
-          /*#__PURE__*/React.createElement("button", {
-            onClick: copyJSON,
-            style: { padding: "8px 16px", background: C.card, color: C.text, border: "1px solid " + C.border, borderRadius: 4, cursor: "pointer", fontWeight: 600, fontSize: 13 }
-          }, "📋 Copy JSON")
-        )
-      ),
-      /*#__PURE__*/React.createElement("div", { style: { display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24 } },
-        Object.entries(datasets).map(function(_ref) {
-          var key = _ref[0], ds = _ref[1];
-          return /*#__PURE__*/React.createElement("button", {
-            key: key,
-            onClick: function() { setSelectedDataset(key); },
-            style: {
-              padding: "6px 12px",
-              background: selectedDataset === key ? C.teal : C.card,
-              color: selectedDataset === key ? C.bg : C.text,
-              border: "1px solid " + (selectedDataset === key ? C.teal : C.border),
-              borderRadius: 4,
-              cursor: "pointer",
-              fontSize: 12,
-              fontWeight: selectedDataset === key ? 600 : 400
-            }
-          }, ds.name);
-        })
-      ),
-      /*#__PURE__*/React.createElement("div", { style: { background: C.card, border: "1px solid " + C.border, borderRadius: 8, overflow: "hidden" } },
-        /*#__PURE__*/React.createElement("div", { style: { padding: "12px 16px", borderBottom: "1px solid " + C.border, display: "flex", justifyContent: "space-between", alignItems: "center" } },
-          /*#__PURE__*/React.createElement("span", { style: { fontWeight: 600, color: C.text } }, currentData.name),
-          /*#__PURE__*/React.createElement("span", { style: { fontSize: 12, color: C.muted } }, currentData.data.length + " rows · Unit: " + currentData.unit)
-        ),
-        /*#__PURE__*/React.createElement("div", { style: { overflowX: "auto" } },
-          /*#__PURE__*/React.createElement("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: 13 } },
-            /*#__PURE__*/React.createElement("thead", null,
-              /*#__PURE__*/React.createElement("tr", { style: { background: C.surface } },
-                columns.map(function(col) {
-                  return /*#__PURE__*/React.createElement("th", {
-                    key: col,
-                    style: { padding: "10px 12px", textAlign: "left", color: C.muted, fontWeight: 600, borderBottom: "1px solid " + C.border, textTransform: "capitalize" }
-                  }, col);
-                })
-              )
-            ),
-            /*#__PURE__*/React.createElement("tbody", null,
-              currentData.data.map(function(row, i) {
-                return /*#__PURE__*/React.createElement("tr", {
-                  key: i,
-                  style: { background: i % 2 === 0 ? "transparent" : C.surface }
-                },
-                  columns.map(function(col) {
-                    return /*#__PURE__*/React.createElement("td", {
-                      key: col,
-                      style: { padding: "10px 12px", color: C.text, borderBottom: "1px solid " + C.border }
-                    }, typeof row[col] === "number" ? row[col].toLocaleString() : row[col]);
-                  })
-                );
-              })
-            )
-          )
-        )
-      ),
-      /*#__PURE__*/React.createElement("div", { style: { marginTop: 16, padding: 16, background: C.surface, borderRadius: 8, border: "1px solid " + C.border } },
-        /*#__PURE__*/React.createElement("h4", { style: { fontSize: 13, color: C.text, marginBottom: 8 } }, "JSON Preview"),
-        /*#__PURE__*/React.createElement("pre", { style: { fontSize: 11, color: C.muted, overflow: "auto", maxHeight: 200, margin: 0, fontFamily: "'DM Mono', monospace" } },
-          JSON.stringify(currentData.data.slice(0, 3), null, 2) + (currentData.data.length > 3 ? "\n// ... " + (currentData.data.length - 3) + " more rows" : "")
-        )
-      )
-    );
   }(), activeTab === "sources" && function () {
     // FIX #10 — Replaced SeaRates + MaxDispatch with primary Aurora/Waymo sources
     // FIX #11 — Added Nikola bankruptcy note to H2 source
