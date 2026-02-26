@@ -6165,4 +6165,16 @@ window.AppComponent = function TransportPredictions() {
   }, "Greenbay Solutions \xB7 Feb 2026")));
 }
 
-}catch(e){console.error(e);var el=document.getElementById("error-msg");if(el){el.style.display="block";el.textContent=e.message;}}
+}catch(e){console.error(e);var el=document.getElementById("error-msg");if(el){el.style.display="block";el.textContent=e.message;} return;}
+
+// Mount the app
+try {
+  var root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(React.createElement(window.AppComponent));
+  document.getElementById("loading").style.display = "none";
+} catch(e) {
+  console.error("Mount error:", e);
+  document.getElementById("load-status").textContent = "Mount error: " + e.message;
+  document.getElementById("error-msg").style.display = "block";
+  document.getElementById("error-msg").textContent = e.stack || e.message;
+}
