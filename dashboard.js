@@ -2999,10 +2999,13 @@ function TransportPredictions() {
     const samTotal = samByRegion.reduce((s, x) => s + x.value, 0); // 2525 geo-breakdown total; full SAM $4.6B incl. all fleet types across all regions
 
     // Revenue trajectory (ARR $M)
-    // bear   = 50% CAGR (Samsara-comparable growth post-Series A)
+    // bear   = ~50% CAGR from 2027 anchor ($3M→$10.1M, 3yr). Upper scenarios: exponential divergence post-2027.
     // rebase = bottoms-up deal model (~97% CAGR, 3-14 enterprise contracts/yr)
     // c/b/o  = TAM model scenarios (3%/5%/7% of SAM) — upside conditioned on
     //          EU CVD mandate velocity + AV OEM partnerships activating
+    // ARR ramp — base year 2026 (Greenbay funded mid-2025, first revenue 2026)
+    // 2026 anchor: <$1M (early pilots converting). 2027 anchor: ~$3M (product maturity).
+    // 2028–2030: scenarios diverge — bear stays conservative, upper scenarios hockey-stick.
     const revenueRamp = [{
       year: 2024,
       bear: 0,
@@ -3010,43 +3013,51 @@ function TransportPredictions() {
       c: 0,
       b: 0,
       o: 0
-    }, {
-      year: 2025,
-      bear: 1.3,
-      rebase: 1.3,
-      c: 1.3,
-      b: 1.3,
-      o: 1.7
     },
-    // all scenarios pinned to actual 2025 starting ARR
+    // pre-funding
+    {
+      year: 2025,
+      bear: 0,
+      rebase: 0,
+      c: 0,
+      b: 0,
+      o: 0
+    },
+    // funded mid-2025 · no revenue year 1
     {
       year: 2026,
-      bear: 2.0,
-      rebase: 2.3,
-      c: 2.8,
-      b: 4.2,
-      o: 6.3
-    }, {
+      bear: 0.8,
+      rebase: 0.8,
+      c: 0.8,
+      b: 0.8,
+      o: 0.8
+    },
+    // <$1M · all scenarios pinned (early revenue)
+    {
       year: 2027,
       bear: 3.0,
-      rebase: 5.2,
-      c: 8.8,
-      b: 14.3,
-      o: 20.9
-    }, {
+      rebase: 3.0,
+      c: 3.0,
+      b: 3.0,
+      o: 3.0
+    },
+    // ~$3M · all scenarios pinned (product maturity)
+    {
       year: 2028,
       bear: 4.5,
-      rebase: 11.0,
-      c: 25.5,
-      b: 42.5,
-      o: 62.9
-    }, {
+      rebase: 7.0,
+      c: 11,
+      b: 25,
+      o: 35
+    },
+    // scenarios diverge — hockey stick begins
+    {
       year: 2029,
-      bear: 6.7,
-      rebase: 21.0,
-      c: 52.9,
-      b: 87.4,
-      o: 128.8
+      bear: 6.8,
+      rebase: 16.5,
+      c: 39,
+      b: 85,
+      o: 120
     }, {
       year: 2030,
       bear: 10.1,
@@ -3750,8 +3761,8 @@ function TransportPredictions() {
         fontStyle: "italic"
       }
     }, "Note: geographic bars show regional split of EV + AHV segments only. Full $4.6B SAM includes all fleet types across all regions."))), /*#__PURE__*/React.createElement(Card, {
-      title: "Greenbay ARR Trajectory 2024\u20132030",
-      subtitle: "5 scenarios: 2 grounded-in-deal-math rebases + 3 TAM-model outcomes \xB7 $M ARR",
+      title: "Greenbay ARR Trajectory 2025\u20132030",
+      subtitle: "Base year 2026 (<$1M) \xB7 2027 anchor $3M \xB7 5 scenarios diverge to 2030 \xB7 $M ARR",
       badge: "5 SCENARIOS",
       badgeColor: C.blue
     }, /*#__PURE__*/React.createElement(ResponsiveContainer, {
@@ -3862,7 +3873,7 @@ function TransportPredictions() {
       fill: C.amber,
       fillOpacity: 0.05,
       label: {
-        value: "Seed · Pilots → SaaS",
+        value: "Funded mid-2025 · pre-revenue · pilots",
         position: "insideTop",
         fill: C.amber,
         fontSize: 8,
@@ -3947,7 +3958,7 @@ function TransportPredictions() {
     }), /*#__PURE__*/React.createElement(Line, {
       type: "monotone",
       dataKey: "bear",
-      name: "Bear \u2014 50% CAGR (Samsara-comparable)",
+      name: "Bear \u2014 ~50% CAGR from 2027 anchor",
       stroke: C.rose,
       strokeWidth: 1.5,
       strokeDasharray: "2 2",
@@ -3967,11 +3978,11 @@ function TransportPredictions() {
       }
     }, [{
       label: "Bear",
-      sublabel: "50% CAGR",
+      sublabel: "~50% CAGR",
       arr2030: "$10M",
       color: C.rose,
       dash: true,
-      assumption: "Samsara's post-Series A growth rate applied to Greenbay's starting ARR. No mandate acceleration, no AV OEM deals.",
+      assumption: "Conservative: ~50% CAGR from 2027 $3M anchor. Comparable to Samsara post-Series A growth rate. No EU mandate acceleration, no AV OEM partnerships.",
       condition: "If: slow pilot conversion, no EU mandate pull-through"
     }, {
       label: "Bottoms-Up",
@@ -4876,11 +4887,21 @@ function TransportPredictions() {
       rows: [["Transit", 1920, "Full orchestration: AI dispatch, energy, yard, compliance audit", "Internal; Samsara $1.2–2.4K blended (FY2025) for narrower scope"], ["Freight", 1440, "75% of transit — similar energy complexity, simpler yard", "Internal; Samsara comp"], ["Legacy", 480, "Context layer lite: depot visibility + handoff only", "Internal; 25% of full orchestration tier"], ["AHV", 3000, "Premium AI tier — 11/21 AV infra components; no human fallback", "Internal; McKinsey Sep 2024 infra premium cited"], ["LCV", 960, "Land-and-expand wedge — 50% of transit tier", "Internal; below Samsara $1.2K floor to maximise adoption"]]
     }, {
       id: "arr_scenarios",
-      title: "ARR Trajectory 2024–2030 — All 5 Scenarios",
+      title: "ARR Trajectory 2025–2030 — All 5 Scenarios (Base Year 2026)",
       badge: "$M ARR",
-      source: "Bear: 50% CAGR (Samsara post-Series A comparable). Bottoms-Up: deal-by-deal model (3–14 enterprise contracts/yr at $350K–800K ACV). TAM scenarios: 3%/5%/7% of $4.6B SAM.",
+      source: "Greenbay funded mid-2025. Base year 2026 (<$1M first revenue). 2027 anchor $3M (product maturity). Bear: ~50% CAGR from 2027 anchor. Bottoms-Up: deal model (3–14 contracts/yr at $350K–800K ACV). TAM scenarios: 3%/5%/7% of $4.6B SAM.",
       columns: ["Year", "Bear ($M)", "Bottoms-Up ($M)", "TAM Conservative 3% ($M)", "TAM Base 5% ($M)", "TAM Upside 7% ($M)"],
-      rows: [[2024, 0, 0, 0, 0, 0], [2025, 1.3, 1.3, 1.3, 1.3, 1.7], [2026, 2.0, 2.3, 2.8, 4.2, 6.3], [2027, 3.0, 5.2, 8.8, 14.3, 20.9], [2028, 4.5, 11.0, 25.5, 42.5, 62.9], [2029, 6.7, 21.0, 52.9, 87.4, 128.8], [2030, 10.1, 38.5, 136.0, 226.0, 317.0]]
+      rows: [[2024, 0, 0, 0, 0, 0],
+      // pre-funding
+      [2025, 0, 0, 0, 0, 0],
+      // funded mid-2025; no revenue year 1
+      [2026, 0.8, 0.8, 0.8, 0.8, 0.8],
+      // <$1M first revenue; all scenarios anchored
+      [2027, 3.0, 3.0, 3.0, 3.0, 3.0],
+      // ~$3M; product maturity; all scenarios anchored
+      [2028, 4.5, 7.0, 11.0, 25.0, 35.0],
+      // scenarios diverge — hockey stick
+      [2029, 6.8, 16.5, 39.0, 85.0, 120.0], [2030, 10.1, 38.5, 136.0, 226.0, 317.0]]
     }, {
       id: "ahv_fleet",
       title: "Autonomous Fleet Baseline — AHV Units",
@@ -5207,7 +5228,6 @@ function TransportPredictions() {
 var domRoot = document.getElementById('root');
 var reactRoot = ReactDOM.createRoot(domRoot);
 reactRoot.render(React.createElement(TransportPredictions));
-  // Hide loader once mounted
   var loader = document.getElementById('loading');
   if (loader) loader.style.display = 'none';
 } catch(e) {
