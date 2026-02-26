@@ -5301,20 +5301,8 @@ window.AppComponent = function TransportPredictions() {
 
 console.log('[Dashboard] Component defined successfully');
 document.getElementById('load-status').textContent = 'Components ready, mounting...';
-}catch(e){
-  console.error('[Dashboard] Component error:', e);
-  var el=document.getElementById("error-msg");
-  var ld=document.getElementById("loading");
-  var ls=document.getElementById("load-status");
-  if(ls){ls.textContent="Component error";}
-  if(el){el.style.display="block";el.textContent=e.message + '\n' + e.stack;}
-  if(ld){ld.style.zIndex="1";ld.style.background="rgba(5,11,24,0.95)";}
-  return;
-}
-
-// Mount the app
-console.log('[Dashboard] Mounting app...');
-try {
+  // Mount the app
+  console.log('[Dashboard] Mounting app...');
   var root = ReactDOM.createRoot(document.getElementById("root"));
   console.log('[Dashboard] Root created, rendering...');
   root.render(React.createElement(window.AppComponent));
@@ -5328,9 +5316,12 @@ try {
       console.log('[Dashboard] Done!');
     });
   });
-} catch(e) {
-  console.error("[Dashboard] Mount error:", e);
-  document.getElementById("load-status").textContent = "Mount error: " + e.message;
-  document.getElementById("error-msg").style.display = "block";
-  document.getElementById("error-msg").textContent = e.stack || e.message;
+}catch(e){
+  console.error('[Dashboard] Error:', e);
+  var el=document.getElementById("error-msg");
+  var ld=document.getElementById("loading");
+  var ls=document.getElementById("load-status");
+  if(ls){ls.textContent="Error: " + e.message;}
+  if(el){el.style.display="block";el.textContent=e.message + '\n' + e.stack;}
+  if(ld){ld.style.zIndex="1";ld.style.background="rgba(5,11,24,0.95)";}
 }
