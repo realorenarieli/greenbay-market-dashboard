@@ -1,12 +1,5 @@
-
-window.onerror = function(msg, src, line, col, err) {
-  document.getElementById('load-status').textContent = 'JS Error';
-  var em = document.getElementById('error-msg');
-  if (em) { em.style.display='block'; em.textContent = msg + ' (line '+line+')'; }
-  return false;
-};
-
-try {
+window.onerror=function(m,s,l){var e=document.getElementById('error-msg');if(e){e.style.display='block';e.textContent=m+' (line '+l+')';}return false;};
+try{
 var {
   useState,
   useEffect
@@ -29,7 +22,6 @@ var {
   ComposedChart,
   Scatter
 } = Recharts;
-
 // ── PALETTE ──────────────────────────────────────────────────────────────────
 const C = {
   bg: "#050B18",
@@ -3007,15 +2999,6 @@ function TransportPredictions() {
     // 2026 anchor: <$1M (early pilots converting). 2027 anchor: ~$3M (product maturity).
     // 2028–2030: scenarios diverge — bear stays conservative, upper scenarios hockey-stick.
     const revenueRamp = [{
-      year: 2024,
-      bear: 0,
-      rebase: 0,
-      c: 0,
-      b: 0,
-      o: 0
-    },
-    // pre-funding
-    {
       year: 2025,
       bear: 0,
       rebase: 0,
@@ -4891,9 +4874,7 @@ function TransportPredictions() {
       badge: "$M ARR",
       source: "Greenbay funded mid-2025. Base year 2026 (<$1M first revenue). 2027 anchor $3M (product maturity). Bear: ~50% CAGR from 2027 anchor. Bottoms-Up: deal model (3–14 contracts/yr at $350K–800K ACV). TAM scenarios: 3%/5%/7% of $4.6B SAM.",
       columns: ["Year", "Bear ($M)", "Bottoms-Up ($M)", "TAM Conservative 3% ($M)", "TAM Base 5% ($M)", "TAM Upside 7% ($M)"],
-      rows: [[2024, 0, 0, 0, 0, 0],
-      // pre-funding
-      [2025, 0, 0, 0, 0, 0],
+      rows: [[2025, 0, 0, 0, 0, 0],
       // funded mid-2025; no revenue year 1
       [2026, 0.8, 0.8, 0.8, 0.8, 0.8],
       // <$1M first revenue; all scenarios anchored
@@ -5225,14 +5206,7 @@ function TransportPredictions() {
     }
   }, "Greenbay Solutions \xB7 Feb 2026")));
 }
-var domRoot = document.getElementById('root');
-var reactRoot = ReactDOM.createRoot(domRoot);
+var reactRoot = ReactDOM.createRoot(document.getElementById('root'));
 reactRoot.render(React.createElement(TransportPredictions));
-  var loader = document.getElementById('loading');
-  if (loader) loader.style.display = 'none';
-} catch(e) {
-  document.getElementById('load-status').textContent = 'Render error';
-  var em = document.getElementById('error-msg');
-  if (em) { em.style.display='block'; em.textContent = e.message; }
-  console.error(e);
-}
+document.getElementById('loading').style.display='none';
+}catch(e){document.getElementById('load-status').textContent='Error: '+e.message;console.error(e);}
