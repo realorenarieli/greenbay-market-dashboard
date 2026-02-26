@@ -4868,12 +4868,12 @@ window.AppComponent = function TransportPredictions() {
       }, {
         name: "FMCSA — Large Truck and Bus Crash Facts (Fleet Size Data)",
         org: "Federal Motor Carrier Safety Administration",
-        url: "https://www.fmcsa.dot.gov/safety/data-and-statistics/large-truck-and-bus-crash-facts",
+        url: "https://ai.fmcsa.dot.gov/CrashStatistics",
         note: "US commercial truck fleet baseline. ~12M registered commercial trucks (Class 3–8) in the US — supports Samsara 5% penetration calculation: 5% × 12M = 600K vehicles."
       }, {
         name: "BTS — Freight Facts and Figures",
         org: "Bureau of Transportation Statistics",
-        url: "https://www.bts.gov/topics/freight-transportation/freight-facts-and-figures",
+        url: "https://data.bts.gov/stories/s/Freight-Facts-and-Figures/45xw-qksz/",
         note: "US freight truck fleet composition, ton-miles by mode. Supporting data for NA fleet size estimates."
       }]
     }, {
@@ -4898,7 +4898,7 @@ window.AppComponent = function TransportPredictions() {
         name: "McKinsey — Will Autonomy Usher in the Future of Truck Freight?",
         org: "McKinsey & Company",
         url: "https://www.mckinsey.com/industries/travel-logistics-and-infrastructure/our-insights/will-autonomy-usher-in-the-future-of-truck-freight-transportation",
-        note: "Primary source for 2035 AHV projections: US 13% of HD truck fleet = ~455K units; EU 4% = ~180K units. Combined ex-China 635K validates Greenbay's 800K global estimate as conservative. Market value $616B by 2035. Published September 2024. Note: McKinsey.com may require direct browser access — not accessible via automated checks."
+        note: "Primary source for 2035 AHV projections: US 13% of HD truck fleet = ~455K units; EU 4% = ~180K units. Combined ex-China 635K validates Greenbay's 800K global estimate as conservative. Market value $616B by 2035. Published September 2024. Note: McKinsey.com is bot-protected (returns 503 to automated requests) — the URL is correct and works in any browser. Access directly."
       }]
     }, {
       category: "Hydrogen Vehicles",
@@ -4906,8 +4906,8 @@ window.AppComponent = function TransportPredictions() {
       items: [{
         name: "IEA — Hydrogen & Fuel Cell Vehicles (Global EV Data Explorer)",
         org: "International Energy Agency",
-        url: "https://www.iea.org/data-and-statistics/data-product/global-ev-outlook-2025",
-        note: "Global FCEV baseline data. ~10% buses in H2 fleet. China dominates H2 bus segment. Access via IEA Global EV Data Explorer."
+        url: "https://iea.blob.core.windows.net/assets/7ea38b60-3033-42a6-9589-71134f4229f4/GlobalEVOutlook2025.pdf",
+        note: "Global FCEV baseline data. ~10% buses in H2 fleet. China dominates H2 bus segment. Data in IEA GEO-25 PDF — see Chapter 4 (Heavy-Duty Vehicles). IEA web pages are bot-protected; use the direct PDF link above which returns 200."
       }, {
         name: "Hydrogen Insight — Fuel Cell Truck Market",
         org: "Hydrogen Insight",
@@ -4973,8 +4973,8 @@ window.AppComponent = function TransportPredictions() {
       }, {
         name: "Samsara S-1 IPO Prospectus (2021)",
         org: "Samsara Inc. (SEC Filing)",
-        url: "https://www.sec.gov/Archives/edgar/data/1641614/000164161421000004/0001641614-21-000004-index.htm",
-        note: "Series A funding round timeline and initial fleet customer base. Used to establish the '4 years post-Series A' penetration timeline referenced in SAM market share assumption."
+        url: "https://efts.sec.gov/LATEST/search-index?q=%22Samsara%22&forms=S-1",
+        note: "IPO prospectus — founding customer base and early fleet data. Used to establish '4 years post-Series A' penetration timeline for SAM assumption. Link searches EDGAR full-text for Samsara S-1 filings. SEC direct file links (sec.gov/Archives/) require browser — use EDGAR search above."
       }, {
         name: "Motive (KeepTruckin) — Fleet Management Pricing",
         org: "Motive Technologies Inc.",
