@@ -417,6 +417,35 @@ var lcvData = [{
   type: "forecast"
 } // = TAM assumption (720K managed EV vans ex-China)
 ];
+// ── CANONICAL DATA OVERLAY ──────────────────────────────────────────────────
+// If canonical data was loaded via shared.json, overlay it on inline arrays.
+// Inline data above serves as fallback if canonical is unavailable.
+(function applyCanonical() {
+  var C_DATA = window.__GREENBAY_CANONICAL__;
+  if (!C_DATA || !C_DATA.fleet_stats || !C_DATA.fleet_stats.global_series) return;
+  var series = C_DATA.fleet_stats.global_series;
+  var fieldMap = {
+    ev_bus_stock_k: evBusData,
+    ev_truck_sales_k: evTruckData,
+    ahv_commercial_k: ahvData,
+    h2_fleet_k: h2Data,
+    lcv_managed_stock_k: lcvData,
+    diesel_bus_fleet_k: dieselBusData,
+    diesel_truck_fleet_k: dieselTruckData
+  };
+  Object.keys(fieldMap).forEach(function(field) {
+    var target = fieldMap[field];
+    series.forEach(function(row) {
+      var entry = target.find(function(d) { return d.year === row.year; });
+      if (entry && row[field] !== undefined) {
+        entry.value = row[field];
+        if (row.type && !entry.type) entry.type = row.type;
+      }
+    });
+  });
+  console.log('Canonical data applied (v' + (C_DATA._canonical_version || '?') + ')');
+})();
+
 var combinedData = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030].map(function (yr) {
   var evBus = evBusData.find(function (d) {
     return d.year === yr;
@@ -5291,7 +5320,14 @@ window.AppComponent = function TransportPredictions() {
       color: C.muted,
       fontFamily: "'DM Mono', monospace"
     }
-  }, "Greenbay Solutions \xB7 Feb 2026"))));
+  }, "Greenbay Solutions \xB7 Feb 2026"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 9,
+      color: C.muted,
+      fontFamily: "'DM Mono', monospace",
+      opacity: 0.6
+    }
+  }, "canonical v" + ((window.__GREENBAY_CANONICAL__ && window.__GREENBAY_CANONICAL__._canonical_version) || "local")))));
 }
 
 // Mount the app

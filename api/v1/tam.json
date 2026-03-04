@@ -1,24 +1,24 @@
 {
-  "endpoint": "tam",
-  "version": "1.0.0",
-  "description": "TAM/SAM/SOM market sizing for Greenbay fleet orchestration platform. 2030 and 2035 horizons. Segment-level ARPU and vehicle counts.",
-  "last_updated": "2026-02-26",
+  "description": "TAM/SAM/SOM market sizing for Greenbay. Multiple methodologies preserved with scope labels.",
+  "last_updated": "2026-03-04",
   "currency": "USD_millions",
   "summary": {
     "tam_2030_usd_m": 5551,
+    "tam_2035_usd_m": 12216,
     "sam_2030_usd_m": 4600,
     "som_base_2030_usd_m": 226,
-    "tam_2035_usd_m": 12216,
-    "sam_rationale": "83% of TAM \u2014 EU+NA primary markets, APAC emerging, China 30% accessible via JV/partner",
-    "som_rationale": "5% SAM penetration by 2030 \u2014 ~45 major operator deployments. Samsara precedent: 5% US commercial trucking in 4yr post-Series A"
+    "som_conservative_2030_usd_m": 136,
+    "som_upside_2030_usd_m": 317,
+    "methodology": "Bottom-Up Fleet Orchestration TAM",
+    "scope": "global"
   },
   "segments_2030": [
     {
       "name": "Transit Fleet Orchestration",
       "vehicles_ex_china_k": 450,
+      "vehicles_china_k": 387,
       "arpu_usd": 1920,
       "revenue_ex_china_usd_m": 864,
-      "vehicles_china_k": 387,
       "revenue_china_usd_m": 743,
       "total_usd_m": 1607,
       "notes": "EV transit buses entering managed depot operations"
@@ -26,9 +26,9 @@
     {
       "name": "Freight Fleet Orchestration",
       "vehicles_ex_china_k": 290,
+      "vehicles_china_k": 261,
       "arpu_usd": 1440,
       "revenue_ex_china_usd_m": 418,
-      "vehicles_china_k": 261,
       "revenue_china_usd_m": 376,
       "total_usd_m": 794,
       "notes": "EV trucks at large operator depots (20+ vehicles)"
@@ -36,19 +36,19 @@
     {
       "name": "Legacy Buses (mixed depot)",
       "vehicles_ex_china_k": 910,
+      "vehicles_china_k": 240,
       "arpu_usd": 480,
       "revenue_ex_china_usd_m": 437,
-      "vehicles_china_k": 240,
       "revenue_china_usd_m": 115,
       "total_usd_m": 552,
-      "notes": "Diesel buses at depots with \u226510% EV/AV requiring mixed orchestration"
+      "notes": "Diesel buses at depots with ≥10% EV/AV requiring mixed orchestration"
     },
     {
       "name": "Legacy Trucks (mixed depot)",
       "vehicles_ex_china_k": 2600,
+      "vehicles_china_k": 600,
       "arpu_usd": 480,
       "revenue_ex_china_usd_m": 1248,
-      "vehicles_china_k": 600,
       "revenue_china_usd_m": 288,
       "total_usd_m": 1536,
       "notes": "Conservative floor: EU 6.2M total trucks (ACEA 2026); 35% managed depot = 2.2M EU + 1.7M NA ceiling = 3.9M. 2.6M excludes owner-operators."
@@ -56,9 +56,9 @@
     {
       "name": "Autonomous Fleet Infra Layer",
       "vehicles_ex_china_k": 28,
+      "vehicles_china_k": 38,
       "arpu_usd": 3000,
       "revenue_ex_china_usd_m": 84,
-      "vehicles_china_k": 38,
       "revenue_china_usd_m": 114,
       "total_usd_m": 198,
       "notes": "NA+EU confirmed 28K L4; 38K APAC L4 at 30% accessibility"
@@ -66,12 +66,12 @@
     {
       "name": "Light Commercial Vehicles",
       "vehicles_ex_china_k": 720,
+      "vehicles_china_k": 180,
       "arpu_usd": 960,
       "revenue_ex_china_usd_m": 691,
-      "vehicles_china_k": 180,
       "revenue_china_usd_m": 173,
       "total_usd_m": 864,
-      "notes": "EV managed vans ex-China. 31.1M EU total LCVs (ACEA); 720K = 2.3% penetration \u2014 conservative floor"
+      "notes": "EV managed vans ex-China. 31.1M EU total LCVs (ACEA); 720K = 2.3% penetration — conservative floor"
     }
   ],
   "total_2030": {
@@ -80,84 +80,6 @@
     "revenue_china_usd_m": 1809,
     "total_usd_m": 5551
   },
-  "segments_2035": [
-    {
-      "name": "Transit Fleet Orchestration",
-      "val_2030_usd_m": 1607,
-      "val_2035_usd_m": 3226,
-      "growth_usd_m": 1619,
-      "multiplier": "2.0x"
-    },
-    {
-      "name": "Freight Fleet Orchestration",
-      "val_2030_usd_m": 794,
-      "val_2035_usd_m": 1915,
-      "growth_usd_m": 1121,
-      "multiplier": "2.4x"
-    },
-    {
-      "name": "Legacy Vehicles (mixed depot)",
-      "val_2030_usd_m": 2088,
-      "val_2035_usd_m": 2947,
-      "growth_usd_m": 859,
-      "multiplier": "1.4x"
-    },
-    {
-      "name": "Autonomous Fleet Infra Layer",
-      "val_2030_usd_m": 198,
-      "val_2035_usd_m": 2400,
-      "growth_usd_m": 2202,
-      "multiplier": "12.1x"
-    },
-    {
-      "name": "Light Commercial Vehicles",
-      "val_2030_usd_m": 864,
-      "val_2035_usd_m": 1728,
-      "growth_usd_m": 864,
-      "multiplier": "2.0x"
-    }
-  ],
-  "total_2035": {
-    "total_usd_m": 12216
-  },
-  "sam_by_region": [
-    {
-      "region": "EU",
-      "sam_usd_m": 1024,
-      "share_pct": 22,
-      "key_driver": "Clean Vehicle Directive + EU Green Deal mandate"
-    },
-    {
-      "region": "North America",
-      "sam_usd_m": 975,
-      "share_pct": 21,
-      "key_driver": "ZEV state mandates + IRA credits (under review)"
-    },
-    {
-      "region": "APAC ex-China",
-      "sam_usd_m": 340,
-      "share_pct": 7,
-      "key_driver": "India FAME, Japan ZEV, Korea H2 roadmap"
-    },
-    {
-      "region": "China (30% acc.)",
-      "sam_usd_m": 186,
-      "share_pct": 4,
-      "key_driver": "Regulatory barriers + domestic incumbents. Note: 30% label reflects JV/partner route constraint; actual vehicles in scope ~1.8% of China fleet"
-    },
-    {
-      "region": "All segments (full)",
-      "sam_usd_m": 2075,
-      "share_pct": 45,
-      "key_driver": "Remaining fleet segments across all regions"
-    },
-    {
-      "region": "TOTAL SAM",
-      "sam_usd_m": 4600,
-      "share_pct": 100,
-      "key_driver": "EU + NA primary; APAC emerging; China restricted"
-    }
-  ],
   "arpu": {
     "transit_usd_per_vehicle_yr": 1920,
     "freight_usd_per_vehicle_yr": 1440,
@@ -165,14 +87,108 @@
     "ahv_usd_per_vehicle_yr": 3000,
     "lcv_usd_per_vehicle_yr": 960,
     "benchmark_samsara_blended": "1200-2400",
-    "benchmark_source": "Samsara FY2025 10-K (SEC) \u2014 $1.46B ARR \u00f7 ~600-700K managed vehicles"
+    "benchmark_source": "Samsara FY2025 10-K (SEC) — $1.46B ARR ÷ ~600-700K managed vehicles"
   },
-  "sources": [
-    "IEA GEO 2025",
-    "ACEA Vehicles on European Roads 2026",
-    "Gartner G00841141",
-    "McKinsey Sep 2024",
-    "Samsara FY2025 10-K",
-    "FMCSA fleet data"
+  "methodologies": [
+    {
+      "id": "bottom_up_orchestration",
+      "label": "Bottom-Up Fleet Orchestration TAM",
+      "is_canonical": true,
+      "scope": "global",
+      "description": "Segment-level vehicle counts × ARPU. Greenbay-specific orchestration market.",
+      "source": "Greenbay internal model (IEA GEO 2025, ACEA 2026, Samsara FY2025 10-K)",
+      "tam_2030_usd_m": 5551,
+      "tam_2035_usd_m": 12216,
+      "sam_2030_usd_m": 4600,
+      "sam_rationale": "83% of TAM — EU+NA primary markets, APAC emerging, China 30% accessible via JV/partner",
+      "som_base_2030_usd_m": 226,
+      "som_conservative_2030_usd_m": 136,
+      "som_upside_2030_usd_m": 317,
+      "som_rationale": "5% SAM penetration by 2030 — ~45 major operator deployments. Samsara precedent: 5% US commercial trucking in 4yr post-Series A"
+    },
+    {
+      "id": "top_down_fleet_mgmt",
+      "label": "Top-Down Fleet Management Market",
+      "is_canonical": false,
+      "scope": "global",
+      "description": "Total fleet management software market. Broader than orchestration — includes telematics, routing, maintenance.",
+      "source": "MarketsandMarkets Fleet Management Market Report 2025-2030",
+      "tam_2025_usd_b": 32.9,
+      "tam_2030_usd_b": 70,
+      "cagr_pct": 13.3,
+      "sam_2025_usd_b": 14.8,
+      "sam_2030_usd_b": 32,
+      "sam_share_of_tam_pct": 45,
+      "sam_rationale": "HD trucking segment (T&L = 45% of market)"
+    },
+    {
+      "id": "bottom_up_customers",
+      "label": "Bottom-Up Customer Model",
+      "is_canonical": false,
+      "scope": "US+EU",
+      "description": "Target customers × ACV × win rate. Used in fleet-orchestration dashboard.",
+      "source": "Greenbay Analysis — FTA NTD, UITP Europe, EV100 Climate Group",
+      "som_base_usd_m": 42,
+      "som_conservative_usd_m": 15,
+      "som_aggressive_usd_m": 80,
+      "methodology": "Target customers × ACV × win rate",
+      "target_segments": [
+        {
+          "name": "Enterprise Transit (500+ vehicles)",
+          "us_count": 50,
+          "eu_count": 100,
+          "total": 150,
+          "acv_usd": 400000
+        },
+        {
+          "name": "Mid-Market Transit (100-500 vehicles)",
+          "us_count": 150,
+          "eu_count": 200,
+          "total": 350,
+          "acv_usd": 250000
+        },
+        {
+          "name": "Enterprise Commercial (500+ vehicles)",
+          "us_count": 100,
+          "eu_count": 150,
+          "total": 250,
+          "acv_usd": 350000
+        }
+      ],
+      "total_target_customers": 750,
+      "scenarios": [
+        {
+          "name": "Conservative",
+          "customers": 500,
+          "win_rate_pct": 10,
+          "avg_acv_usd": 300000,
+          "som_usd_m": 15
+        },
+        {
+          "name": "Base Case",
+          "customers": 750,
+          "win_rate_pct": 15,
+          "avg_acv_usd": 375000,
+          "som_usd_m": 42
+        },
+        {
+          "name": "Aggressive",
+          "customers": 1000,
+          "win_rate_pct": 20,
+          "avg_acv_usd": 400000,
+          "som_usd_m": 80
+        }
+      ]
+    },
+    {
+      "id": "ev_orchestration_sam_slice",
+      "label": "EV Fleet Orchestration (SAM slice)",
+      "is_canonical": false,
+      "scope": "global",
+      "description": "2% of top-down SAM earmarked for EV orchestration early adopters. Used in electrification-intel.",
+      "source": "MarketsandMarkets + Greenbay estimate",
+      "som_2030_usd_m": 640,
+      "som_rationale": "~2% of $32B SAM — EV fleet orchestration early adopter segment"
+    }
   ]
 }

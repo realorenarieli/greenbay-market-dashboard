@@ -1,17 +1,15 @@
 {
-  "endpoint": "fleet",
-  "version": "1.0.0",
-  "description": "Global heavy vehicle fleet time series 2021\u20132030. EV stock/sales, diesel fleet, AHV (L4+ commercial), H\u2082, LCV managed vans. Actuals 2021\u20132024, forecasts 2025\u20132030.",
-  "last_updated": "2026-02-26",
+  "description": "Global heavy vehicle fleet time series 2021–2030. EV stock/sales, diesel fleet, AHV (L4+ commercial), H₂, LCV managed vans. Actuals 2021–2024, forecasts 2025–2030.",
+  "last_updated": "2026-03-04",
   "data_as_of": "FY2024",
   "units": {
-    "ev_bus_stock_k": "Thousand units \u2014 cumulative fleet stock, IEA transit BEV scope (excludes school buses, coaches)",
-    "ev_truck_sales_k": "Thousand units \u2014 annual new sales/registrations (not cumulative stock)",
-    "ahv_commercial_k": "Thousand units \u2014 L4+ commercially deployed only, no safety driver in ODD",
-    "h2_fleet_k": "Thousand units \u2014 hydrogen fuel cell buses and trucks",
-    "lcv_managed_stock_k": "Thousand units \u2014 EV vans in managed depot operations, ex-China",
-    "diesel_bus_fleet_k": "Thousand units \u2014 global public transit diesel bus fleet",
-    "diesel_truck_fleet_k": "Thousand units \u2014 global diesel truck fleet (medium+heavy)"
+    "ev_bus_stock_k": "Thousand units — cumulative fleet stock, IEA transit BEV scope (excludes school buses, coaches)",
+    "ev_truck_sales_k": "Thousand units — annual new sales/registrations (not cumulative stock)",
+    "ahv_commercial_k": "Thousand units — L4+ commercially deployed only, no safety driver in ODD",
+    "h2_fleet_k": "Thousand units — hydrogen fuel cell buses and trucks",
+    "lcv_managed_stock_k": "Thousand units — EV vans in managed depot operations, ex-China",
+    "diesel_bus_fleet_k": "Thousand units — global public transit diesel bus fleet",
+    "diesel_truck_fleet_k": "Thousand units — global diesel truck fleet (medium+heavy)"
   },
   "series": [
     {
@@ -62,7 +60,7 @@
       "year": 2025,
       "ev_bus_stock_k": 880,
       "ev_truck_sales_k": 113,
-      "ahv_commercial_k": 3.0,
+      "ahv_commercial_k": 3,
       "h2_fleet_k": 22,
       "lcv_managed_stock_k": 310,
       "diesel_bus_fleet_k": 5650,
@@ -73,7 +71,7 @@
       "year": 2026,
       "ev_bus_stock_k": 1010,
       "ev_truck_sales_k": 160,
-      "ahv_commercial_k": 8.0,
+      "ahv_commercial_k": 8,
       "h2_fleet_k": 29,
       "lcv_managed_stock_k": 420,
       "diesel_bus_fleet_k": 5480,
@@ -84,7 +82,7 @@
       "year": 2027,
       "ev_bus_stock_k": 1160,
       "ev_truck_sales_k": 210,
-      "ahv_commercial_k": 18.0,
+      "ahv_commercial_k": 18,
       "h2_fleet_k": 37,
       "lcv_managed_stock_k": 530,
       "diesel_bus_fleet_k": 5290,
@@ -95,7 +93,7 @@
       "year": 2028,
       "ev_bus_stock_k": 1330,
       "ev_truck_sales_k": 265,
-      "ahv_commercial_k": 35.0,
+      "ahv_commercial_k": 35,
       "h2_fleet_k": 46,
       "lcv_managed_stock_k": 610,
       "diesel_bus_fleet_k": 5080,
@@ -106,7 +104,7 @@
       "year": 2029,
       "ev_bus_stock_k": 1520,
       "ev_truck_sales_k": 315,
-      "ahv_commercial_k": 80.0,
+      "ahv_commercial_k": 80,
       "h2_fleet_k": 56,
       "lcv_managed_stock_k": 665,
       "diesel_bus_fleet_k": 4850,
@@ -125,70 +123,71 @@
       "type": "forecast_high_scenario"
     }
   ],
-  "regional": {
-    "ev_bus_na_eu_k": [
-      {
-        "year": 2021,
-        "NA": 4,
-        "EU": 8,
-        "type": "actual"
-      },
-      {
-        "year": 2022,
-        "NA": 6,
-        "EU": 12,
-        "type": "actual"
-      },
-      {
-        "year": 2023,
-        "NA": 8,
-        "EU": 17,
-        "type": "actual"
-      },
-      {
-        "year": 2024,
-        "NA": 14,
-        "EU": 22,
-        "type": "actual"
-      },
-      {
-        "year": 2025,
-        "NA": 19,
-        "EU": 28,
-        "type": "forecast"
-      },
-      {
-        "year": 2026,
-        "NA": 26,
-        "EU": 36,
-        "type": "forecast"
-      },
-      {
-        "year": 2027,
-        "NA": 34,
-        "EU": 46,
-        "type": "forecast"
-      },
-      {
-        "year": 2028,
-        "NA": 44,
-        "EU": 58,
-        "type": "forecast"
-      },
-      {
-        "year": 2029,
-        "NA": 55,
-        "EU": 72,
-        "type": "forecast"
-      },
-      {
-        "year": 2030,
-        "NA": 68,
-        "EU": 88,
-        "type": "forecast"
-      }
-    ],
-    "ev_truck_na_eu_k_annual_sales": [
+  "regional_ev_bus_stock_k": [
+    {
+      "year": 2021,
+      "NA": 4,
+      "EU": 8,
+      "type": "actual"
+    },
+    {
+      "year": 2022,
+      "NA": 6,
+      "EU": 12,
+      "type": "actual"
+    },
+    {
+      "year": 2023,
+      "NA": 8,
+      "EU": 17,
+      "type": "actual"
+    },
+    {
+      "year": 2024,
+      "NA": 14,
+      "EU": 22,
+      "type": "actual"
+    },
+    {
+      "year": 2025,
+      "NA": 19,
+      "EU": 28,
+      "type": "forecast"
+    },
+    {
+      "year": 2026,
+      "NA": 26,
+      "EU": 36,
+      "type": "forecast"
+    },
+    {
+      "year": 2027,
+      "NA": 34,
+      "EU": 46,
+      "type": "forecast"
+    },
+    {
+      "year": 2028,
+      "NA": 44,
+      "EU": 58,
+      "type": "forecast"
+    },
+    {
+      "year": 2029,
+      "NA": 55,
+      "EU": 72,
+      "type": "forecast"
+    },
+    {
+      "year": 2030,
+      "NA": 68,
+      "EU": 88,
+      "type": "forecast"
+    }
+  ],
+  "regional_ev_truck_sales_k": {
+    "_scope": "US+EU only — annual new HD truck sales/registrations",
+    "series": [
       {
         "year": 2021,
         "NA": 0.3,
@@ -211,6 +210,8 @@
         "year": 2024,
         "NA": 3.8,
         "EU": 10.5,
+        "scope": "US+EU",
+        "total_us_eu": 14.3,
         "type": "actual"
       },
       {
@@ -249,80 +250,31 @@
         "EU": 62,
         "type": "forecast"
       }
-    ],
-    "ev_bus_share_pct_new_purchases": [
-      {
-        "year": 2021,
-        "EU": 4,
-        "NA": 2
-      },
-      {
-        "year": 2022,
-        "EU": 8,
-        "NA": 3
-      },
-      {
-        "year": 2023,
-        "EU": 14,
-        "NA": 5
-      },
-      {
-        "year": 2024,
-        "EU": 19,
-        "NA": 9
-      },
-      {
-        "year": 2025,
-        "EU": 25,
-        "NA": 13
-      },
-      {
-        "year": 2026,
-        "EU": 32,
-        "NA": 19
-      },
-      {
-        "year": 2027,
-        "EU": 41,
-        "NA": 26
-      },
-      {
-        "year": 2028,
-        "EU": 50,
-        "NA": 34
-      },
-      {
-        "year": 2029,
-        "EU": 59,
-        "NA": 43
-      },
-      {
-        "year": 2030,
-        "EU": 68,
-        "NA": 52
-      }
     ]
   },
   "total_fleet_context": {
-    "description": "Total fleet sizes all powertrains \u2014 denominator for EV penetration calculations",
+    "description": "Total fleet sizes all powertrains — denominator for EV penetration calculations",
     "source": "ACEA Vehicles on European Roads 2026 (FY2024); IEA GEO-25 implied denominators",
+    "us_total_trucks_class8": 3910000,
     "eu_total_buses": 699238,
     "eu_total_trucks_medium_heavy": 6200000,
     "eu_total_vans_lcv": 31100000,
     "global_total_buses_approx": 21000000,
     "eu_bus_avg_age_years": 12.2,
-    "eu_truck_avg_age_years": 14.0,
+    "eu_truck_avg_age_years": 14,
     "eu_van_avg_age_years": 12.9,
     "eu_bus_bev_share_pct": 3.5,
     "eu_truck_bev_share_pct": 0.3,
     "eu_van_bev_share_pct": 1.3
   },
-  "sources": [
-    "IEA Global EV Outlook 2024",
-    "IEA Global EV Outlook 2025",
-    "ACEA Vehicles on European Roads 2026",
-    "Aurora Q4 2025",
-    "Waymo public data",
-    "Einride fleet reports"
-  ]
+  "ev_market_context": {
+    "_note": "HD truck sales context for fleet-orchestration dashboard",
+    "us_eu_hd_truck_sales_2024": 608000,
+    "scope": "US+EU",
+    "ev_sales_2024_us_eu": 11700,
+    "ev_share_2024_pct": 1.9,
+    "ev_sales_2030_us_eu": 121000,
+    "ev_share_2030_pct": 19,
+    "source": "IEA Global EV Outlook 2025, ACEA Vehicles in Use Report"
+  }
 }

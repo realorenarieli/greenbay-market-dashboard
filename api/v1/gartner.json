@@ -1,9 +1,6 @@
 {
-  "endpoint": "gartner",
-  "version": "1.0.0",
-  "description": "Gartner Strategic Planning Assumptions (SPAs) from Predicts 2026: Transportation (G00841141) and related reports. Four SPAs directly relevant to Greenbay's market timing.",
-  "last_updated": "2026-02-26",
-  "source_report": "Gartner Predicts 2026: Transportation \u2014 G00841141 (paywalled)",
+  "description": "Gartner Strategic Planning Assumptions (SPAs) from Predicts 2026: Transportation (G00841141). Four SPAs relevant to Greenbay market timing.",
+  "last_updated": "2026-03-04",
   "spas": [
     {
       "id": "agentic_ai",
@@ -91,7 +88,7 @@
       "prediction": "By 2032, 60% of new mobility-as-a-service fleets will be fully autonomous",
       "target_year": 2032,
       "target_value_pct": 60,
-      "greenbay_relevance": "Robotaxi fleets require same depot orchestration infrastructure as AV trucks \u2014 Greenbay covers 11/21 core AV depot components.",
+      "greenbay_relevance": "Robotaxi fleets require same depot orchestration infrastructure as AV trucks.",
       "series": [
         {
           "year": 2025,
@@ -141,7 +138,7 @@
       "prediction": "By 2028, 30% of European transport firms will be on mandatory data-sharing platforms",
       "target_year": 2028,
       "target_value_pct": 30,
-      "greenbay_relevance": "Regulatory-grade audit trail and data portability are built into Greenbay's compliance module. Direct EU CVD alignment.",
+      "greenbay_relevance": "Regulatory-grade audit trail and data portability are built into Greenbay's compliance module.",
       "series": [
         {
           "year": 2025,
@@ -171,65 +168,60 @@
       "year": 2024,
       "na_eu_k": 0.5,
       "apac_k": 0.2,
-      "china_k": 2.0,
+      "china_k": 2,
       "global_k": 2.7,
       "notes": "Aurora pre-commercial; Einride limited routes"
     },
     {
       "year": 2025,
       "na_eu_k": 2.5,
-      "apac_k": 1.0,
-      "china_k": 8.0,
+      "apac_k": 1,
+      "china_k": 8,
       "global_k": 11.5,
       "notes": "Aurora I-45 Dallas-Houston commercial launch Apr 2025"
     },
     {
       "year": 2026,
-      "na_eu_k": 5.0,
-      "apac_k": 2.0,
-      "china_k": 15.0,
-      "global_k": 22.0,
-      "notes": "Aurora expansion; Gatik scaling"
+      "na_eu_k": 5,
+      "apac_k": 2,
+      "china_k": 15,
+      "global_k": 22
     },
     {
       "year": 2027,
-      "na_eu_k": 12.0,
-      "apac_k": 5.0,
-      "china_k": 30.0,
-      "global_k": 47.0,
-      "notes": "Einride EU scale; Waymo Via expansion"
+      "na_eu_k": 12,
+      "apac_k": 5,
+      "china_k": 30,
+      "global_k": 47
     },
     {
       "year": 2028,
-      "na_eu_k": 25.0,
-      "apac_k": 12.0,
-      "china_k": 55.0,
-      "global_k": 92.0,
-      "notes": "AV mandate tailwinds; OEM partnerships"
+      "na_eu_k": 25,
+      "apac_k": 12,
+      "china_k": 55,
+      "global_k": 92
     },
     {
       "year": 2029,
-      "na_eu_k": 45.0,
-      "apac_k": 22.0,
-      "china_k": 90.0,
-      "global_k": 157.0,
-      "notes": "Series B deployment capital deployed"
+      "na_eu_k": 45,
+      "apac_k": 22,
+      "china_k": 90,
+      "global_k": 157
     },
     {
       "year": 2030,
-      "na_eu_k": 66.0,
-      "apac_k": 89.0,
-      "china_k": 320.0,
-      "global_k": 475.0,
-      "notes": "Gartner high scenario; China dominates"
+      "na_eu_k": 66,
+      "apac_k": 89,
+      "china_k": 320,
+      "global_k": 475
     },
     {
       "year": 2035,
-      "na_eu_k": 635.0,
-      "apac_k": 165.0,
-      "china_k": 800.0,
-      "global_k": 1600.0,
-      "notes": "McKinsey: US 455K + EU 180K; APAC + China 965K"
+      "na_eu_k": 635,
+      "apac_k": 165,
+      "china_k": 800,
+      "global_k": 1600,
+      "notes": "McKinsey: US 455K + EU 180K"
     }
   ]
 }
